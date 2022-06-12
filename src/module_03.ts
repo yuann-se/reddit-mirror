@@ -29,6 +29,26 @@ interface MyArray<T> {
   reduce<U>(func: (previousValue: U, currentValue: T) => U, initVal?: U): U
 }
 
-const arr: MyArray<number> = [1, 2, 6];
+const arr: MyArray<number> = [1, 2, 7];
 console.log(arr.reduce((val1, val2) => val1 + val2, 5));
 
+// Task 4
+interface IHomeTask {
+  data: string;
+  numbericData: number;
+  date: Date;
+  externalData: {
+    basis: number;
+    value: string;
+  }
+}
+
+type MyPartial<T> = {
+  [N in keyof T]?: T[N] extends object ? MyPartial<T[N]> : T[N]
+}
+
+const homeTask: MyPartial<IHomeTask> = {
+  externalData: {
+    value: 'win'
+  }
+}

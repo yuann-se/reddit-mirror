@@ -52,12 +52,12 @@ compiler.run((err) => {
     if (err) console.log(`Compilation failed: ${err}`);
     console.log('Compiled successfully')
   })
+  nodemon({
+    script: path.resolve(__dirname, '../dist/server/server.js'),
+    watch: [
+      path.resolve(__dirname, '../dist/server'),
+      path.resolve(__dirname, '../dist/client'),
+    ]
+  })
 })
 
-nodemon({
-  script: path.resolve(__dirname, '../dist/server/server.js'),
-  watch: [
-    path.resolve(__dirname, '../dist/server'),
-    path.resolve(__dirname, '../dist/client'),
-  ]
-})
