@@ -26,7 +26,7 @@ const MyHometask: ITask = {
 // Task 3
 interface MyArray<T> {
   [N: number]: T;
-  reduce<U>(func: (previousValue: U, currentValue: T) => U, initVal?: U): U
+  reduce<U>(func: (previousValue: U, currentValue: T, index: number, arr: MyArray<T>) => U, initVal: U): U
 }
 
 const arr: MyArray<number> = [1, 2, 7];
