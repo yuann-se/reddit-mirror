@@ -5,3 +5,4 @@ import { Header } from '../shared/Header';
 window.addEventListener('load', () => {
   ReactDom.hydrate(<Header />, document.getElementById('react_root'));
 })
+
