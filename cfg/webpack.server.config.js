@@ -5,7 +5,7 @@ const NODE_ENV = process.env.NODE_ENV;
 const GLOBAL_CSS_REGEXP = /\.global\.css$/;
 
 module.exports = {
-  target: "node",
+  target: 'node',
   mode: NODE_ENV ? NODE_ENV : 'development',
   entry: path.resolve(__dirname, '../src/server/server.js'),
   output: {
@@ -32,8 +32,8 @@ module.exports = {
               localIdentName: '[name]__[local]--[hash:base64:5]',
             },
             onlyLocals: true,
-          }
-        }
+          },
+        },
         ],
         exclude: GLOBAL_CSS_REGEXP
       },

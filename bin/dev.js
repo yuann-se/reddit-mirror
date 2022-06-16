@@ -8,6 +8,7 @@ const express = require('express');
 const cors = require('cors');
 
 const hmrServer = express();
+const compiler = webpack(webpackServerConfig);
 const clientCompiler = webpack(webpackClientConfig);
 
 const allowedOrigins = ["http://localhost:3000", "http://localhost:3001"];
@@ -24,40 +25,44 @@ hmrServer.use(
   })
 )
 
-hmrServer.use(webpackDevMiddleware(clientCompiler, {
-  publicPath: '//localhost:3001/static/',
-  serverSideRender: true,
-  noInfo: true,
-  watchOptions: {
-    ignore: /dist/,
-  },
-  writeToDisk: true,
-  stats: 'errors-only',
-}));
+hmrServer.use(
+  webpackDevMiddleware(clientCompiler, {
+    publicPath: '//localhost:3001/static/',
+    serverSideRender: true,
+    noInfo: true,
+    watchOptions: {
+      ignore: /dist/,
+    },
+    writeToDisk: true,
+    stats: 'errors-only',
+  })
+)
 
 hmrServer.use(webpackHotMiddleware(clientCompiler, {
-  path: '/static/__webpack_hmr'
+  path: '/static/__webpack_hmr',
 }));
 
 hmrServer.listen(3001, () => {
-  console.log('hmr server started');
+  console.log('HMR server successfully started')
 })
 
-const compiler = webpack(webpackServerConfig);
-
 compiler.run((err) => {
-  if (err) console.log(`Compilation failed: ${err}`);
-
+  if (err) {
+    console.log('Compilation failed: ', err)
+  }
   compiler.watch({}, (err) => {
-    if (err) console.log(`Compilation failed: ${err}`);
-    console.log('Compiled successfully')
-  })
+    if (err) {
+      console.log('Compilation failed: ', err)
+    }
+    console.log('Compilation was successful')
+  });
+
   nodemon({
     script: path.resolve(__dirname, '../dist/server/server.js'),
     watch: [
       path.resolve(__dirname, '../dist/server'),
       path.resolve(__dirname, '../dist/client'),
-    ]
+    ],
   })
 })
 

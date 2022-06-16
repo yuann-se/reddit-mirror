@@ -4,7 +4,7 @@ import styles from './cardslist.css';
 
 export function CardsList() {
   return (
-    <ul className={styles.cardslist}>
+    <ul className={styles.cardsList}>
       <Card />
     </ul>
   );
