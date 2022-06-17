@@ -1,0 +1,20 @@
+.commentsBtn {
+  display: flex;
+  align-items: normal;
+}
+
+.commentsBtn * {
+  color: var(--greyC4);
+}
+
+.commentsNumber {
+  padding: 0 0 0 6px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@media all and (min-width: 1024px) {
+  .commentsBtn {
+    display: none;
+  }
+}
