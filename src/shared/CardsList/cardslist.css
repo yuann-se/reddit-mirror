@@ -2,4 +2,15 @@
   .cardsList {
     padding: 40px 0;
   }
+
+  .cardsList>li {
+    margin-bottom: 40px;
+  }
 }
+
+@media all and (min-width: 1540px) {
+  .cardsList>li {
+    margin-bottom: 0;
+  }
+}
+
