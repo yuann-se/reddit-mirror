@@ -2,21 +2,25 @@ import React from 'react';
 import { Dropdown } from '../../../Dropdown';
 import { BlockIcon } from '../../../icons/BlockIcon';
 import { CommentsIcon } from '../../../icons/CommentsIcon';
-import { ComplaintIcon } from '../../../icons/ComplaintIcon';
+import { ReportIcon } from '../../../icons/ReportIcon';
 import { DropdownMenuBtn } from '../../../icons/DropdownMenuBtn';
 import { generateRandomString } from '../../../utils/generateRandomString';
 import styles from './menu.css';
 import { ShareIcon } from '../../../icons/ShareIcon';
 import { SaveIcon } from '../../../icons/SaveIcon';
+import { GenericList } from '../../../GenericList';
 
-const list = [
-  { icon: <CommentsIcon />, text: 'Комментарии', classes: `${styles.smHidden}` },
-  { icon: <ShareIcon />, text: 'Поделиться', classes: `${styles.smHidden}` },
-  { icon: <BlockIcon />, text: 'Скрыть', classes: '' },
-  { icon: <SaveIcon />, text: 'Сохранить', classes: `${styles.smHidden}` },
-  { icon: <ComplaintIcon />, text: 'Пожаловаться', classes: ''}
+const LIST = [
+  { icon: <CommentsIcon />, text: 'Комментарии', className: `${styles.smHidden} ` },
+  { icon: <ShareIcon />, text: 'Поделиться', className: `${styles.smHidden} ` },
+  { icon: <BlockIcon />, text: 'Скрыть', className: `` },
+  { icon: <SaveIcon />, text: 'Сохранить', className: `${styles.smHidden} ` },
+  { icon: <ReportIcon />, text: 'Пожаловаться', className: `` }
 ]
-.map((item) => <li key={generateRandomString()} className={`${styles.menuItem} ${item.classes}`}>{item.icon}<span>{item.text}</span></li>)
+  .map((item) => ({
+    ...item, id: generateRandomString(),
+    className: item.className + `${styles.menuItem}`
+  }))
 
 export function Menu(): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -33,7 +37,7 @@ export function Menu(): JSX.Element {
       >
         <div className={styles.dropdown} onClick={() => setIsOpen(false)}>
           <ul className={styles.menuItemsList}>
-            {list}
+            <GenericList list={LIST} />
           </ul>
           <button className={styles.closeBtn}>
             Закрыть
