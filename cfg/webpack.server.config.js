@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const { DefinePlugin } = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
@@ -28,7 +29,6 @@ module.exports = {
         use: [{
           loader: 'css-loader',
           options: {
-            sourceMap: IS_DEV,
             modules: {
               mode: 'local',
               localIdentName: '[name]__[local]--[hash:base64:5]',
@@ -41,15 +41,12 @@ module.exports = {
       },
       {
         test: GLOBAL_CSS_REGEXP,
-        use: [{
-          loader: 'css-loader',
-          options: {
-            sourceMap: IS_DEV
-          }
-        }]
+        use: 'css-loader'
       }]
   },
   optimization: {
     minimize: false,
   },
+  devtool: IS_DEV ? 'eval' : false,
+  plugins: [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` })]
 }

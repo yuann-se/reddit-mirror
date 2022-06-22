@@ -11,3 +11,4 @@ export * from './RoundShareIcon';
 export * from './SaveIcon';
 export * from './ShareIcon';
 export * from './KarmaArrowUpIcon';
+export * from './AnonAvatarIcon';
