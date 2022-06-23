@@ -8,8 +8,9 @@
   line-height: 14px;
 }
 
-svg.down {
+.down {
   transform: rotate(180deg);
+  padding-right: 4px;
 }
 
 @media all and (min-width: 1024px) {

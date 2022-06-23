@@ -12,20 +12,22 @@ interface IIconProps {
   width: number
 }
 
-function getTag(Name: EIcons) {
-  if (Name === EIcons.block) return <BlockIcon />;
-  if (Name === EIcons.comments) return <CommentsIcon />;
-  if (Name === EIcons.report) return <ReportIcon />;
-  if (Name === EIcons.menuBtn) return <DropdownMenuBtn />;
-  if (Name === EIcons.arrowUp) return <KarmaArrowUpIcon />;
-  if (Name === EIcons.saveRnd) return <RoundSaveIcon />;
-  if (Name === EIcons.shareRnd) return <RoundShareIcon />;
-  if (Name === EIcons.save) return <SaveIcon />;
-  if (Name === EIcons.share) return <ShareIcon />;
+function getTag(Name: EIcons, width: number) {
+  switch(Name) {
+    case EIcons.block: return <BlockIcon iconWidth= {width}/>;
+    case EIcons.comments: return <CommentsIcon iconWidth= {width}/>;
+    case EIcons.report: return <ReportIcon iconWidth= {width}/>;
+    case EIcons.menuBtn: return <DropdownMenuBtn iconWidth= {width}/>;
+    case EIcons.arrowUp: return <KarmaArrowUpIcon iconWidth= {width}/>;
+    case EIcons.save: return <SaveIcon iconWidth= {width}/>;
+    case EIcons.share: return <ShareIcon iconWidth= {width}/>;
+    case EIcons.saveRnd: return <RoundSaveIcon iconWidth= {width}/>;
+    case EIcons.shareRnd: return <RoundShareIcon iconWidth= {width}/>;
+  }
 }
 
 export function Icon({ Name, width }: IIconProps) {
   return (
-    <span style={{ width: `${width}px`, fontSize: '0' }}>{getTag(Name)}</span>
+    getTag(Name, width)
   );
 }

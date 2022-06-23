@@ -1,3 +1,7 @@
+export interface ISvgProps {
+  iconWidth?: number
+}
+
 export * from './BlockIcon';
 export * from './CommentsIcon';
 export * from './ReportIcon';

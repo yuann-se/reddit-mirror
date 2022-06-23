@@ -1,16 +1,16 @@
 import React from 'react';
-import { KarmaArrowUpIcon } from '../../../../icons';
+import { EIcons, Icon } from '../../../../Icon';
 import styles from './karmacounter.css';
 
 export function KarmaCounter() {
   return (
     <div className={styles.karmaCounter}>
       <button className={styles.up}>
-        <KarmaArrowUpIcon />
+        <Icon Name={EIcons.arrowUp} width={19} />
       </button>
       <span className={styles.karmaValue}>236</span>
       <button className={styles.down}>
-        <KarmaArrowUpIcon />
+        <Icon Name={EIcons.arrowUp} width={19} />
       </button>
     </div>
   );

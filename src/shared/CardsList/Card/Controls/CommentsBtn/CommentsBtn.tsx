@@ -1,11 +1,11 @@
 import React from 'react';
-import { CommentsIcon } from '../../../../icons/CommentsIcon';
+import { EIcons, Icon } from '../../../../Icon';
 import styles from './commentsbtn.css';
 
 export function CommentsBtn() {
   return (
     <button className={styles.commentsBtn}>
-      <CommentsIcon />
+      <Icon Name={EIcons.comments} width={15}/>
       <span className={styles.commentsNumber}>12</span>
     </button>
   );
