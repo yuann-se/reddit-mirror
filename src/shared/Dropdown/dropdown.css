@@ -15,18 +15,3 @@
   height: 100%;
 }
 
-.display-enter{
-  opacity: 0;
-  transform: translateY(30px);
-  /* transition: opacity .2s ease, transform .2s ease; */
-}
-
-.display-enter-active {
-  opacity: 1;
-  transform: none;
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-.display-enter-done {
-  opacity: .5;
-}

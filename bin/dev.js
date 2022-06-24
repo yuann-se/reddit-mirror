@@ -43,7 +43,7 @@ hmrServer.use(webpackHotMiddleware(clientCompiler, {
 }));
 
 hmrServer.listen(3001, () => {
-  console.log('HMR server successfully started')
+  console.log('>>> HMR server successfully started')
 })
 
 compiler.run((err) => {
@@ -54,7 +54,7 @@ compiler.run((err) => {
     if (err) {
       console.log('Compilation failed: ', err)
     }
-    console.log('Compilation was successful')
+    console.log('>>> Compilation was successful')
   });
 
   nodemon({
