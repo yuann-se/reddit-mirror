@@ -5,34 +5,27 @@
   padding: 0;
 }
 
-.menuItemsList {
-  padding: 0 20px;
+/* .containerDefault {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .2s ease, transform .2s ease;
+} */
+
+.transition-enter-active, .transition-appear-active {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .2s ease, transform .2s ease;
 }
 
-.menuItem {
-  padding: 10px 0;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  cursor: pointer;
-  background-color: white;
+.transition-enter, .transition-appear {
+  opacity: 1;
+  transform: none;
 }
 
-.smHidden {
-  display: none;
-}
-
-.menuItem span {
-  color: var(--grey99);
-}
-
-.menuItem:not(:last-child) {
-  border-bottom: 1px solid var(--greyEC);
-}
-
-.menuItem>svg+span {
-  margin-left: 7px;
-}
+/* .containerIsActive {
+  opacity: 1;
+  transform: none;
+} */
 
 .dropdown {
   position: absolute;
@@ -43,6 +36,11 @@
   border-radius: 3px;
   background-color: var(--white);
 }
+
+/* .dropdownIsActive {
+  opacity: 1;
+  transform: none;
+} */
 
 .closeBtn {
   background-color: var(--greyD9);
@@ -55,17 +53,27 @@
 }
 
 .menuBtn {
+  position: relative;
   width: 31px;
   height: 31px;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: rotate(90deg);
-  border-radius: 50%;
 }
 
-.menuBtn:active,
-.menuBtnIsActive {
+.menuBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  transform: scale(0);
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.menuBtnIsActive::before {
+  transform: scale(1);
   background-color: rgba(51, 51, 51, 0.1);
 }
 
@@ -85,23 +93,11 @@
     align-self: center;
     transform: unset;
   }
-
-  .smHidden {
-    display: flex;
-  }
 }
 
 @media all and (min-width: 1540px) {
-  .menuBtn:hover {
+  .menuBtn:hover::before {
     background-color: rgba(51, 51, 51, 0.1);
-  }
-
-  .menuItemsList {
-    padding: 10px 20px;
-  }
-
-  .menuItem {
-    padding: 6px 0;
   }
 
   .closeBtn {
