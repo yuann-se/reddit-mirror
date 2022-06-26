@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 .userBox {
   cursor: pointer;
   display: flex;
@@ -5,11 +7,11 @@
 }
 
 .userBox:hover span {
-  color: var(--orange);
+  color: $orange;
 }
 
 .userBox:hover .avatarBox {
-  box-shadow: 0 0 0 1px var(--orange);
+  box-shadow: 0 0 0 1px $orange;
 }
 
 .avatarBox {
@@ -32,7 +34,7 @@
   display: none;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .username {
     display: flex;
   }

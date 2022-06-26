@@ -1,9 +1,8 @@
 import React from 'react';
+import { Icon, EIcons } from '../../../Icon';
 import { ActionBtns } from './ActionBtns';
-import { SaveBtn } from './ActionBtns/SaveBtn';
-import { ShareBtn } from './ActionBtns/ShareBtn';
 import { CommentsBtn } from './CommentsBtn';
-import styles from './controls.css';
+import styles from './controls.scss';
 import { KarmaCounter } from './KarmaCounter';
 
 export function Controls() {
@@ -12,8 +11,8 @@ export function Controls() {
       <KarmaCounter />
       <CommentsBtn />
       <ActionBtns>
-        <ShareBtn />
-        <SaveBtn />
+        <Icon Name={EIcons.shareRnd} width={20} />
+        <Icon Name={EIcons.saveRnd} width={20} />
       </ActionBtns>
     </div>
   );

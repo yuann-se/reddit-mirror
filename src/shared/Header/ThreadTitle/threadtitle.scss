@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .threadTitle {
   font-weight: normal;
   padding: 0 20px;
@@ -6,7 +8,7 @@
   margin: 0 0 15px;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .threadTitle {
     padding: 0;
     margin: 0 27px 0 0;

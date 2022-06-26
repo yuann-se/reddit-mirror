@@ -1,6 +1,6 @@
 import React from 'react';
 import { EIcons, Icon } from '../../../../Icon';
-import styles from './karmacounter.css';
+import styles from './karmacounter.scss';
 
 export function KarmaCounter() {
   return (

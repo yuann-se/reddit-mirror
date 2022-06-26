@@ -1,19 +1,17 @@
-.karmaCounter>*+* {
-  padding: 0 0 0 4px;
-}
+@import '../../../../../variables';
 
 .karmaValue {
-  color: var(--greyC4);
+  padding: 0 4px;
+  color: $greyC4;
   font-size: 12px;
   line-height: 14px;
 }
 
 .down {
   transform: rotate(180deg);
-  padding-right: 4px;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .karmaCounter {
     display: flex;
     align-items: center;
@@ -21,23 +19,20 @@
     flex-flow: column nowrap;
   }
 
-  .karmaCounter>*+* {
-    padding: 7px 0 0;
-  }
-
   .karmaValue {
+    padding: 7px 0;
     font-size: 14px;
     line-height: 16px;
-    color: var(--black);
+    color: $black;
   }
 }
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: $desctopWidth) {
   .karmaCounter>button.up:hover>svg>path {
-    fill: var(--green);
+    fill: $green;
   }
 
   .karmaCounter>button.down:hover>svg>path {
-    fill: var(--orange);
+    fill: $orange;
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { EIcons, Icon } from '../../../../Icon';
 import { EColors, Text } from '../../../../Text';
-import styles from './itemslist.css';
+import styles from './itemslist.scss';
 
 interface IItemList {
   postID: string

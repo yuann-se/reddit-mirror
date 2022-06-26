@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './posttitle.css';
+import styles from './posttitle.scss';
 
 export function PostTitle() {
   return (

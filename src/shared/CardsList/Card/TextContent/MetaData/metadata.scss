@@ -1,3 +1,5 @@
+@import '../../../../../variables';
+
 .metaData {
   display: flex;
   flex-flow: row nowrap;
@@ -10,21 +12,9 @@
   display: none;
 }
 
-.createdAt, .createdAt span {
-  color: var(--grey99);
-}
-
-@media all and (min-width: 1024px) {
-  .metaData {
-    flex-flow: row-reverse nowrap;
-    justify-content: flex-end;
-    font-size: 14px;
-    line-height: 16px;
-  }
-
-  .publishedLabel {
-    display: inline;
-  }
+.createdAt,
+.createdAt span {
+  color: $grey99;
 }
 
 .userLink {
@@ -44,18 +34,29 @@
 }
 
 .username {
-  color: var(--orange);
+  color: $orange;
   position: relative;
   z-index: 1;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
+  .metaData {
+    flex-flow: row-reverse nowrap;
+    justify-content: flex-end;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .publishedLabel {
+    display: inline;
+  }
+
   .userLink {
     padding: 0 0 0 5px;
   }
 }
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: $desctopWidth) {
   .userLink:hover a {
     text-decoration: underline;
   }

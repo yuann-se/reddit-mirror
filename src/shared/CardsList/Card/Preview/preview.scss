@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 .preview {
   max-height: 178px;
   margin: 0 -20px;
@@ -9,7 +11,7 @@
   object-fit: cover;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .preview {
     flex-basis: 190px;
     order: 0;

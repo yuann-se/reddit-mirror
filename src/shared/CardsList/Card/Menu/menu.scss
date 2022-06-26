@@ -1,3 +1,5 @@
+@import '../../../../variables';
+
 .menu {
   position: absolute;
   top: 17px;
@@ -5,27 +7,18 @@
   padding: 0;
 }
 
-/* .containerDefault {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity .2s ease, transform .2s ease;
-} */
-
-.transition-enter-active, .transition-appear-active {
+.transition-enter-active,
+.transition-appear-active {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity .2s ease, transform .2s ease;
 }
 
-.transition-enter, .transition-appear {
+.transition-enter,
+.transition-appear {
   opacity: 1;
   transform: none;
 }
-
-/* .containerIsActive {
-  opacity: 1;
-  transform: none;
-} */
 
 .dropdown {
   position: absolute;
@@ -34,22 +27,17 @@
   top: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
-  background-color: var(--white);
+  background-color: $white;
 }
 
-/* .dropdownIsActive {
-  opacity: 1;
-  transform: none;
-} */
-
 .closeBtn {
-  background-color: var(--greyD9);
+  background-color: $greyD9;
   padding: 12px 23px;
   border-radius: 0 0 3px 3px;
   width: 100%;
   font-weight: 400;
   font-size: 14px;
-  color: var(--grey66);
+  color: $grey66;
 }
 
 .menuBtn {
@@ -77,7 +65,7 @@
   background-color: rgba(51, 51, 51, 0.1);
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .menu {
     position: relative;
     order: 2;
@@ -95,8 +83,9 @@
   }
 }
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: $desctopWidth) {
   .menuBtn:hover::before {
+    transform: scale(1);
     background-color: rgba(51, 51, 51, 0.1);
   }
 

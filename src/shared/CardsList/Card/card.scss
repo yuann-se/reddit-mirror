@@ -1,14 +1,17 @@
+@import '../../../variables';
+
 .card {
   position: relative;
   margin-top: -1px;
-  background-color: var(--white);
+  background-color: $white;
   border-radius: 7px;
   padding: 20px 20px 10px;
   display: flex;
   flex-flow: row wrap;
 }
 
-.card>*, .textContent>* {
+.card>*,
+.textContent>* {
   flex: 1 1 100%;
 }
 
@@ -16,11 +19,12 @@
   padding: 13px 0 0;
 }
 
-.card:hover h2 a, .card:focus-within h2 a {
-  color: var(--orange);
+.card:hover h2 a,
+.card:focus-within h2 a {
+  color: $orange;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .card {
     background-color: transparent;
     flex-flow: row nowrap;
@@ -37,7 +41,7 @@
   }
 }
 
-@media all and (min-width: 1540px) {
+@media all and (min-width: $desctopWidth) {
   .card {
     padding: 20px 60px;
     max-height: 147px;
@@ -45,8 +49,9 @@
     border-radius: 0;
   }
 
-  .card:hover, .card:focus-within {
-    outline: 1px solid var(--greyD9);
+  .card:hover,
+  .card:focus-within {
+    outline: 1px solid $greyD9;
     outline-offset: -2px;
   }
 }

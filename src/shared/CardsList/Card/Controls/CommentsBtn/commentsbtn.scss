@@ -1,10 +1,12 @@
+@import '../../../../../variables';
+
 .commentsBtn {
   display: flex;
   align-items: normal;
 }
 
 .commentsBtn * {
-  color: var(--greyC4);
+  color: $greyC4;
 }
 
 .commentsNumber {
@@ -13,7 +15,7 @@
   line-height: 14px;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .commentsBtn {
     display: none;
   }

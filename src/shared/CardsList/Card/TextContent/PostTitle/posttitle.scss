@@ -1,3 +1,5 @@
+@import '../../../../../variables';
+
 .title {
   font-size: 16px;
   line-height: 19px;
@@ -21,7 +23,7 @@
   left: 0;
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: $tabletWidth) {
   .title {
     padding: 0 0 10px 0;
     font-size: 20px;

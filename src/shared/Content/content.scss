@@ -1,0 +1,11 @@
+/* .content {
+  overflow: hidden;
+} */
+@import '../../variables';
+
+@media all and (min-width: $tabletWidth) {
+  .content {
+    background-color: $white;
+    border-radius: 7px 7px 0 0;
+  }
+}

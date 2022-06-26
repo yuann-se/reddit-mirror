@@ -4,7 +4,7 @@ const { DefinePlugin } = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
-const GLOBAL_CSS_REGEXP = /\.global\.css$/;
+const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
 
 module.exports = {
   target: 'node',
@@ -25,7 +25,7 @@ module.exports = {
         use: ['ts-loader']
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [{
           loader: 'css-loader',
           options: {
@@ -36,12 +36,13 @@ module.exports = {
             onlyLocals: true,
           },
         },
+          'sass-loader',
         ],
         exclude: GLOBAL_CSS_REGEXP
       },
       {
         test: GLOBAL_CSS_REGEXP,
-        use: 'css-loader'
+        use: ['css-loader', 'sass-loader']
       }]
   },
   optimization: {
