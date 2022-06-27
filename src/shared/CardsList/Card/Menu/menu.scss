@@ -1,5 +1,27 @@
 @import '../../../../variables';
 
+.open-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.open-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.open-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.open-exit-active {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
 .menu {
   position: absolute;
   top: 17px;
@@ -7,22 +29,8 @@
   padding: 0;
 }
 
-.transition-enter-active,
-.transition-appear-active {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-.transition-enter,
-.transition-appear {
-  opacity: 1;
-  transform: none;
-}
-
 .dropdown {
   position: absolute;
-  z-index: 100;
   right: 0;
   top: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);

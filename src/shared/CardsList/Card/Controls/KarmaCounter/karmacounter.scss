@@ -28,6 +28,12 @@
 }
 
 @media all and (min-width: $desctopWidth) {
+
+  .karmaCounter>button.up>svg>path,
+  .karmaCounter>button.down>svg>path {
+    transition: fill .2s ease;
+  }
+
   .karmaCounter>button.up:hover>svg>path {
     fill: $green;
   }

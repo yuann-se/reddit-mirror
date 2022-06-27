@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './dropdown.scss';
+import { CSSTransition } from 'react-transition-group';
 
 interface IDropdownProps {
   button: React.ReactNode;
@@ -7,12 +8,13 @@ interface IDropdownProps {
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
-  transitionClasses?: object
+  transitionClasses?: object;
+  transitionTimeout?: number
 }
 
 const NOOP = () => { };
 
-export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NOOP, transitionClasses }: IDropdownProps) {
+export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NOOP, transitionClasses = {}, transitionTimeout = 0 }: IDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(isOpen);
   React.useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
   React.useEffect(() => isDropdownOpen ? onOpen : onClose, [isDropdownOpen]);
@@ -28,13 +30,19 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
       <div onClick={handleOpen}>
         {button}
       </div>
-      {isDropdownOpen && (
+      <CSSTransition
+        in={isDropdownOpen}
+        timeout={transitionTimeout}
+        classNames={transitionClasses}
+        mountOnEnter
+        unmountOnExit
+      >
         <div className={styles.listContainer}>
           <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
             {children}
           </div>
         </div>
-      )}
+      </CSSTransition>
     </div>
   );
 }

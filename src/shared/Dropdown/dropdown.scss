@@ -5,6 +5,7 @@
 
 .listContainer {
   position: relative;
+  z-index: 100;
 }
 
 .list {
@@ -14,4 +15,3 @@
   width: 100%;
   height: 100%;
 }
-

@@ -3,11 +3,15 @@
 .card {
   position: relative;
   margin-top: -1px;
-  background-color: $white;
-  border-radius: 7px;
   padding: 20px 20px 10px;
   display: flex;
   flex-flow: row wrap;
+
+  background-color: $white;
+  border-radius: 7px;
+  outline: 1px solid transparent;
+  outline-offset: -2px;
+  transition: outline .2s ease;
 }
 
 .card>*,
@@ -17,6 +21,10 @@
 
 .card>*+* {
   padding: 13px 0 0;
+}
+
+.card h2 {
+  transition: color .2s ease;
 }
 
 .card:hover h2 a,
@@ -52,6 +60,5 @@
   .card:hover,
   .card:focus-within {
     outline: 1px solid $greyD9;
-    outline-offset: -2px;
   }
 }

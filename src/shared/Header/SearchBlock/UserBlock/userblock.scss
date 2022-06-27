@@ -4,6 +4,20 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+
+  span {
+    transition: color .2s ease;
+  }
+
+  .avatarBox {
+    height: 50px;
+    margin-right: 17px;
+    border-radius: 50%;
+    outline: 1px solid transparent;
+    outline-offset: 0;
+    will-change: outline, outline-offset;
+    transition: outline .2s ease, outline-offset .2s ease;
+  }
 }
 
 .userBox:hover span {
@@ -11,16 +25,8 @@
 }
 
 .userBox:hover .avatarBox {
-  box-shadow: 0 0 0 1px $orange;
-}
-
-.avatarBox {
-  width: 60px;
-  height: 60px;
-  padding: 5px;
-  margin-right: 12px;
-  border-radius: 100%;
-  box-shadow: none;
+  outline: 1px solid $orange;
+  outline-offset: 5px;
 }
 
 .avatarImage {

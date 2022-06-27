@@ -23,7 +23,24 @@
   align-items: center;
   height: 20px;
   padding: 0 6px 0 0;
+
+  a {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $orange;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .2s ease;
+    }
+  }
 }
+
 
 .avatar {
   border-radius: 20px;
@@ -57,7 +74,7 @@
 }
 
 @media all and (min-width: $desctopWidth) {
-  .userLink:hover a {
-    text-decoration: underline;
+  .userLink:hover a::before {
+    transform: none;
   }
 }

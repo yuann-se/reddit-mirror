@@ -16,8 +16,15 @@ export function Menu(): JSX.Element {
         button={<button className={btnClasses} onClick={handleClick}>
           <Icon Name={EIcons.menuBtn} width={5} />
         </button>}
+        transitionClasses={{
+          enter: styles['open-enter'],
+          enterActive: styles['open-enter-active'],
+          exit: styles['open-exit'],
+          exitActive: styles['open-exit-active']
+        }}
+        transitionTimeout={200}
       >
-        <div className={styles.dropdown}>
+        <div className={styles.dropdown} onClick={handleClick}>
           <ItemsList postID='1111' />
           <button className={styles.closeBtn}>
             Закрыть
