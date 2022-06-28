@@ -17,7 +17,8 @@ export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
       <div className={styles.avatarBox}>
         {avatarSrc
           ? <img src={avatarSrc} alt='User avatar' className={styles.avatarImage} />
-          : <Icon Name={EIcons.anonAvatar} width={50} />}
+          : <Icon Name={EIcons.anonAvatar} width={50} />
+          }
       </div>
 
       <div className={styles.username}>

@@ -3,12 +3,16 @@ import { Dropdown } from '../../../Dropdown';
 import styles from './menu.scss';
 import { ItemsList } from './ItemsList';
 import { EIcons, Icon } from '../../../Icon';
+import classNames from 'classnames';
 
 export function Menu(): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
   const handleClick = () => { setIsOpen(!isOpen) }
 
-  const btnClasses = `${styles.menuBtn} ${isOpen ? styles.menuBtnIsActive : ''}`;
+  const btnClasses = classNames(
+    styles['menuBtn'],
+    { [styles['menuBtnIsActive']]: isOpen }
+  )
 
   return (
     <div className={styles.menu}>
