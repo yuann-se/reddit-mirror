@@ -1,11 +1,16 @@
 import React from 'react';
 import styles from './posttitle.scss';
 
-export function PostTitle() {
+interface IPostTitleProps {
+  postUrl: string;
+  postTitle: string
+}
+
+export function PostTitle(props: IPostTitleProps) {
   return (
     <h2 className={styles.title}>
-      <a href="#post-url" className={styles.postLink}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ex modi placeat facilis!
+      <a href={props.postUrl} className={styles.postLink}>
+        {props.postTitle}
       </a>
     </h2>
   );

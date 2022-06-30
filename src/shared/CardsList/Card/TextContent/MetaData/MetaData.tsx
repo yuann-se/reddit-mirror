@@ -1,17 +1,30 @@
 import React from 'react';
 import styles from './metadata.scss';
 
-export function MetaData() {
+interface IMetaDataProps {
+  avatarSrc: string;
+  authorUrl: string;
+  author: string;
+  createdAt: string
+}
+
+export function MetaData(props: IMetaDataProps) {
+
+  let date = new Date(props.createdAt);
+  let createdAt = date.toLocaleDateString();
+
   return (
     <div className={styles.metaData}>
       <div className={styles.userLink}>
-        <img src='https://upload.wikimedia.org/wikipedia/commons/8/8f/Mhohl-potrait-web.jpg'
-          alt="avatar" className={styles.avatar} />
-        <a href="#user-url" className={styles.username}>Станислав Грачёв</a>
+        {props.avatarSrc && (
+          <img src={props.avatarSrc}
+            alt="avatar" className={styles.avatar} />
+        )}
+        <a href={props.authorUrl} className={styles.username}>{props.author}</a>
       </div>
       <span className={styles.createdAt}>
         <span className={styles.publishedLabel}>опубликовано </span>
-        5 часов назад
+        {createdAt}
       </span>
     </div>
   );

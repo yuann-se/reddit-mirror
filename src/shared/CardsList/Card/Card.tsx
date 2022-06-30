@@ -20,10 +20,22 @@ interface ICardProps {
 export function Card(props: ICardProps) {
   return (
     <li className={styles.card}>
-      <TextContent />
-      <Preview />
+      <TextContent
+        avatarSrc={props.avatarSrc}
+        author={props.author}
+        authorUrl={props.authorUrl}
+        createdAt={props.createdAt}
+        postUrl={props.postUrl}
+        postTitle={props.postTitle}
+      />
+      {props.previewSrc && (
+        <Preview src={props.previewSrc} />
+      )}
       <Menu />
-      <Controls />
+      <Controls
+        upvotes={props.upvotes}
+        comments={props.comments}
+      />
     </li>
   );
 }

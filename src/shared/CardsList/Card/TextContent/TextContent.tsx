@@ -3,11 +3,29 @@ import { MetaData } from './MetaData';
 import { PostTitle } from './PostTitle';
 import styles from './textcontent.scss';
 
-export function TextContent() {
+interface ITextContentProps {
+  avatarSrc: string;
+  authorUrl: string;
+  author: string;
+  createdAt: string;
+
+  postUrl: string;
+  postTitle: string
+}
+
+export function TextContent(props: ITextContentProps) {
   return (
     <div className={styles.textContent}>
-      <MetaData />
-      <PostTitle />
+      <MetaData
+        avatarSrc={props.avatarSrc}
+        author={props.author}
+        authorUrl={props.authorUrl}
+        createdAt={props.createdAt}
+      />
+      <PostTitle
+        postUrl={props.postUrl}
+        postTitle={props.postTitle}
+      />
     </div>
   );
 }
