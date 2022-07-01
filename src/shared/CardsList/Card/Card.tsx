@@ -6,6 +6,7 @@ import { Preview } from './Preview';
 import { TextContent } from './TextContent';
 
 interface ICardProps {
+  id: string;
   author: string;
   authorUrl: string;
   avatarSrc: string;

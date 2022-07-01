@@ -13,7 +13,7 @@ export function useUserData() {
   const token = useContext(tokenContext);
 
   useEffect(() => {
-    if (token && token.length > 0) {
+    if (token.length > 10) {
       axios.get(
         'https://oauth.reddit.com/api/v1/me',
         { headers: { Authorization: `bearer ${token}` } }

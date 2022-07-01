@@ -10,7 +10,7 @@ interface IMetaDataProps {
 
 export function MetaData(props: IMetaDataProps) {
 
-  let date = new Date(props.createdAt);
+  let date = new Date(Number(props.createdAt) * 1000);
   let createdAt = date.toLocaleDateString();
 
   return (
