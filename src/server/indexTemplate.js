@@ -15,6 +15,7 @@ export const indexTemplate = (content, token, error) =>
 
   <body>
     <div id="react_root">${content}</div>
+    <div id="modal_root"></div>
   </body>
 
   </html>`
