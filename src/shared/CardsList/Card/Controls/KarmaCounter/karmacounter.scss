@@ -1,0 +1,44 @@
+@import '../../../../../variables';
+
+.karmaValue {
+  padding: 0 4px;
+  color: $greyC4;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.down {
+  transform: rotate(180deg);
+}
+
+@media all and (min-width: $tabletWidth) {
+  .karmaCounter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+  }
+
+  .karmaValue {
+    padding: 7px 0;
+    font-size: 14px;
+    line-height: 16px;
+    color: $black;
+  }
+}
+
+@media all and (min-width: $desctopWidth) {
+
+  .karmaCounter>button.up>svg>path,
+  .karmaCounter>button.down>svg>path {
+    transition: fill .2s ease;
+  }
+
+  .karmaCounter>button.up:hover>svg>path {
+    fill: $green;
+  }
+
+  .karmaCounter>button.down:hover>svg>path {
+    fill: $orange;
+  }
+}

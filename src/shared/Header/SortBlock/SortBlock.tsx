@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './sortblock.css';
+import styles from './sortblock.scss';
 
 export function SortBlock() {
   return (

@@ -1,0 +1,47 @@
+@import '../../../../variables';
+
+.userBox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  span {
+    transition: color .2s ease;
+  }
+
+  .avatarBox {
+    height: 50px;
+    margin-right: 17px;
+    border-radius: 50%;
+    outline: 1px solid transparent;
+    outline-offset: 0;
+    will-change: outline, outline-offset;
+    transition: outline .2s ease, outline-offset .2s ease;
+  }
+}
+
+.userBox:hover span {
+  color: $orange;
+}
+
+.userBox:hover .avatarBox {
+  outline: 1px solid $orange;
+  outline-offset: 5px;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.username {
+  display: none;
+}
+
+@media all and (min-width: $tabletWidth) {
+  .username {
+    display: flex;
+  }
+}

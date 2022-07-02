@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
-const GLOBAL_CSS_REGEXP = /\.global\.css$/;
+const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
 const DEV_PLUGINS = [new CleanWebpackPlugin(), new HotModuleReplacementPlugin()];
 const COMMON_PLUGINS = [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` })]
 
@@ -37,7 +37,7 @@ module.exports = {
         use: ['ts-loader'],
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           'style-loader',
           {
@@ -50,6 +50,7 @@ module.exports = {
               },
             },
           },
+          'sass-loader',
         ],
         exclude: GLOBAL_CSS_REGEXP,
       },
@@ -61,7 +62,9 @@ module.exports = {
             options: {
               sourceMap: IS_DEV
             }
-          }],
+          },
+          'sass-loader',
+        ],
       },
     ],
   },

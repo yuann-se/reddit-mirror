@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './actionbtns.css';
+import styles from './actionbtns.scss';
 
 interface IActionBtnsProps {
   children?: React.ReactNode;

@@ -1,0 +1,103 @@
+@import '../../../../variables';
+
+.open-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.open-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.open-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.open-exit-active {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.menu {
+  position: absolute;
+  top: 17px;
+  right: 15px;
+  padding: 0;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  background-color: $white;
+}
+
+.closeBtn {
+  background-color: $greyD9;
+  padding: 12px 23px;
+  border-radius: 0 0 3px 3px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  color: $grey66;
+}
+
+.menuBtn {
+  position: relative;
+  width: 31px;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(90deg);
+}
+
+.menuBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  transform: scale(0);
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.menuBtnIsActive::before {
+  transform: scale(1);
+  background-color: rgba(51, 51, 51, 0.1);
+}
+
+@media all and (min-width: $tabletWidth) {
+  .menu {
+    position: relative;
+    order: 2;
+    display: flex;
+    align-items: center;
+    flex: 0 0;
+    top: unset;
+    right: unset;
+    margin: 0 0 0 auto;
+  }
+
+  .menuBtn {
+    align-self: center;
+    transform: unset;
+  }
+}
+
+@media all and (min-width: $desctopWidth) {
+  .menuBtn:hover::before {
+    transform: scale(1);
+    background-color: rgba(51, 51, 51, 0.1);
+  }
+
+  .closeBtn {
+    display: none;
+  }
+}

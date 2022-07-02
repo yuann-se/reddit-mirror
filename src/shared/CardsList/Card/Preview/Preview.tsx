@@ -1,10 +1,14 @@
 import React from 'react';
-import styles from './preview.css';
+import styles from './preview.scss';
 
-export function Preview() {
+interface IPreviewProps {
+  src: string
+}
+
+export function Preview({ src }: IPreviewProps) {
   return (
     <div className={styles.preview}>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Tehran_Stock_Exchange_3513528.jpg"
+      <img src={src}
         alt="preview" className={styles.previewImg} />
     </div>
   );

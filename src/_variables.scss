@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+$black: #333333;
+$orange: #CC6633;
+$green: #A4CC33;
+$whiteLightness: 100%;
+$white: hsl(0, 0%, $whiteLightness);
+$grayF4: hsl(0, 0%, calc($whiteLightness - 4%));
+$greyF3: hsl(0, 0%, calc($whiteLightness - 5%));
+$greyEC: hsl(0, 0%, calc($whiteLightness - 7%));
+$greyD9: hsl(0, 0%, calc($whiteLightness - 15%));
+$greyC4: hsl(0, 0%, calc($whiteLightness - 23%));
+$grey99: hsl(0, 0%, calc($whiteLightness - 40%));
+$grey66: hsl(0, 0%, calc($whiteLightness - 60%));
+
+$tabletWidth: 768px;
+$desctopWidth: 1240px;

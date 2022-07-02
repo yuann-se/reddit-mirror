@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.sortBlock {
+  background-color: $white;
+  padding: 11px 20px;
+  border-radius: 7px;
+  margin: 0 0 20px;
+}
+
+@media all and (min-width: $tabletWidth) {
+  .sortBlock {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+}

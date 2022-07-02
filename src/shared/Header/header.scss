@@ -1,0 +1,16 @@
+@import '../../variables';
+
+@media all and (min-width: $tabletWidth) {
+  .header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 40px;
+  }
+}
+
+@media all and (min-width: $desctopWidth) {
+  .header {
+    padding: 67px 0;
+  }
+}
