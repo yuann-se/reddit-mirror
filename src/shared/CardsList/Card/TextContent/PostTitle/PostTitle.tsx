@@ -23,7 +23,7 @@ export function PostTitle(props: IPostTitleProps) {
         {props.postTitle}
       </a>
       {isModalOpen && (
-        <Post onClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen}/>
+        <Post onClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen} />
       )}
       {/* <CSSTransition
         in={isModalOpen}

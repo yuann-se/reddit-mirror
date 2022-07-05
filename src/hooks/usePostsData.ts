@@ -9,6 +9,7 @@ interface IPost {
   authorUrl: string;
   avatarSrc: string;
   createdAt: string;
+  id: string;
   postTitle: string;
   postUrl: string
   previewSrc: string;
@@ -21,17 +22,9 @@ interface IInitPost {
     author: string;
     avatarSrc: string;
     created: string;
+    id: string;
     title: string;
     url: string
-    // preview: {
-    //   images: [
-    //     {
-    //       source: {
-    //         url: string;
-    //       }
-    //     }
-    //   ]
-    // };
     ups: number;
     num_comments: number;
     sr_detail: {
@@ -55,6 +48,7 @@ export function usePostsData() {
     )
       .then((res) => {
         const initData = res.data.data.children;
+        console.log(initData)
 
         initData.map(({ data }: IInitPost) => {
           const post = {
@@ -62,10 +56,10 @@ export function usePostsData() {
             authorUrl: `https://www.reddit.com/user/${data.author}/`,
             avatarSrc: data.sr_detail.icon_img,
             createdAt: data.created,
+            id: data.id,
             postTitle: data.title,
             postUrl: data.url,
             previewSrc: data.thumbnail.length < 10 ? postPreviewDefault : data.thumbnail,
-            // previewSrc: data.preview ? data.preview.images[0].source.url : '',
             upvotes: data.ups,
             comments: data.num_comments
           };

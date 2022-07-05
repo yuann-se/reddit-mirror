@@ -9,8 +9,8 @@ export function CardsList() {
   const data = useContext(postsContext);
 
   const list = data.map((post) => <Card
-    key = {generateRandomString()}
-    id={generateRandomString()}
+    key={generateRandomString()}
+    id={post.id}
     author={post.author}
     authorUrl={post.authorUrl}
     avatarSrc={post.avatarSrc}

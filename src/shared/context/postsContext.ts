@@ -5,6 +5,7 @@ interface IPost {
   authorUrl: string;
   avatarSrc: string;
   createdAt: string;
+  id: string;
   postTitle: string;
   postUrl: string
   previewSrc: string;

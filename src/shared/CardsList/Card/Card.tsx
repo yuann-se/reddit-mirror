@@ -20,7 +20,10 @@ interface ICardProps {
 
 export function Card(props: ICardProps) {
   return (
-    <li className={styles.card}>
+    <li
+      className={styles.card}
+      id={props.id}
+    >
       <TextContent
         avatarSrc={props.avatarSrc}
         author={props.author}
