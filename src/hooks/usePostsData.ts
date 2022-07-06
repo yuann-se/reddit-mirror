@@ -48,7 +48,7 @@ export function usePostsData() {
     )
       .then((res) => {
         const initData = res.data.data.children;
-        // console.log(initData)
+        console.log(initData)
 
         initData.map(({ data }: IInitPost) => {
           const post = {
