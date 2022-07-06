@@ -1,10 +1,11 @@
 import React from 'react';
 import { AnonAvatarIcon, BlockIcon, CommentsIcon, ReportIcon, DropdownMenuBtn, KarmaArrowUpIcon, RoundSaveIcon, RoundShareIcon, SaveIcon, ShareIcon } from '../icons';
+import { ModalCloseIcon } from '../icons/ModalCloseIcon';
 
 export enum EIcons {
   anonAvatar, block, comments, report,
   menuBtn, arrowUp, saveRnd,
-  shareRnd, save, share,
+  shareRnd, save, share, closeModal
 }
 
 interface IIconProps {
@@ -24,6 +25,7 @@ function getTag(Name: EIcons, width: number) {
     case EIcons.share: return <ShareIcon iconWidth={width} />;
     case EIcons.saveRnd: return <RoundSaveIcon iconWidth={width} />;
     case EIcons.shareRnd: return <RoundShareIcon iconWidth={width} />;
+    case EIcons.closeModal: return <ModalCloseIcon iconWidth={width} />;
   }
 }
 

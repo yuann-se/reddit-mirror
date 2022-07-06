@@ -110,7 +110,7 @@
   font-weight: 500;
 }
 
-@media all and (min-width: $tabletWidth) and (max-width: ($desctopWidth - 1)) {
+@media all and (min-width: $tabletWidth) and (max-width: ($desktopWidth - 1)) {
   .t28 {
     font-size: 28px;
     line-height: 33px;
@@ -142,7 +142,7 @@
   }
 }
 
-@media all and (min-width: $desctopWidth) {
+@media all and (min-width: $desktopWidth) {
   .d28 {
     font-size: 28px;
     line-height: 33px;

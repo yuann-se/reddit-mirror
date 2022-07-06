@@ -4,11 +4,11 @@ import { PostTitle } from './PostTitle';
 import styles from './textcontent.scss';
 
 interface ITextContentProps {
+  postID: string;
   avatarSrc: string;
   authorUrl: string;
   author: string;
   createdAt: string;
-
   postUrl: string;
   postTitle: string
 }
@@ -23,6 +23,7 @@ export function TextContent(props: ITextContentProps) {
         createdAt={props.createdAt}
       />
       <PostTitle
+        postID={props.postID}
         postUrl={props.postUrl}
         postTitle={props.postTitle}
       />

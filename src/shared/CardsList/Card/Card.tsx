@@ -25,6 +25,7 @@ export function Card(props: ICardProps) {
       id={props.id}
     >
       <TextContent
+        postID={props.id}
         avatarSrc={props.avatarSrc}
         author={props.author}
         authorUrl={props.authorUrl}
@@ -35,7 +36,7 @@ export function Card(props: ICardProps) {
       {props.previewSrc && (
         <Preview src={props.previewSrc} />
       )}
-      <Menu />
+      <Menu postID={props.id} />
       <Controls
         upvotes={props.upvotes}
         comments={props.comments}

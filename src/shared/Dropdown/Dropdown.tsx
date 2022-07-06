@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './dropdown.scss';
 import { CSSTransition } from 'react-transition-group';
+import ReactDOM from 'react-dom';
 
 interface IDropdownProps {
   button: React.ReactNode;
@@ -21,16 +22,21 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
 
   const handleOpen = () => {
     if (isOpen === undefined) {
-      setIsDropdownOpen(!isDropdownOpen)
+      setIsDropdownOpen(!isDropdownOpen);
+      // console.log(btnRef.current?.getBoundingClientRect());
     }
   }
+
+  const node = document.getElementById('dropdown_root');
+  if (!node) return null;
 
   return (
     <div className={styles.container}>
       <div onClick={handleOpen}>
         {button}
       </div>
-      <CSSTransition
+      {ReactDOM.createPortal(
+        (<CSSTransition
         in={isDropdownOpen}
         timeout={transitionTimeout}
         classNames={transitionClasses}
@@ -42,7 +48,9 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
             {children}
           </div>
         </div>
-      </CSSTransition>
+      </CSSTransition>), node
+      )}
+
     </div>
   );
 }

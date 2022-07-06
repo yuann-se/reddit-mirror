@@ -7,9 +7,10 @@ interface IPost {
   createdAt: string;
   id: string;
   postTitle: string;
-  postUrl: string
+  postUrl: string;
   previewSrc: string;
   upvotes: number;
+  subreddit: string;
   comments: number
 }
 

@@ -1,7 +1,8 @@
-/* .content {
-  overflow: hidden;
-} */
 @import '../../variables';
+
+.content {
+  overflow: hidden;
+}
 
 @media all and (min-width: $tabletWidth) {
   .content {

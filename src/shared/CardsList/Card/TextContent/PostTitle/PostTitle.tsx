@@ -1,9 +1,9 @@
 import React from 'react';
 import { Post } from '../../../../Post';
 import styles from './posttitle.scss';
-import { CSSTransition } from 'react-transition-group';
 
 interface IPostTitleProps {
+  postID: string;
   postUrl: string;
   postTitle: string
 }
@@ -13,8 +13,8 @@ export function PostTitle(props: IPostTitleProps) {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleClick = (e: React.SyntheticEvent) => {
-    e.preventDefault();
     setIsModalOpen(true);
+    e.preventDefault();
   }
 
   return (
@@ -22,18 +22,10 @@ export function PostTitle(props: IPostTitleProps) {
       <a href={props.postUrl} className={styles.postLink} onClick={handleClick}>
         {props.postTitle}
       </a>
-      {isModalOpen && (
-        <Post onClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen} />
-      )}
-      {/* <CSSTransition
-        in={isModalOpen}
-        timeout={1000}
-        classNames='modal'
-        mountOnEnter
-        unmountOnExit
-      >
-        <Post onClose={() => setIsModalOpen(false)} />
-      </CSSTransition> */}
+        <Post
+        onClose={() => setIsModalOpen(false)}
+        isModalOpen={isModalOpen}
+        postID = {props.postID} />
     </h2>
   );
 }

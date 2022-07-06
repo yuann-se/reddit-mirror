@@ -1,10 +1,12 @@
 import React, { ChangeEvent, FormEvent, forwardRef, useContext, useEffect, useState } from 'react';
-import { commentContext } from '../context/commentContext';
 import styles from './commentform.scss';
 
-export const CommentForm = forwardRef<HTMLTextAreaElement>((props, ref) => {
+interface ICommentFormProps {
+  value: string
+}
 
-  const { value, onChange } = useContext(commentContext);
+export const CommentForm = forwardRef<HTMLTextAreaElement, ICommentFormProps>(({value}, ref) => {
+
   const [inputValue, setInputValue] = useState(value);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
