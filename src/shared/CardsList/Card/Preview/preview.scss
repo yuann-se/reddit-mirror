@@ -3,12 +3,20 @@
 .preview {
   max-height: 178px;
   margin: 0 -20px;
+  background-color: $grayF4;
 }
 
 .previewImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.defaultPreviewImg {
+  object-fit: contain;
+  opacity: .2;
+  transform: scale(.8);
+  filter: grayscale(1);
 }
 
 @media all and (min-width: $tabletWidth) {

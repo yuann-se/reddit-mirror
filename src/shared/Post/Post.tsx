@@ -10,7 +10,7 @@ import { KarmaCounter } from '../CardsList/Card/Controls/KarmaCounter';
 import { EColors, Text } from '../Text';
 import { MetaData } from '../CardsList/Card/TextContent/MetaData';
 import { useCommentsData } from '../../hooks/useCommentsData';
-import { CommentsBlock } from './PostComments';
+import { CommentsBlock } from './CommentsBlock';
 
 interface IPostProps {
   onClose?: () => void;
@@ -33,10 +33,7 @@ export function Post(props: IPostProps) {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // if (data.length > 0) {
-  //   const commentsData = useCommentsData(postData.subreddit, props.postID);
-  //   console.log(commentsData);
-  // }
+  const [commentsData] = useCommentsData(postData.subreddit, props.postID);
 
   useEffect(() => {
     if (props.isModalOpen) document.body.style.overflow = 'hidden';
@@ -104,9 +101,7 @@ export function Post(props: IPostProps) {
               )}
             </div>
             <CommentForm value={inputValue} setValue={setInputValue} />
-            {data.length > 0 && (
-              <CommentsBlock postID={props.postID} subreddit={postData.subreddit}/>
-            )}
+            <CommentsBlock comments={commentsData} />
           </div>
         </div>
       </CSSTransition>

@@ -4,8 +4,6 @@ import { generateRandomString } from '../utils/generateRandomString';
 import { Card } from './Card/Card';
 import styles from './cardslist.scss';
 
-const postPreviewDefault = 'https://oksimetr.ru/wp-content/uploads/a/f/5/af5c6b86f119f4d8905d178695017163.jpeg';
-
 export function CardsList() {
 
   const data = useContext(bestPostsContext);
@@ -19,7 +17,7 @@ export function CardsList() {
     createdAt={post.createdAt}
     postTitle={post.postTitle}
     postUrl={post.postUrl}
-    previewSrc={post.previewSrc.length > 10 ? post.previewSrc : postPreviewDefault}
+    previewSrc={post.previewSrc}
     upvotes={post.upvotes}
     comments={post.comments}
   />)
