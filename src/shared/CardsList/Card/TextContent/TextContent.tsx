@@ -10,7 +10,7 @@ interface ITextContentProps {
   author: string;
   createdAt: string;
   postUrl: string;
-  postTitle: string
+  postTitle: string;
 }
 
 export function TextContent(props: ITextContentProps) {

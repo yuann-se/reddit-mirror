@@ -8,8 +8,8 @@ import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
 import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider } from "./shared/context/userContext";
-import { usePostsData } from "./hooks/usePostsData";
-import { postsContext } from "./shared/context/postsContext";
+import { useBestPostsData } from "./hooks/useBestPostsData";
+import { bestPostsContext } from "./shared/context/bestPostsContext";
 import { commentContext } from "./shared/context/commentContext";
 import axios from "axios";
 
@@ -18,7 +18,7 @@ function AppComponent() {
 
   const [commentValue, setCommentValue] = useState('');
   const [token] = useToken();
-  const [postsData] = usePostsData();
+  const [postsData] = useBestPostsData();
 
   // useEffect(() => {
   //   axios.get(
@@ -37,14 +37,14 @@ function AppComponent() {
     }}>
       <tokenContext.Provider value={token}>
         <UserContextProvider>
-          <postsContext.Provider value={postsData}>
+          <bestPostsContext.Provider value={postsData}>
             <Layout>
               <Header />
               <Content>
                 <CardsList />
               </Content>
             </Layout>
-          </postsContext.Provider>
+          </bestPostsContext.Provider>
         </UserContextProvider>
       </tokenContext.Provider>
     </commentContext.Provider>

@@ -44,25 +44,39 @@
 
 .modal-exit-active {
   opacity: 0;
-  transform: scale(1.5);
+  transform: scale(.5);
   transition: opacity .2s ease, transform .2s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.karmaCounter {
+  margin-right: 20px;
+}
+
+.title {
+  max-width: 80%;
+
+  h2 {
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
 }
 
 .content {
   overflow-y: auto;
+  padding-bottom: 30px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid $greyD9;
 }
 
 .preview {
   width: 100%;
 }
-
-// .close {
-//   align-self: flex-end;
-//   width: 40px;
-//   height: 40px;
-//   margin: -24px;
-//   color: #000
-// }
 
 .closeBtn {
   position: absolute;

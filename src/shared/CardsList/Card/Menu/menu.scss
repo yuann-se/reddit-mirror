@@ -2,7 +2,7 @@
 
 .open-enter {
   opacity: 0;
-  transform: translateY(-30px);
+  transform: translateY(-50px);
 }
 
 .open-enter-active {
@@ -18,7 +18,7 @@
 
 .open-exit-active {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(50px);
   transition: opacity .2s ease, transform .2s ease;
 }
 

@@ -34,7 +34,7 @@ interface IInitPost {
   }
 }
 
-export function usePostsData() {
+export function useBestPostsData() {
 
   const [data, setData] = useState<IPost[]>([]);
   const token = useContext(tokenContext);
@@ -48,7 +48,7 @@ export function usePostsData() {
     )
       .then((res) => {
         const initData = res.data.data.children;
-        console.log(initData)
+        // console.log(initData)
 
         initData.map(({ data }: IInitPost) => {
           const post = {
@@ -67,7 +67,6 @@ export function usePostsData() {
 
           postsData.push(post);
         })
-
         setData(postsData);
       })
       .catch(console.log)

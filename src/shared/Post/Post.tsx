@@ -2,15 +2,20 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.scss';
 import { CSSTransition } from 'react-transition-group';
-import { CommentForm } from '../CommentForm';
+import { CommentForm } from './CommentForm';
 import { commentContext } from '../context/commentContext';
 import { EIcons, Icon } from '../Icon';
-import { postsContext } from '../context/postsContext';
+import { bestPostsContext } from '../context/bestPostsContext';
+import { KarmaCounter } from '../CardsList/Card/Controls/KarmaCounter';
+import { EColors, Text } from '../Text';
+import { MetaData } from '../CardsList/Card/TextContent/MetaData';
+import { useCommentsData } from '../../hooks/useCommentsData';
+import { CommentsBlock } from './PostComments';
 
 interface IPostProps {
   onClose?: () => void;
   isModalOpen?: boolean;
-  postID: string
+  postID: string;
 }
 
 const imageReg = /[\/.](gif|jpg|jpeg|tiff|png)$/i;
@@ -20,13 +25,18 @@ export function Post(props: IPostProps) {
   const { value, onChange } = useContext(commentContext);
   const [inputValue, setInputValue] = useState(value);
 
-  const data = useContext(postsContext);
+  const data = useContext(bestPostsContext);
   const [postData] = data.filter((item) => item.id === props.postID);
   const chooseSrc = imageReg.test(postData.postUrl)
     ? postData.postUrl
     : postData.previewSrc
 
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // if (data.length > 0) {
+  //   const commentsData = useCommentsData(postData.subreddit, props.postID);
+  //   console.log(commentsData);
+  // }
 
   useEffect(() => {
     if (props.isModalOpen) document.body.style.overflow = 'hidden';
@@ -72,13 +82,31 @@ export function Post(props: IPostProps) {
             <button className={styles.closeBtn} onClick={handleClick}>
               <Icon Name={EIcons.closeModal} width={21} />
             </button>
-            <h2>{postData.postTitle}</h2>
+            <div className={styles.header}>
+              <div className={styles.karmaCounter}>
+                <KarmaCounter upvotes={postData.upvotes} />
+              </div>
+              <div>
+                <div className={styles.title}>
+                  <Text As={'h2'} size={20} color={EColors.black}>{postData.postTitle}</Text>
+                </div>
+                <MetaData
+                  avatarSrc={postData.avatarSrc}
+                  authorUrl={postData.authorUrl}
+                  author={postData.author}
+                  createdAt={postData.createdAt}
+                />
+              </div>
+            </div>
             <div className={styles.content}>
               {postData.previewSrc.length > 10 && (
                 <img src={chooseSrc} className={styles.preview} alt='Post image'></img>
               )}
             </div>
             <CommentForm value={inputValue} setValue={setInputValue} />
+            {data.length > 0 && (
+              <CommentsBlock postID={props.postID} subreddit={postData.subreddit}/>
+            )}
           </div>
         </div>
       </CSSTransition>

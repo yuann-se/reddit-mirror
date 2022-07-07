@@ -5,7 +5,7 @@ import styles from './posttitle.scss';
 interface IPostTitleProps {
   postID: string;
   postUrl: string;
-  postTitle: string
+  postTitle: string;
 }
 
 export function PostTitle(props: IPostTitleProps) {

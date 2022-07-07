@@ -15,7 +15,7 @@ interface ICardProps {
   postUrl: string
   previewSrc: string;
   upvotes: number;
-  comments: number
+  comments: number;
 }
 
 export function Card(props: ICardProps) {

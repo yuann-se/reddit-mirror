@@ -47,7 +47,7 @@ export function Menu({ postID }: IMenuProps): JSX.Element {
           className={styles.dropdown}
           style={btnRef.current ?
             {
-              left: btnCoord().left - dropdownWidth,
+              left: btnCoord().right - dropdownWidth,
               top: btnCoord().bottom + window.scrollY + 10
             } : {}}
           onClick={handleClick}>

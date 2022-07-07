@@ -14,4 +14,4 @@ interface IPost {
   comments: number
 }
 
-export const postsContext = React.createContext<IPost[]>([]);
+export const bestPostsContext = React.createContext<IPost[]>([]);
