@@ -7,7 +7,7 @@ export interface IInitData {
     id: string;
     body: string;
     author: string;
-    created: number;
+    created: string;
     replies: IInitData;
   }
 }
@@ -18,11 +18,11 @@ export function useCommentsData(subreddit: string, postID: string) {
 
   useEffect(() => {
     axios.get(
-      `https://api.reddit.com/r/${subreddit}/comments/${postID}?sort=top&limit=100`,
+      `https://api.reddit.com/r/${subreddit}/comments/${postID}?sort=top`,
     )
       .then((res) => {
         setCommentsData(res.data[1].data.children)
-        console.log(res.data[1].data.children)
+        // console.log(res.data[1].data.children)
       })
   }, []);
   return [commentsData]

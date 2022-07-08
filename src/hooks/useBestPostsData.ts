@@ -23,6 +23,16 @@ interface IInitPost {
     created: string;
     id: string;
     title: string;
+    preview?: {
+      images: [
+         {
+          source: {
+            url: string;
+          }
+        }
+
+      ]
+    }
     url: string
     ups: number;
     subreddit: string;
@@ -30,7 +40,6 @@ interface IInitPost {
     sr_detail: {
       icon_img: string
     }
-    thumbnail: string;
   }
 }
 
@@ -48,9 +57,12 @@ export function useBestPostsData() {
     )
       .then((res) => {
         const initData = res.data.data.children;
-        // console.log(initData)
 
         initData.map(({ data }: IInitPost) => {
+          const prevSrc = data.preview
+          ? data.preview.images[0].source.url.split('&amp;').join('&')
+          : 'default'
+
           const post = {
             author: data.author,
             authorUrl: `https://www.reddit.com/user/${data.author}/`,
@@ -59,7 +71,7 @@ export function useBestPostsData() {
             id: data.id,
             postTitle: data.title,
             postUrl: data.url,
-            previewSrc: data.thumbnail,
+            previewSrc: prevSrc,
             subreddit: data.subreddit,
             upvotes: data.ups,
             comments: data.num_comments

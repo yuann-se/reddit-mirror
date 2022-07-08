@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styles from './dropdown.scss';
 import { CSSTransition } from 'react-transition-group';
 import ReactDOM from 'react-dom';
@@ -23,7 +23,6 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
   const handleOpen = () => {
     if (isOpen === undefined) {
       setIsDropdownOpen(!isDropdownOpen);
-      // console.log(btnRef.current?.getBoundingClientRect());
     }
   }
 

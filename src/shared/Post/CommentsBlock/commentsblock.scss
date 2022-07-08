@@ -1,0 +1,66 @@
+@import '../../../variables';
+
+.mainWrapper {
+  display: flex;
+}
+
+.container {
+  flex-grow: 1;
+  background-color: $white;
+}
+
+.upvotes {
+  min-width: 40px;
+}
+
+.arrowsIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: $white;
+}
+
+.arrowDown {
+  width: fit-content;
+  transform: rotate(180deg);
+  margin-top: 10px;
+}
+
+.bar {
+  width: 3px;
+  height: calc(100% - 40px);
+  background-color: $greyD9;
+  margin: 0 auto;
+}
+
+.metaData {
+  margin-bottom: 15px;
+}
+
+.commentBody {
+  margin-bottom: 10px;
+}
+
+.controls {
+  display: flex;
+  max-width: 340px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.controlsNarrow {
+  display: flex;
+  max-width: 100px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.iconWrapper {
+  margin-right: 5px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+}
