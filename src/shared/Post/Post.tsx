@@ -9,6 +9,7 @@ import { MetaData } from '../CardsList/Card/TextContent/MetaData';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { CommentsBlock } from './CommentsBlock';
 import { Modal } from '../Modal';
+import { Stats } from './Stats';
 
 interface IPostProps {
   onClose?: () => void;
@@ -34,44 +35,48 @@ export function Post(props: IPostProps) {
 
   return (
     <div className={styles.container}>
-    <Modal
-    open={props.isModalOpen}
-    onClose={() => handleClick()}
-    transitionTimeout={200}
-    transitionClasses={{
-      enter: styles['modal-enter'],
-      enterActive: styles['modal-enter-active'],
-      exit: styles['modal-exit'],
-      exitActive: styles['modal-exit-active']
-    }}
-    >
-      <button className={styles.closeBtn} onClick={handleClick}>
-        <Icon Name={EIcons.closeModal} width={21} />
-      </button>
-      <div className={styles.header}>
-        <div className={styles.karmaCounter}>
-          <KarmaCounter upvotes={postData.upvotes} />
-        </div>
-        <div>
-          <div className={styles.title}>
-            <Text As={'h2'} size={20} color={EColors.black}>{postData.postTitle}</Text>
+      <Modal
+        open={props.isModalOpen}
+        onClose={() => handleClick()}
+        transitionTimeout={200}
+        transitionClasses={{
+          enter: styles['modal-enter'],
+          enterActive: styles['modal-enter-active'],
+          exit: styles['modal-exit'],
+          exitActive: styles['modal-exit-active']
+        }}
+      >
+        <button className={styles.closeBtn} onClick={handleClick}>
+          <Icon Name={EIcons.closeModal} width={21} />
+        </button>
+        <div className={styles.header}>
+          <div className={styles.karmaCounter}>
+            <KarmaCounter upvotes={postData.upvotes} />
           </div>
-          <MetaData
-            avatarSrc={postData.avatarSrc}
-            authorUrl={postData.authorUrl}
-            author={postData.author}
-            createdAt={postData.createdAt}
-          />
+          <div>
+            <div className={styles.title}>
+              <Text As={'h2'} size={20} color={EColors.black}>{postData.postTitle}</Text>
+            </div>
+            <MetaData
+              avatarSrc={postData.avatarSrc}
+              authorUrl={postData.authorUrl}
+              author={postData.author}
+              createdAt={postData.createdAt}
+            />
+          </div>
         </div>
-      </div>
-      <div className={styles.content}>
-        {postData.previewSrc.length > 10 && (
-          <img src={chooseSrc} className={styles.preview} alt='Post image'></img>
-        )}
-      </div>
-      <CommentForm isModalOpen={props.isModalOpen}/>
-      <CommentsBlock comments={commentsData} depth={undefined}/>
-    </Modal>
+        <div className={styles.content}>
+          {postData.previewSrc.length > 10 && (
+            <img src={chooseSrc} className={styles.preview} alt='Post image'></img>
+          )}
+        </div>
+        <Stats commentsNumber={postData.comments} ratio={postData.upvoteRatio} />
+        <CommentForm openState={props.isModalOpen} />
+        <div className={styles.sortComments}>
+
+        </div>
+        <CommentsBlock comments={commentsData} depth={undefined} isModalOpen={props.isModalOpen} />
+      </Modal>
     </div>
   );
 }

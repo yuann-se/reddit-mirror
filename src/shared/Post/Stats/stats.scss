@@ -1,0 +1,23 @@
+@import '../../../variables';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.controlsContainer {
+  display: flex;
+
+  .menuItem {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-right: 30px;
+    cursor: pointer;
+
+    svg {
+      margin-right: 5px;
+    }
+  }
+}

@@ -12,6 +12,7 @@ interface IPost {
   postUrl: string
   previewSrc: string;
   upvotes: number;
+  upvoteRatio: number;
   subreddit: string;
   comments: number
 }
@@ -25,7 +26,7 @@ interface IInitPost {
     title: string;
     preview?: {
       images: [
-         {
+        {
           source: {
             url: string;
           }
@@ -35,6 +36,7 @@ interface IInitPost {
     }
     url: string
     ups: number;
+    upvote_ratio: number;
     subreddit: string;
     num_comments: number;
     sr_detail: {
@@ -57,11 +59,12 @@ export function useBestPostsData() {
     )
       .then((res) => {
         const initData = res.data.data.children;
+        // console.log(initData);
 
         initData.map(({ data }: IInitPost) => {
           const prevSrc = data.preview
-          ? data.preview.images[0].source.url.split('&amp;').join('&')
-          : 'default'
+            ? data.preview.images[0].source.url.split('&amp;').join('&')
+            : 'default'
 
           const post = {
             author: data.author,
@@ -74,6 +77,7 @@ export function useBestPostsData() {
             previewSrc: prevSrc,
             subreddit: data.subreddit,
             upvotes: data.ups,
+            upvoteRatio: data.upvote_ratio,
             comments: data.num_comments
           };
 

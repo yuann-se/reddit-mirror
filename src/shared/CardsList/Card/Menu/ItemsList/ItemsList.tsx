@@ -1,6 +1,7 @@
 import React from 'react';
 import { EIcons, Icon } from '../../../../Icon';
 import { EColors, Text } from '../../../../Text';
+import { generateRandomString } from '../../../../utils/generateRandomString';
 import styles from './itemslist.scss';
 
 interface IItemList {
@@ -8,42 +9,44 @@ interface IItemList {
 }
 
 export function ItemsList({ postID }: IItemList) {
+
+  const btnsList = [
+    {
+      icon: <Icon Name={EIcons.comments} width={15} />,
+      text: <Text size={14} mobileSize={12} color={EColors.grey99}>Комментарии</Text>,
+      classes: `${styles.smHidden}`
+    },
+    {
+      icon: <Icon Name={EIcons.share} width={12} />,
+      text: <Text size={14} mobileSize={12} color={EColors.grey99}>Поделиться</Text>,
+      classes: `${styles.smHidden}`
+    },
+    {
+      icon: <Icon Name={EIcons.block} width={14} />,
+      text: <Text size={14} mobileSize={12} color={EColors.grey99}>Скрыть</Text>,
+      classes: ``
+    },
+    {
+      icon: <Icon Name={EIcons.save} width={14} />,
+      text: <Text size={14} mobileSize={12} color={EColors.grey99}>Сохранить</Text>,
+      classes: `${styles.smHidden}`
+    },
+    {
+      icon: <Icon Name={EIcons.report} width={16} />,
+      text: <Text size={14} mobileSize={12} color={EColors.grey99}>Пожаловаться</Text>,
+      classes: ``
+    },
+  ].map(({ icon, text, classes }) =>
+    <li key={generateRandomString()}>
+      <button
+        className={`${classes} ${styles.menuItem}`}
+        onClick={() => console.log(postID)}
+      >{icon}{text}</button></li>
+  )
+
   return (
     <ul className={styles.menuItemsList}>
-      <li>
-        <button className={`${styles.menuItem} ${styles.smHidden}`} onClick={() => console.log(postID)}>
-          <Icon Name={EIcons.comments} width={15} />
-          <Text size={14} mobileSize={12} color={EColors.grey99}>Комментарии</Text>
-        </button>
-      </li>
-
-      <li>
-        <button className={`${styles.menuItem} ${styles.smHidden}`} onClick={() => console.log(postID)}>
-          <Icon Name={EIcons.share} width={12} />
-          <Text size={14} mobileSize={12} color={EColors.grey99}>Поделиться</Text>
-        </button>
-      </li>
-
-      <li>
-        <button className={`${styles.menuItem}`} onClick={() => console.log(postID)}>
-          <Icon Name={EIcons.block} width={14} />
-          <Text size={14} mobileSize={12} color={EColors.grey99}>Скрыть</Text>
-        </button>
-      </li>
-
-      <li>
-        <button className={`${styles.menuItem} ${styles.smHidden}`} onClick={() => console.log(postID)}>
-          <Icon Name={EIcons.save} width={14} />
-          <Text size={14} mobileSize={12} color={EColors.grey99}>Сохранить</Text>
-        </button>
-      </li>
-
-      <li>
-        <button className={`${styles.menuItem}`} onClick={() => console.log(postID)}>
-          <Icon Name={EIcons.report} width={16} />
-          <Text size={14} mobileSize={12} color={EColors.grey99}>Пожаловаться</Text>
-        </button>
-      </li>
+      {btnsList}
     </ul>
   );
 }

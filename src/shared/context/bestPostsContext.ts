@@ -10,6 +10,7 @@ interface IPost {
   postUrl: string;
   previewSrc: string;
   upvotes: number;
+  upvoteRatio: number;
   subreddit: string;
   comments: number
 }

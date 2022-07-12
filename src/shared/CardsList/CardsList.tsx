@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { bestPostsContext } from '../context/bestPostsContext';
-import { generateRandomString } from '../utils/generateRandomString';
 import { Card } from './Card/Card';
 import styles from './cardslist.scss';
 
@@ -9,7 +8,7 @@ export function CardsList() {
   const data = useContext(bestPostsContext);
 
   const list = data.map((post) => <Card
-    key={generateRandomString()}
+    key={post.id}
     id={post.id}
     author={post.author}
     authorUrl={post.authorUrl}
