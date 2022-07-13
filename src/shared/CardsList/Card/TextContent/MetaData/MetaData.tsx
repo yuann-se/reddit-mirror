@@ -17,7 +17,7 @@ export function MetaData(props: IMetaDataProps) {
   return (
     <div className={styles.metaData}>
       <div className={styles.userLink}>
-        {props.avatarSrc.length > 10
+        {props.avatarSrc
           ? <img src={props.avatarSrc}
             alt="avatar" className={styles.avatar} />
           : <span className={styles.avatar}><Icon Name={EIcons.anonAvatar} width={20} /></span>
