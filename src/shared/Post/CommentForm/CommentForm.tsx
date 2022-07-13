@@ -1,5 +1,6 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
-import { commentContext } from '../../context/commentContext';
+import React, { ChangeEvent, FormEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TInitialState, updateComment } from '../../../store';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
 import { generateRandomString } from '../../utils/generateRandomString';
@@ -21,31 +22,25 @@ const markdownBtns = [
 ].map((btn) =>
   <button key={generateRandomString()} className={styles.markdownBtn}>{btn}</button>)
 
-interface ICommentFormProps {
-  openState: boolean;
-}
+export function CommentForm() {
 
-export function CommentForm({ openState }: ICommentFormProps) {
-
-  const { value, onChange } = useContext(commentContext);
-  const [inputValue, setInputValue] = useState(value);
+  const value = useSelector<TInitialState, string>(state => state.commentText);
+  const dispatch = useDispatch();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
-  useEffect(() => {
-    return () => {
-      onChange(inputValue);
-    }
-  }, [openState])
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(updateComment(e.target.value));
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <textarea
         className={styles.input}
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}>
+        value={value}
+        onChange={handleChange}>
       </textarea>
       <div className={styles.controlsWrapper}>
         <div className={styles.markdownBtnsWrapper}>

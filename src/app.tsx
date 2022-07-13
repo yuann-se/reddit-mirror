@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { hot } from "react-hot-loader/root";
 import { useToken } from "./hooks/useToken";
 import './main.global.scss';
@@ -10,20 +10,20 @@ import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider } from "./shared/context/userContext";
 import { useBestPostsData } from "./hooks/useBestPostsData";
 import { bestPostsContext } from "./shared/context/bestPostsContext";
-import { commentContext } from "./shared/context/commentContext";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { rootReducer } from "./store";
+import { legacy_createStore as createStore } from 'redux';
 
+const store = createStore(rootReducer, composeWithDevTools())
 
 function AppComponent() {
 
-  const [commentValue, setCommentValue] = useState('');
   const [token] = useToken();
   const [postsData] = useBestPostsData();
 
   return (
-    <commentContext.Provider value={{
-      value: commentValue,
-      onChange: setCommentValue,
-    }}>
+    <Provider store={store}>
       <tokenContext.Provider value={token}>
         <UserContextProvider>
           <bestPostsContext.Provider value={postsData}>
@@ -36,7 +36,7 @@ function AppComponent() {
           </bestPostsContext.Provider>
         </UserContextProvider>
       </tokenContext.Provider>
-    </commentContext.Provider>
+    </Provider>
   )
 }
 
