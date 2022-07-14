@@ -1,21 +1,30 @@
+import { createAction, createReducer } from "@reduxjs/toolkit";
 import { ActionCreator, AnyAction, Reducer } from "redux";
 
 export type TInitialState = {
-  commentText: string;
+  postComments: {
+    [postID: string]: { text: string }
+  }
+  token: string;
 }
 
 const initialState: TInitialState = {
-  commentText: 'lalla',
+  postComments: {},
+  token: ''
 }
 
-export const rootReducer: Reducer<TInitialState> = (state = initialState, action) => {
-  switch (action.type) {
-    case 'UPDATE_COMMENT': return {
-      ...state, commentText: action.text,
-    }
-    default: return state;
-  }
-}
+export const UPDATE_COMMENT = createAction('UPDATE_COMMENT', function prepare(id, text) { return {payload: {id, text}}});
+export const SET_TOKEN = createAction<string>('SET_TOKEN');
 
-export const updateComment: ActionCreator<AnyAction> = (text) =>
-  ({ type: 'UPDATE_COMMENT', text })
+export const rootReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(UPDATE_COMMENT, (state, action) => {
+      state.postComments[action.payload.id] = {text: action.payload.text}
+    })
+    .addCase(SET_TOKEN, (state, action) => {
+      state.token = action.payload
+    })
+    .addDefaultCase((state, action) => {state})
+})
+
+

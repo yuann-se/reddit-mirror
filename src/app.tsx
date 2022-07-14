@@ -10,21 +10,22 @@ import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider } from "./shared/context/userContext";
 import { useBestPostsData } from "./hooks/useBestPostsData";
 import { bestPostsContext } from "./shared/context/bestPostsContext";
-import { Provider } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { rootReducer } from "./store";
-import { legacy_createStore as createStore } from 'redux';
+import { Provider, useDispatch } from "react-redux";
+import { rootReducer, SET_TOKEN } from "./store";
+import { configureStore } from "@reduxjs/toolkit";
 
-const store = createStore(rootReducer, composeWithDevTools())
+const store = configureStore({reducer: rootReducer})
 
 function AppComponent() {
 
-  const [token] = useToken();
+  // const [token] = useToken();
+  const dispatch = useDispatch();
+  dispatch(SET_TOKEN(useToken()));
   const [postsData] = useBestPostsData();
 
   return (
     <Provider store={store}>
-      <tokenContext.Provider value={token}>
+      {/* <tokenContext.Provider value={token}> */}
         <UserContextProvider>
           <bestPostsContext.Provider value={postsData}>
             <Layout>
@@ -35,7 +36,7 @@ function AppComponent() {
             </Layout>
           </bestPostsContext.Provider>
         </UserContextProvider>
-      </tokenContext.Provider>
+      {/* </tokenContext.Provider> */}
     </Provider>
   )
 }

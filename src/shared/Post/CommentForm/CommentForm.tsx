@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { TInitialState, updateComment } from '../../../store';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { useDispatch, useStore } from 'react-redux';
+import { TInitialState, UPDATE_COMMENT } from '../../../store';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
 import { generateRandomString } from '../../utils/generateRandomString';
@@ -22,24 +22,32 @@ const markdownBtns = [
 ].map((btn) =>
   <button key={generateRandomString()} className={styles.markdownBtn}>{btn}</button>)
 
-export function CommentForm() {
+  interface ICommentFormProps {
+    postID: string
+  }
 
-  const value = useSelector<TInitialState, string>(state => state.commentText);
+export function CommentForm(props: ICommentFormProps) {
+
   const dispatch = useDispatch();
+  const store = useStore<TInitialState>();
+  const storeValue = store.getState().postComments[`${props.postID}`];
+
+  const [inputValue, setInputValue] = useState(storeValue ? storeValue.text : '');
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(updateComment(e.target.value));
+    setInputValue(e.target.value);
+    dispatch(UPDATE_COMMENT(props.postID, e.target.value));
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <textarea
         className={styles.input}
-        value={value}
+        value={inputValue}
         onChange={handleChange}>
       </textarea>
       <div className={styles.controlsWrapper}>

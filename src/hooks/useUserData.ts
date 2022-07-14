@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
 import { tokenContext } from "../shared/context/tokenContext";
+import { TInitialState } from "../store";
 
 interface IUserData {
   name?: string;
@@ -11,6 +13,7 @@ export function useUserData() {
 
   const [data, setData] = useState<IUserData>({});
   const token = useContext(tokenContext);
+  // const token = useSelector((state: TInitialState) => state.token)
 
   useEffect(() => {
     if (token.length > 10) {

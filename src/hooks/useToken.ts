@@ -7,5 +7,5 @@ export function useToken() {
       setToken(window.__token__)
     }
   }, [])
-  return [token]
+  return token
 }

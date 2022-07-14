@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
 import { tokenContext } from "../shared/context/tokenContext";
+import { TInitialState } from "../store";
 
 interface IPost {
   author: string;
@@ -48,6 +50,7 @@ interface IInitPost {
 export function useBestPostsData() {
 
   const [data, setData] = useState<IPost[]>([]);
+  // const token = useSelector((state: TInitialState) => state.token)
   const token = useContext(tokenContext);
   let postsData: IPost[] = [];
 
