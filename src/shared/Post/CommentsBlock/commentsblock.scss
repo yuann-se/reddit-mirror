@@ -1,0 +1,102 @@
+@import '../../../variables';
+
+.mainWrapper {
+  display: flex;
+}
+
+.container {
+  flex-grow: 1;
+  background-color: $white;
+}
+
+.upvotes {
+  min-width: 40px;
+}
+
+.arrowsIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: $white;
+}
+
+.arrowDown {
+  width: fit-content;
+  transform: rotate(180deg);
+  margin-top: 4px;
+}
+
+.bar {
+  width: 3px;
+  height: calc(100% - 90px);
+  background-color: $greyD9;
+  margin: 0 auto;
+}
+
+.metaDataContainer {
+  margin-bottom: 15px;
+  height: 30px;
+  position: relative;
+
+  .metaData {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.commentBody {
+  margin-bottom: 15px;
+
+  p {
+    word-break: break-word;
+  }
+}
+
+.controls {
+  display: flex;
+  max-width: 340px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.controlsNarrow {
+  display: flex;
+  max-width: 100px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.iconWrapper {
+  margin-right: 5px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+}
+
+
+.reply-enter {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.reply-enter-active {
+  opacity: 1;
+  transform: none;
+  transform-origin: top;
+  transition: all .2s ease;
+}
+
+.reply-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.reply-exit-active {
+  opacity: 0;
+  transform: scale(0);
+  transition: all .2s ease;
+}

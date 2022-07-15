@@ -73,7 +73,7 @@
   }
 }
 
-@media all and (min-width: $desctopWidth) {
+@media all and (min-width: $desktopWidth) {
   .userLink:hover a::before {
     transform: none;
   }

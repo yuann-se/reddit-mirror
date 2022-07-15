@@ -1,0 +1,68 @@
+@import '../../variables';
+
+.modal-enter {
+  opacity: 0;
+  transform: translateX(-150px);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.modal-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.container {
+  overflow-y: scroll;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.karmaCounter {
+  margin-right: 20px;
+}
+
+.title {
+  max-width: 80%;
+
+  h2 {
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+}
+
+.content {
+  overflow-y: auto;
+  padding-bottom: 30px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid $greyD9;
+}
+
+.preview {
+  width: 100%;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+
+.sortComments {
+  margin-bottom: 50px;
+  border-bottom: 1px solid $greyD9;
+}

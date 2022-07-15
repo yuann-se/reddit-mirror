@@ -5,11 +5,14 @@ interface IPost {
   authorUrl: string;
   avatarSrc: string;
   createdAt: string;
+  id: string;
   postTitle: string;
-  postUrl: string
+  postUrl: string;
   previewSrc: string;
   upvotes: number;
+  upvoteRatio: number;
+  subreddit: string;
   comments: number
 }
 
-export const postsContext = React.createContext<IPost[]>([]);
+export const bestPostsContext = React.createContext<IPost[]>([]);

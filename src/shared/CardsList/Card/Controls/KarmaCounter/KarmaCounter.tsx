@@ -3,7 +3,7 @@ import { EIcons, Icon } from '../../../../Icon';
 import styles from './karmacounter.scss';
 
 interface IKarmaCounterProps {
-  upvotes: number
+  upvotes: number;
 }
 
 export function KarmaCounter({ upvotes }: IKarmaCounterProps) {

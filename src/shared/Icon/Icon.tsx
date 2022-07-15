@@ -1,10 +1,15 @@
 import React from 'react';
-import { AnonAvatarIcon, BlockIcon, CommentsIcon, ReportIcon, DropdownMenuBtn, KarmaArrowUpIcon, RoundSaveIcon, RoundShareIcon, SaveIcon, ShareIcon } from '../icons';
+import { AnonAvatarIcon, BlockIcon, CommentsIcon, ReportIcon, DropdownMenuBtn, KarmaArrowUpIcon, RoundSaveIcon, RoundShareIcon, SaveIcon, ShareIcon, AttachAudioIcon, AttachDocIcon, AttachImgIcon, AttachLinkIcon, AttachPdfIcon, AttachPhotoIcon, ChangeTextIcon, DownloadIcon, EditIcon, InlineCodeIcon, ReverseIcon, SpeechBubbleIcon } from '../icons';
+import { ModalCloseIcon } from '../icons/ModalCloseIcon';
 
 export enum EIcons {
   anonAvatar, block, comments, report,
   menuBtn, arrowUp, saveRnd,
-  shareRnd, save, share,
+  shareRnd, save, share, closeModal,
+  attachAudio, attachDoc, attachImg,
+  attachLink, attachPdf, attachPhoto,
+  changeText, download, edit,
+  inlineCode, reverse, speechBubble
 }
 
 interface IIconProps {
@@ -24,6 +29,19 @@ function getTag(Name: EIcons, width: number) {
     case EIcons.share: return <ShareIcon iconWidth={width} />;
     case EIcons.saveRnd: return <RoundSaveIcon iconWidth={width} />;
     case EIcons.shareRnd: return <RoundShareIcon iconWidth={width} />;
+    case EIcons.closeModal: return <ModalCloseIcon iconWidth={width} />;
+    case EIcons.attachAudio: return <AttachAudioIcon iconWidth={width} />;
+    case EIcons.attachDoc: return <AttachDocIcon iconWidth={width} />;
+    case EIcons.attachImg: return <AttachImgIcon iconWidth={width} />;
+    case EIcons.attachLink: return <AttachLinkIcon iconWidth={width} />;
+    case EIcons.attachPdf: return <AttachPdfIcon iconWidth={width} />;
+    case EIcons.attachPhoto: return <AttachPhotoIcon iconWidth={width} />;
+    case EIcons.changeText: return <ChangeTextIcon iconWidth={width} />;
+    case EIcons.download: return <DownloadIcon iconWidth={width} />;
+    case EIcons.edit: return <EditIcon iconWidth={width} />;
+    case EIcons.inlineCode: return <InlineCodeIcon iconWidth={width} />;
+    case EIcons.reverse: return <ReverseIcon iconWidth={width} />;
+    case EIcons.speechBubble: return <SpeechBubbleIcon iconWidth={width} />;
   }
 }
 

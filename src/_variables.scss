@@ -8,10 +8,11 @@ $white: hsl(0, 0%, $whiteLightness);
 $grayF4: hsl(0, 0%, calc($whiteLightness - 4%));
 $greyF3: hsl(0, 0%, calc($whiteLightness - 5%));
 $greyEC: hsl(0, 0%, calc($whiteLightness - 7%));
+$greyE5: hsl(0, 0%, calc($whiteLightness - 10%));
 $greyD9: hsl(0, 0%, calc($whiteLightness - 15%));
 $greyC4: hsl(0, 0%, calc($whiteLightness - 23%));
 $grey99: hsl(0, 0%, calc($whiteLightness - 40%));
 $grey66: hsl(0, 0%, calc($whiteLightness - 60%));
 
 $tabletWidth: 768px;
-$desctopWidth: 1240px;
+$desktopWidth: 1240px;

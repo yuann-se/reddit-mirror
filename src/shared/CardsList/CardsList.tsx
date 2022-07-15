@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
-import { postsContext } from '../context/postsContext';
-import { generateRandomString } from '../utils/generateRandomString';
+import { bestPostsContext } from '../context/bestPostsContext';
 import { Card } from './Card/Card';
 import styles from './cardslist.scss';
 
 export function CardsList() {
 
-  const data = useContext(postsContext);
+  const data = useContext(bestPostsContext);
 
   const list = data.map((post) => <Card
-    key = {generateRandomString()}
-    id={generateRandomString()}
+    key={post.id}
+    id={post.id}
     author={post.author}
     authorUrl={post.authorUrl}
     avatarSrc={post.avatarSrc}
