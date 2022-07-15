@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './searchblock.scss';
 import { UserBlock } from './UserBlock';
-import { userContext } from '../../context/userContext';
+import { useSelector } from 'react-redux';
+import { TInitialState } from '../../../store';
 
 export function SearchBlock() {
 
-  const { iconImg, name } = useContext(userContext);
+  const { username, iconImg} = useSelector((state: TInitialState) => state.userData);
 
   return (
     <div className={styles.searchBlock}>
-      <UserBlock avatarSrc={iconImg} username={name} />
+      <UserBlock avatarSrc={iconImg} username={username} />
     </div>
   );
 }

@@ -1,8 +1,5 @@
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
-import { useSelector } from "react-redux";
-import { tokenContext } from "../shared/context/tokenContext";
-import { TInitialState } from "../store";
+import { useState, useEffect } from "react";
 
 interface IPost {
   author: string;
@@ -50,15 +47,12 @@ interface IInitPost {
 export function useBestPostsData() {
 
   const [data, setData] = useState<IPost[]>([]);
-  // const token = useSelector((state: TInitialState) => state.token)
-  const token = useContext(tokenContext);
   let postsData: IPost[] = [];
 
   useEffect(() => {
-
     axios.get(
       'https://oauth.reddit.com/best.json?sr_detail=true',
-      { headers: { Authorization: `bearer ${token}` } }
+      { headers: { Authorization: `bearer ` } }
     )
       .then((res) => {
         const initData = res.data.data.children;
@@ -90,7 +84,7 @@ export function useBestPostsData() {
       })
       .catch(console.log)
 
-  }, [token]);
+  }, []);
 
   return [data]
 }

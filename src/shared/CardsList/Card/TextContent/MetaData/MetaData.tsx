@@ -41,7 +41,7 @@ const timeSince = (date: string) => {
     if (interval.toString().endsWith('1') && !interval.toString().endsWith('11')) return `${Math.floor(interval)} минуту назад`;
     if (interval.toString().endsWith('2' || '3' || '4')) return `${Math.floor(interval)} минуты назад`;
     return `${Math.floor(interval)} минут назад`
-  } else if (interval < 1) return 'меньше минуты назад';
+  } else if (interval < 1) return 'менее минуты назад';
 }
 
 export function MetaData(props: IMetaDataProps) {

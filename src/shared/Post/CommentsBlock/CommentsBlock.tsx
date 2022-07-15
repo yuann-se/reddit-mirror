@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { IInitData } from '../../../hooks/useCommentsData';
+import { TInitialState, updateReply } from '../../../store';
 import { MetaData } from '../../CardsList/Card/TextContent/MetaData';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
@@ -13,25 +15,23 @@ interface ICommentsBlockProps {
   isModalOpen: boolean;
 }
 
-type TReplyState = {
-  [id: string]: boolean;
-}
-
 export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockProps) {
 
-  const [isReplyFormOpen, setIsReplyFormOpen] = useState<TReplyState>({});
-
+  const dispatch = useDispatch();
   typeof depth == 'number' ? depth++ : depth = 0;
 
   return (
-    <div style={{ 'width': '100%' }}>
+    <div className={styles.componentContainer}>
       {Array.isArray(comments) && comments.length > 0
         ? comments.map((item) => {
 
+          const storeData = useSelector((state: TInitialState) => state.commentsReplies[`${item.data.id}`]);
           function handleReply() {
-            isReplyFormOpen[item.data.id]
-              ? setIsReplyFormOpen({ ...isReplyFormOpen, [item.data.id]: ![item.data.id] })
-              : setIsReplyFormOpen({ ...isReplyFormOpen, [item.data.id]: true })
+            if (storeData) {
+              dispatch(updateReply(item.data.id, !storeData.isOpen, storeData.text))
+            } else {
+              dispatch(updateReply(item.data.id, true, `${item.data.author}, `))
+            }
           }
 
           return (
@@ -46,7 +46,7 @@ export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockPr
                   </div>
                   <div className={styles.bar}></div>
                 </div>
-                <div className={styles.container}>
+                <div className={styles.contentContainer}>
                   <div className={styles.metaDataContainer}>
                     <div className={styles.metaData}>
                       <MetaData
@@ -91,7 +91,7 @@ export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockPr
                   </ul>
 
                   <CSSTransition
-                    in={isReplyFormOpen[item.data.id] === true}
+                    in={storeData && storeData.isOpen}
                     timeout={200}
                     classNames={{
                       enter: styles['reply-enter'],
@@ -103,12 +103,14 @@ export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockPr
                     unmountOnExit
                   >
                     <div>
-                      <ReplyForm openState={isReplyFormOpen[item.data.id]} refer={`${item.data.author}, `} />
+                      <ReplyForm
+                      commentID={item.data.id}
+                      isOpen={storeData && storeData.isOpen}
+                      isModalOpen={isModalOpen}
+                       />
                     </div>
                   </CSSTransition>
-                  {/* {isReplyFormOpen[item.data.id] && (
-                    <ReplyForm openState={isReplyFormOpen[item.data.id]} refer={`${item.data.author}, `} />
-                  )} */}
+
                   {item.data.replies && (
                     <CommentsBlock comments={item.data.replies.data.children} depth={depth} isModalOpen={isModalOpen} />
                   )}

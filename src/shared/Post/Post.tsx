@@ -71,7 +71,7 @@ export function Post(props: IPostProps) {
           )}
         </div>
         <Stats commentsNumber={postData.comments} ratio={postData.upvoteRatio} />
-        <CommentForm postID = {props.postID}/>
+        <CommentForm postID = {props.postID} isOpen={props.isModalOpen}/>
         <div className={styles.sortComments}>
 
         </div>

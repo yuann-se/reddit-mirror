@@ -1,10 +1,14 @@
 @import '../../../variables';
 
+.componentContainer {
+  width: 100%;
+}
+
 .mainWrapper {
   display: flex;
 }
 
-.container {
+.contentContainer {
   flex-grow: 1;
   background-color: $white;
 }
