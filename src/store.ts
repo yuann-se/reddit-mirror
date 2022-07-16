@@ -1,9 +1,23 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
+interface ICommentsData {
+  data: {
+    children: ICommentsData[]
+    id: string;
+    body: string;
+    author: string;
+    created: string;
+    replies: ICommentsData;
+  }
+}
+
 export type TInitialState = {
-  postComments: {
+  myPostComment: {
     [postID: string]: { text: string }
   };
+  commentsData: {
+    [postID: string]: ICommentsData[];
+  }
   commentsReplies: {
     [commentID: string]: { isOpen: boolean, text: string }
   }
@@ -15,7 +29,8 @@ export type TInitialState = {
 }
 
 const initialState: TInitialState = {
-  postComments: {},
+  myPostComment: {},
+  commentsData: {},
   commentsReplies: {},
   token: '',
   userData: {
@@ -25,26 +40,32 @@ const initialState: TInitialState = {
 }
 
 export const updateComment = createAction('UPDATE_COMMENT',
-  function prepare(id, text) { return { payload: { id, text } } });
+  function prepare(id: string, text: string) { return { payload: { id, text } } });
 
 export const updateReply = createAction('UPDATE_REPLY',
-  function prepare(id, isOpen, text) { return { payload: { id, isOpen, text } } });
+  function prepare(id: string, isOpen: boolean, text: string) { return { payload: { id, isOpen, text } } });
 
 export const setToken = createAction<string>('SET_TOKEN');
 
 export const setUserData = createAction('SET_USER_DATA',
-function prepare(username, iconImg) { return { payload: { username, iconImg } } });
+  function prepare(username: string, iconImg: string) { return { payload: { username, iconImg } } });
+
+export const setCommentsData = createAction('SET_COMMENTS_DATA',
+  function prepare(id: string, data: ICommentsData[]) { return { payload: { id, data } } });
 
 export const rootReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(updateComment, (state, action) => {
-      state.postComments[action.payload.id] = { text: action.payload.text }
+      state.myPostComment[action.payload.id] = { text: action.payload.text }
     })
     .addCase(updateReply, (state, action) => {
       state.commentsReplies[action.payload.id] = {
         text: action.payload.text,
         isOpen: action.payload.isOpen
       }
+    })
+    .addCase(setCommentsData, (state, action) => {
+      state.commentsData[action.payload.id] = action.payload.data;
     })
     .addCase(setToken, (state, action) => {
       state.token = action.payload

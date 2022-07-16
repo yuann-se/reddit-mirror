@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { TInitialState } from "../store";
 
 interface IUserData {
-  name?: string;
-  iconImg?: string;
+  name: string;
+  iconImg: string;
 }
 
 export function useUserData() {
 
-  const [data, setData] = useState<IUserData>({});
+  const [data, setData] = useState<IUserData>({ name: '', iconImg: '' });
   const token = useSelector((state: TInitialState) => state.token)
 
   useEffect(() => {

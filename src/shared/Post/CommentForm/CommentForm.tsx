@@ -22,21 +22,23 @@ const markdownBtns = [
 ].map((btn) =>
   <button key={generateRandomString()} className={styles.markdownBtn}>{btn}</button>)
 
-  interface ICommentFormProps {
-    postID: string;
-    isOpen: boolean;
-  }
+interface ICommentFormProps {
+  postID: string;
+  isOpen: boolean;
+}
 
 export function CommentForm(props: ICommentFormProps) {
 
   const dispatch = useDispatch();
-  const storeValue = useSelector((state: TInitialState) => state.postComments[`${props.postID}`]);
+  const storeValue = useSelector((state: TInitialState) => state.myPostComment[`${props.postID}`]);
 
   const [inputValue, setInputValue] = useState(storeValue ? storeValue.text : '');
 
   useEffect(() => {
     return () => {
-      dispatch(updateComment(props.postID, inputValue));
+      if (storeValue && storeValue.text !== inputValue) {
+        dispatch(updateComment(props.postID, inputValue));
+      }
     }
   }, [props.isOpen])
 

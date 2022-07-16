@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import { IInitData } from '../../../hooks/useCommentsData';
+import { ICommentsData } from '../../../hooks/useCommentsData';
 import { TInitialState, updateReply } from '../../../store';
 import { MetaData } from '../../CardsList/Card/TextContent/MetaData';
 import { EIcons, Icon } from '../../Icon';
@@ -10,7 +10,7 @@ import styles from './commentsblock.scss';
 import { ReplyForm } from './ReplyForm';
 
 interface ICommentsBlockProps {
-  comments: IInitData[];
+  comments: ICommentsData[];
   depth: number | undefined;
   isModalOpen: boolean;
 }
@@ -27,11 +27,9 @@ export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockPr
 
           const storeData = useSelector((state: TInitialState) => state.commentsReplies[`${item.data.id}`]);
           function handleReply() {
-            if (storeData) {
-              dispatch(updateReply(item.data.id, !storeData.isOpen, storeData.text))
-            } else {
-              dispatch(updateReply(item.data.id, true, `${item.data.author}, `))
-            }
+            storeData
+              ? dispatch(updateReply(item.data.id, !storeData.isOpen, storeData.text))
+              : dispatch(updateReply(item.data.id, true, `${item.data.author}, `))
           }
 
           return (
@@ -104,10 +102,10 @@ export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockPr
                   >
                     <div>
                       <ReplyForm
-                      commentID={item.data.id}
-                      isOpen={storeData && storeData.isOpen}
-                      isModalOpen={isModalOpen}
-                       />
+                        commentID={item.data.id}
+                        isOpen={storeData && storeData.isOpen}
+                        isModalOpen={isModalOpen}
+                      />
                     </div>
                   </CSSTransition>
 

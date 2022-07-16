@@ -22,12 +22,14 @@ function AppComponent() {
 
   const token = useToken();
   useEffect(() => {
-    dispatch(setToken(token));
+    if (token) dispatch(setToken(token));
   }, [token])
 
   const { name, iconImg } = useUserData();
   useEffect(() => {
-    dispatch(setUserData(name, iconImg))
+    if (name && iconImg) {
+      dispatch(setUserData(name, iconImg))
+    }
   })
 
 

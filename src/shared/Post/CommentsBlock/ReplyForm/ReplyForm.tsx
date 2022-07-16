@@ -41,9 +41,19 @@ export function ReplyForm({ commentID, isOpen, isModalOpen }: IReplyFormProps) {
 
   useEffect(() => {
     return () => {
-      dispatch(updateReply(commentID, false, inputValue))
+      if (inputValue != storeValue.text) {
+        dispatch(updateReply(commentID, false, inputValue))
+      }
     }
-  }, [isOpen, isModalOpen])
+  }, [isOpen])
+
+  useEffect(() => {
+    return () => {
+      if (!isModalOpen) {
+        dispatch(updateReply(commentID, true, inputValue))
+      }
+    }
+  }, [isModalOpen])
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
