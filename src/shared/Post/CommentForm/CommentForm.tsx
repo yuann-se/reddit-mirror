@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector, useStore } from 'react-redux';
-import { TInitialState, updateComment } from '../../../store';
+import { RootState } from '../../../app';
+import { IMainState, updateComment } from '../../../store/store';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
 import { generateRandomString } from '../../utils/generateRandomString';
@@ -30,7 +31,7 @@ interface ICommentFormProps {
 export function CommentForm(props: ICommentFormProps) {
 
   const dispatch = useDispatch();
-  const storeValue = useSelector((state: TInitialState) => state.myPostComment[`${props.postID}`]);
+  const storeValue = useSelector((state: RootState) => state.main.myPostComment[`${props.postID}`]);
 
   const [inputValue, setInputValue] = useState(storeValue ? storeValue.text : '');
 

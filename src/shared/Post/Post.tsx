@@ -8,10 +8,10 @@ import { EColors, Text } from '../Text';
 import { MetaData } from '../CardsList/Card/TextContent/MetaData';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { CommentsBlock } from './CommentsBlock';
-import { Modal } from '../Modal';
 import { Stats } from './Stats';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCommentsData, TInitialState } from '../../store';
+import { setCommentsData, IMainState } from '../../store/store';
+import { RootState } from '../../app';
 
 interface IPostProps {
   onClose?: () => void;
@@ -29,7 +29,7 @@ export function Post(props: IPostProps) {
     ? postData.postUrl
     : postData.previewSrc
 
-  const savedComments = useSelector((state: TInitialState) => state.commentsData[`${props.postID}`]);
+  const savedComments = useSelector((state: RootState) => state.main.commentsData[`${props.postID}`]);
   const dispatch = useDispatch();
 
   const commentsData = savedComments && savedComments.length > 0 ? savedComments : useCommentsData(postData.subreddit, props.postID);

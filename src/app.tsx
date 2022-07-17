@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { hot } from "react-hot-loader/root";
 import './main.global.scss';
 import { CardsList } from "./shared/CardsList";
@@ -7,31 +7,18 @@ import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
 import { useBestPostsData } from "./hooks/useBestPostsData";
 import { bestPostsContext } from "./shared/context/bestPostsContext";
-import { Provider, useDispatch } from "react-redux";
-import { rootReducer, setToken, setUserData } from "./store";
+import { Provider } from "react-redux";
+import { reducer } from "./store/store";
 import { configureStore } from "@reduxjs/toolkit";
 import { useToken } from "./hooks/useToken";
-import { useUserData } from "./hooks/useUserData";
 
-const store = configureStore({ reducer: rootReducer })
+const store = configureStore({ reducer: reducer })
+export type RootState = ReturnType<typeof store.getState>
 
 function AppComponent() {
 
   const [postsData] = useBestPostsData();
-  const dispatch = useDispatch();
-
-  const token = useToken();
-  useEffect(() => {
-    if (token) dispatch(setToken(token));
-  }, [token])
-
-  const { name, iconImg } = useUserData();
-  useEffect(() => {
-    if (name && iconImg) {
-      dispatch(setUserData(name, iconImg))
-    }
-  })
-
+  useToken();
 
   return (
     <bestPostsContext.Provider value={postsData}>

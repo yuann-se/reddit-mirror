@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TInitialState, updateReply } from '../../../../store';
+import { RootState } from '../../../../app';
+import { IMainState, updateReply } from '../../../../store/store';
 import { EIcons, Icon } from '../../../Icon';
 import { EColors, Text } from '../../../Text';
 import { generateRandomString } from '../../../utils/generateRandomString';
@@ -24,7 +25,7 @@ interface IReplyFormProps {
 export function ReplyForm({ commentID, isOpen, isModalOpen }: IReplyFormProps) {
 
   const dispatch = useDispatch();
-  const storeValue = useSelector((state: TInitialState) => state.commentsReplies[`${commentID}`])
+  const storeValue = useSelector((state: RootState) => state.main.commentsReplies[`${commentID}`])
 
   const [inputValue, setInputValue] = useState(storeValue.text);
 
