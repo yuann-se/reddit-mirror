@@ -1,20 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export interface IInitData {
+export interface ICommentsData {
   data: {
-    children: IInitData[]
+    children: ICommentsData[]
     id: string;
     body: string;
     author: string;
     created: string;
-    replies: IInitData;
+    replies: ICommentsData;
   }
 }
 
 export function useCommentsData(subreddit: string, postID: string) {
 
-  const [commentsData, setCommentsData] = useState<IInitData[]>([]);
+  const [commentsData, setCommentsData] = useState<ICommentsData[]>([]);
 
   useEffect(() => {
     axios.get(
@@ -25,7 +25,7 @@ export function useCommentsData(subreddit: string, postID: string) {
         // console.log(res.data[1].data.children)
       })
   }, []);
-  return [commentsData]
+  return commentsData
 }
 
 

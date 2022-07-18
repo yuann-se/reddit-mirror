@@ -1,43 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { hot } from "react-hot-loader/root";
-import { useToken } from "./hooks/useToken";
 import './main.global.scss';
 import { CardsList } from "./shared/CardsList";
 import { Content } from "./shared/Content";
 import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
-import { tokenContext } from "./shared/context/tokenContext";
-import { UserContextProvider } from "./shared/context/userContext";
 import { useBestPostsData } from "./hooks/useBestPostsData";
 import { bestPostsContext } from "./shared/context/bestPostsContext";
-import { commentContext } from "./shared/context/commentContext";
+import { Provider } from "react-redux";
+import { reducer } from "./store/store";
+import { configureStore } from "@reduxjs/toolkit";
+import { useToken } from "./hooks/useToken";
 
+const store = configureStore({ reducer: reducer })
+export type RootState = ReturnType<typeof store.getState>
 
 function AppComponent() {
 
-  const [commentValue, setCommentValue] = useState('');
-  const [token] = useToken();
   const [postsData] = useBestPostsData();
+  useToken();
 
   return (
-    <commentContext.Provider value={{
-      value: commentValue,
-      onChange: setCommentValue,
-    }}>
-      <tokenContext.Provider value={token}>
-        <UserContextProvider>
-          <bestPostsContext.Provider value={postsData}>
-            <Layout>
-              <Header />
-              <Content>
-                <CardsList />
-              </Content>
-            </Layout>
-          </bestPostsContext.Provider>
-        </UserContextProvider>
-      </tokenContext.Provider>
-    </commentContext.Provider>
+    <bestPostsContext.Provider value={postsData}>
+      <Layout>
+        <Header />
+        <Content>
+          <CardsList />
+        </Content>
+      </Layout>
+    </bestPostsContext.Provider>
   )
 }
 
-export const App = hot(() => <AppComponent />);
+export const App = hot(() => <Provider store={store}><AppComponent /></Provider>);

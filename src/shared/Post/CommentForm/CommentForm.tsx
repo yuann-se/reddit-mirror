@@ -1,5 +1,7 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
-import { commentContext } from '../../context/commentContext';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { RootState } from '../../../app';
+import { IMainState, updateComment } from '../../../store/store';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
 import { generateRandomString } from '../../utils/generateRandomString';
@@ -22,30 +24,41 @@ const markdownBtns = [
   <button key={generateRandomString()} className={styles.markdownBtn}>{btn}</button>)
 
 interface ICommentFormProps {
-  openState: boolean;
+  postID: string;
+  isOpen: boolean;
 }
 
-export function CommentForm({ openState }: ICommentFormProps) {
+export function CommentForm(props: ICommentFormProps) {
 
-  const { value, onChange } = useContext(commentContext);
-  const [inputValue, setInputValue] = useState(value);
+  const dispatch = useDispatch();
+  const storeValue = useSelector((state: RootState) => state.main.myPostComment[`${props.postID}`]);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-  }
+  const [inputValue, setInputValue] = useState(storeValue ? storeValue.text : '');
 
   useEffect(() => {
     return () => {
-      onChange(inputValue);
+      if (storeValue && storeValue.text !== inputValue) {
+        dispatch(updateComment(props.postID, inputValue));
+      }
     }
-  }, [openState])
+  }, [props.isOpen])
+
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    dispatch(updateComment(props.postID, inputValue));
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(e.target.value);
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <textarea
         className={styles.input}
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}>
+        onChange={handleChange}>
       </textarea>
       <div className={styles.controlsWrapper}>
         <div className={styles.markdownBtnsWrapper}>
