@@ -57,7 +57,7 @@ export const meRequestAsync = (): ThunkAction<void, RootState, unknown, Action<s
   dispatch(meRequest());
   axios.get(
     'https://oauth.reddit.com/api/v1/me',
-    { headers: { Authorization: `bearer ${getState().main.token}` } }
+    { headers: { Authorization: `bearer ${getState().token.token}` } }
   )
     .then((res) => {
       const userData = res.data;

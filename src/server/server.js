@@ -12,7 +12,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/auth', (req, res) => {
-  axios.post(
+  const token = localStorage.getItem('token');
+  token
+  ? res.send(indexTemplate(ReactDOM.renderToString(App()), token))
+  : axios.post(
     'https://www.reddit.com/api/v1/access_token',
     `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/auth`,
     {

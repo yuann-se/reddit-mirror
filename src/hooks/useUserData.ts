@@ -8,7 +8,7 @@ export function useUserData() {
 
   const dispatch = useDispatch<any>();
   const data = useSelector<RootState, IUserData>((state) => state.me.data);
-  const token = useSelector<RootState, string>((state) => state.main.token);
+  const token = useSelector<RootState, string>((state) => state.token.token);
   const loading = useSelector<RootState, boolean>((state) => state.me.loading);
 
   useEffect(() => {

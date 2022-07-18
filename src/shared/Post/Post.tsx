@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styles from './post.scss';
 import { CommentForm } from './CommentForm';
 import { EIcons, Icon } from '../Icon';
@@ -6,12 +6,11 @@ import { bestPostsContext } from '../context/bestPostsContext';
 import { KarmaCounter } from '../CardsList/Card/Controls/KarmaCounter';
 import { EColors, Text } from '../Text';
 import { MetaData } from '../CardsList/Card/TextContent/MetaData';
-import { useCommentsData } from '../../hooks/useCommentsData';
 import { CommentsBlock } from './CommentsBlock';
 import { Stats } from './Stats';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCommentsData, IMainState } from '../../store/store';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../app';
+import { useCommentsData } from '../../hooks/useCommentsData';
 
 interface IPostProps {
   onClose?: () => void;
@@ -29,18 +28,7 @@ export function Post(props: IPostProps) {
     ? postData.postUrl
     : postData.previewSrc
 
-  const savedComments = useSelector((state: RootState) => state.main.commentsData[`${props.postID}`]);
-  const dispatch = useDispatch();
-
-  const commentsData = savedComments && savedComments.length > 0 ? savedComments : useCommentsData(postData.subreddit, props.postID);
-
-  useEffect(() => {
-    return () => {
-      if (!savedComments && commentsData.length > 0) {
-        dispatch(setCommentsData(props.postID, commentsData));
-      }
-    }
-  }, [props.isModalOpen])
+  const commentsData = useCommentsData(postData.subreddit, props.postID);
 
   const handleClick = () => {
     props.onClose?.()
