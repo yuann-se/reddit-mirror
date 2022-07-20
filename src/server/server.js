@@ -9,24 +9,26 @@ app.use('/static', express.static('./dist/client'))
 
 app.get('/', (req, res) => {
   res.send(indexTemplate(ReactDOM.renderToString(App())))
-})
+});
+
+const tokensCache = {};
 
 app.get('/auth', (req, res) => {
-  const token = localStorage.getItem('token');
-  token
-  ? res.send(indexTemplate(ReactDOM.renderToString(App()), token))
-  : axios.post(
-    'https://www.reddit.com/api/v1/access_token',
-    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/auth`,
-    {
-      auth: { username: process.env.CLIENT_ID, password: 'llspliIY0sBA-voydz89yDt2r-N9EA' },
-      headers: { 'Content-type': 'application/x-www-form-urlencoded' }
-    }
-  )
-    .then(({ data }) => {
-      res.send(indexTemplate(ReactDOM.renderToString(App()), data['access_token']))
-    })
-    .catch(console.log)
+  req.query.code && tokensCache[req.query.code]
+    ? res.send(indexTemplate(ReactDOM.renderToString(App()), tokensCache[req.query.code]))
+    : axios.post(
+      'https://www.reddit.com/api/v1/access_token',
+      `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/auth`,
+      {
+        auth: { username: process.env.CLIENT_ID, password: 'llspliIY0sBA-voydz89yDt2r-N9EA' },
+        headers: { 'Content-type': 'application/x-www-form-urlencoded' }
+      }
+    )
+      .then(({ data }) => {
+        res.send(indexTemplate(ReactDOM.renderToString(App()), data['access_token']));
+        tokensCache[req.query.code] = data['access_token'];
+      })
+      .catch(console.log)
 })
 
 app.listen(3000, () => {

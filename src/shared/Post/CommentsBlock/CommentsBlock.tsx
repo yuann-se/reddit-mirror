@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { RootState } from '../../../app';
-import { ICommentsData } from '../../../store/comments';
+import { IResponse } from '../../../store/comments';
 import { updateReply } from '../../../store/store';
 import { MetaData } from '../../CardsList/Card/TextContent/MetaData';
 import { EIcons, Icon } from '../../Icon';
@@ -11,7 +11,7 @@ import styles from './commentsblock.scss';
 import { ReplyForm } from './ReplyForm';
 
 interface ICommentsBlockProps {
-  comments: ICommentsData[];
+  comments: IResponse[];
   depth: number | undefined;
   isModalOpen: boolean;
 }
@@ -26,7 +26,7 @@ export function CommentsBlock({ comments, depth, isModalOpen }: ICommentsBlockPr
       {Array.isArray(comments) && comments.length > 0
         ? comments.map((item) => {
 
-          const storeData = useSelector((state: RootState) => state.main.commentsReplies[`${item.data.id}`]);
+          const storeData = useSelector((state: RootState) => state.main.commentsReplies[item.data.id]);
           function handleReply() {
             storeData
               ? dispatch(updateReply(item.data.id, !storeData.isOpen, storeData.text))

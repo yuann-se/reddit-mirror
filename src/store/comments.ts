@@ -2,20 +2,23 @@ import { Action, createAction, createSlice, ThunkAction } from "@reduxjs/toolkit
 import axios from "axios";
 import { RootState } from "../app";
 
-export interface ICommentsData {
+export interface IResponse {
   data: {
-    children: ICommentsData[]
     id: string;
     body: string;
     author: string;
     created: string;
-    replies: ICommentsData;
+    replies: {
+      data: {
+        children: IResponse[]
+      }
+    }
   }
 }
 
 interface IInitState {
   commentsData: {
-    [postID: string]: ICommentsData[]
+    [postID: string]: IResponse[]
   }
 }
 
@@ -23,23 +26,26 @@ const initialState: IInitState = {
   commentsData: {},
 }
 
-// function getRequiredData(initData: ICommentsData[]) {
-//   const reqData: ICommentsData[] = [];
-//   initData.map((item) => {
-//     reqData.push({data:{
-//       children: [],
-//       id: item.data.id,
-//       body: item.data.body,
-//       author: item.data.author,
-//       created: item.data.created,
-//       replies: item.data.replies ? getRequiredData(item.data.replies.data.children) : []
-//     }});
-//   })
-//   return reqData;
-// }
+function getRequiredData(initData: IResponse[]) {
+  const reqData: IResponse[] = [];
+  initData.map((item) => {
+    reqData.push({
+      data: {
+        id: item.data.id,
+        body: item.data.body,
+        author: item.data.author,
+        created: item.data.created,
+        replies: item.data.replies
+          ? { data: { children: getRequiredData(item.data.replies.data.children) } }
+          : { data: { children: [] } }
+      }
+    });
+  })
+  return reqData;
+}
 
 export const setCommentsData = createAction('SET_COMMENTS_DATA',
-  function prepare(id: string, data: ICommentsData[]) {
+  function prepare(id: string, data: IResponse[]) {
     return { payload: { id, data } }
   });
 
@@ -49,8 +55,7 @@ export const saveComments = (subreddit: string, postID: string): ThunkAction<voi
   )
     .then((res) => {
       const initRes = res.data[1].data.children;
-
-      dispatch(setCommentsData(postID, initRes))
+      dispatch(setCommentsData(postID, getRequiredData(initRes)))
     })
 }
 
