@@ -35,6 +35,7 @@ export function Post({ open, onClose, postID }: IPostProps) {
   const chooseSrc = imageReg.test(postData.postUrl)
     ? postData.postUrl
     : postData.previewSrc
+
   const commentsData = useCommentsData(postData.subreddit, postID);
 
   const handleOverlayClick = (e: React.SyntheticEvent) => {

@@ -8,6 +8,7 @@ import { generateRandomString } from '../../utils/generateRandomString';
 import { SubmitHandler, useForm } from "react-hook-form";
 import styles from './commentform.scss';
 import { CSSTransition } from 'react-transition-group';
+import { SuccessMsg } from './SuccessMsg';
 
 const markdownBtns = [
   <Icon Name={EIcons.inlineCode} width={20} />,
@@ -41,13 +42,6 @@ const errorTransitionClasses = {
   exitActive: styles['show-exit-active']
 };
 
-const modalTransitionClasses = {
-  enter: styles['modal-enter'],
-  enterActive: styles['modal-enter-active'],
-  exit: styles['modal-exit'],
-  exitActive: styles['modal-exit-active']
-}
-
 export function CommentForm(props: ICommentFormProps) {
 
   const dispatch = useDispatch();
@@ -67,11 +61,14 @@ export function CommentForm(props: ICommentFormProps) {
     }
   }, [props.isOpen])
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ITextarea>();
-  const onSubmit: SubmitHandler<ITextarea> = data => {
+  const { register, handleSubmit, formState: { errors }, reset, formState,
+    formState: { isSubmitSuccessful } } = useForm<ITextarea>();
+
+  const onSubmit: SubmitHandler<ITextarea> = () => {
     setInputValue('');
     setStartValidate(false);
     showSuccessMessage(true);
+    reset();
   }
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -80,15 +77,15 @@ export function CommentForm(props: ICommentFormProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor='comment'>Oставьте ваш комментарий</label>
       <textarea
-        name='comment'
-        ref={register({ required: true, maxLength: 20 })}
-        // {...register("comment", { required: 'true', maxLength: 20 })}
+        {...register("comment", { required: 'true', maxLength: 20 })}
         className={styles.input}
+        id='comment'
         value={inputValue}
         placeholder={placeholder}
         onChange={handleChange}
-        aria-invalid={!!errors.comment || undefined}>
+        aria-invalid={!!errors.comment && (inputValue.length === 0 || inputValue.length > 20) || undefined}>
       </textarea>
       <div className={styles.controlsWrapper}>
         <div className={styles.markdownBtnsWrapper}>
@@ -128,17 +125,7 @@ export function CommentForm(props: ICommentFormProps) {
         <p className={styles.errorMessage}>Введите комментарий</p>
       </CSSTransition>
 
-      {/* <Modal
-        open={successMessage}
-        onClose={() => showSuccessMessage(false)}
-        transitionTimeout={200}
-        transitionClasses={modalTransitionClasses}
-      >
-        <div className={styles.successMessageContainer}>
-          <p className={styles.successMessage}>Комментарий опубликован! =)</p>
-          <button className={styles.successCloseBtn}>Ура!</button>
-        </div>
-      </Modal> */}
+      <SuccessMsg open={successMessage} onClose={() => showSuccessMessage(false)} />
 
     </form>
   );

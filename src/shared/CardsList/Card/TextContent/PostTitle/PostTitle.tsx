@@ -1,4 +1,6 @@
 import React from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { IResponse } from '../../../../../store/comments';
 import { Post } from '../../../../Post';
 import styles from './posttitle.scss';
 
@@ -13,8 +15,8 @@ export function PostTitle(props: IPostTitleProps) {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleClick = (e: React.SyntheticEvent) => {
-    setIsModalOpen(true);
     e.preventDefault();
+    setIsModalOpen(true);
   }
 
   return (
