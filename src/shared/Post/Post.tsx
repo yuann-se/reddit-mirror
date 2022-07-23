@@ -36,7 +36,7 @@ export function Post({ open, onClose, postID }: IPostProps) {
     ? postData.postUrl
     : postData.previewSrc
 
-  const commentsData = useCommentsData(postData.subreddit, postID);
+  const commentsData = useCommentsData(postID);
 
   const handleOverlayClick = (e: React.SyntheticEvent) => {
     if (e.target instanceof Node && !modalRef.current?.contains(e.target)) {

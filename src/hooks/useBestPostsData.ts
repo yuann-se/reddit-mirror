@@ -12,7 +12,6 @@ interface IPost {
   previewSrc: string;
   upvotes: number;
   upvoteRatio: number;
-  subreddit: string;
   comments: number
 }
 
@@ -30,13 +29,11 @@ interface IInitPost {
             url: string;
           }
         }
-
       ]
     }
     url: string
     ups: number;
     upvote_ratio: number;
-    subreddit: string;
     num_comments: number;
     sr_detail: {
       icon_img: string
@@ -50,14 +47,15 @@ export function useBestPostsData() {
   let postsData: IPost[] = [];
 
   useEffect(() => {
-    axios.get(
-      'https://oauth.reddit.com/best.json?sr_detail=true',
-      { headers: { Authorization: `bearer ` } }
-    )
-      .then((res) => {
-        const initData = res.data.data.children;
-        // console.log(initData);
 
+    async function load() {
+      try {
+        const res = await axios.get(
+          'https://oauth.reddit.com/best.json?sr_detail=true',
+          { headers: { Authorization: `bearer ` } }
+        );
+
+        const initData = res.data.data.children;
         initData.map(({ data }: IInitPost) => {
           const prevSrc = data.preview
             ? data.preview.images[0].source.url.split('&amp;').join('&')
@@ -72,7 +70,6 @@ export function useBestPostsData() {
             postTitle: data.title,
             postUrl: data.url,
             previewSrc: prevSrc,
-            subreddit: data.subreddit,
             upvotes: data.ups,
             upvoteRatio: data.upvote_ratio,
             comments: data.num_comments
@@ -81,9 +78,12 @@ export function useBestPostsData() {
           postsData.push(post);
         })
         setData(postsData);
-      })
-      .catch(console.log)
+      } catch (error) {
+        console.error(error)
+      }
+    };
 
+    load();
   }, []);
 
   return [data]

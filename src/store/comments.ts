@@ -49,9 +49,9 @@ export const setCommentsData = createAction('SET_COMMENTS_DATA',
     return { payload: { id, data } }
   });
 
-export const saveComments = (subreddit: string, postID: string): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
+export const saveComments = (postID: string): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
   axios.get(
-    `https://api.reddit.com/r/${subreddit}/comments/${postID}?sort=top`,
+    `https://api.reddit.com/comments/${postID}?sort=top`,
   )
     .then((res) => {
       const initRes = res.data[1].data.children;

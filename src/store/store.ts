@@ -1,5 +1,4 @@
-import { Action, combineReducers, createAction, createSlice, ThunkAction } from "@reduxjs/toolkit";
-import { RootState } from "../app";
+import { combineReducers, createAction, createSlice } from "@reduxjs/toolkit";
 import { comments } from "./comments";
 import { me } from "./me";
 import { token } from "./token";
