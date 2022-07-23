@@ -1,11 +1,16 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app';
-import { IMainState, updateComment } from '../../../store/store';
+import { updateComment } from '../../../store/store';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
 import { generateRandomString } from '../../utils/generateRandomString';
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import styles from './commentform.scss';
+import { CSSTransition } from 'react-transition-group';
+import { SuccessMsg } from './SuccessMsg';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 const markdownBtns = [
   <Icon Name={EIcons.inlineCode} width={20} />,
@@ -28,46 +33,118 @@ interface ICommentFormProps {
   isOpen: boolean;
 }
 
+interface ITextarea {
+  comment: string
+}
+
+const errorTransitionClasses = {
+  enter: styles['show-enter'],
+  enterActive: styles['show-enter-active'],
+  exit: styles['show-exit'],
+  exitActive: styles['show-exit-active']
+};
+
 export function CommentForm(props: ICommentFormProps) {
 
   const dispatch = useDispatch();
-  const storeValue = useSelector((state: RootState) => state.main.myPostComment[`${props.postID}`]);
+  const storeValue = useSelector((state: RootState) => state.main.myPostComment[props.postID]);
+  const userName = useSelector((state: RootState) => state.me.data.username);
+  const placeholder = userName
+    ? `${userName}, оставьте ваш комментарий`
+    : `Оставьте ваш комментарий`
 
-  const [inputValue, setInputValue] = useState(storeValue ? storeValue.text : '');
+  const [inputValue, setInputValue] = useState<string>(storeValue ? storeValue.text : '');
+  const [successMessage, showSuccessMessage] = useState<boolean>(false);
+
+  const validationSchema = Yup.object().shape({
+    comment: Yup.string()
+      .required('Введите комментарий')
+      .max(500, 'Максимальная длина комментария - 500 символов'),
+  });
 
   useEffect(() => {
     return () => {
-      if (storeValue && storeValue.text !== inputValue) {
-        dispatch(updateComment(props.postID, inputValue));
-      }
+      dispatch(updateComment(props.postID, inputValue));
     }
-  }, [props.isOpen])
+  }, [props.isOpen]);
 
+  const { control, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } =
+    useForm<ITextarea>({ resolver: yupResolver(validationSchema), defaultValues: { comment: inputValue } });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    dispatch(updateComment(props.postID, inputValue));
+  const onSubmit: SubmitHandler<ITextarea> = () => {
+    setInputValue('');
+    showSuccessMessage(true);
   }
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset()
+  }, [isSubmitSuccessful, reset])
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <textarea
-        className={styles.input}
-        value={inputValue}
-        onChange={handleChange}>
-      </textarea>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor='comment'>Oставьте ваш комментарий</label>
+      <Controller
+        control={control}
+        name="comment"
+        render={({ field: { onChange } }) => (
+          <textarea className={styles.input}
+            value={inputValue} onChange={(e) => {
+              onChange(e);
+              handleChange(e);
+            }}
+            aria-invalid={!!errors.comment || undefined}
+            placeholder={placeholder} />
+        )}
+      />
+
       <div className={styles.controlsWrapper}>
         <div className={styles.markdownBtnsWrapper}>
           {markdownBtns}
         </div>
-        <button type='submit' className={styles.button}>
+        <button type='submit' className={styles.button}
+        >
           <Text size={14} color={EColors.white}>Комментировать</Text>
         </button>
       </div>
+
+      <CSSTransition
+        in={inputValue.length > 400 && inputValue.length <= 500 && !errors.comment}
+        timeout={200} classNames={errorTransitionClasses}
+        mountOnEnter unmountOnExit
+      >
+        <p className={styles.symbolsCounter}>Осталось {500 - inputValue.length}/500 символов</p>
+      </CSSTransition>
+
+      <CSSTransition
+        in={inputValue.length > 500 && !errors.comment} timeout={200}
+        classNames={errorTransitionClasses}
+        mountOnEnter unmountOnExit
+      >
+        <div className={styles.symbolsCounter}>Превышена максимальная длина комментария</div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={errors.comment?.type === 'max'} timeout={200}
+        classNames={errorTransitionClasses}
+        mountOnEnter unmountOnExit
+      >
+        <div className={styles.errorMessage}>{errors.comment?.message}</div>
+      </CSSTransition>
+
+      <CSSTransition
+        in={errors.comment?.type === 'required'} timeout={200}
+        classNames={errorTransitionClasses}
+        mountOnEnter unmountOnExit
+      >
+        <div className={styles.errorMessage}>{errors.comment?.message}</div>
+      </CSSTransition>
+
+      <SuccessMsg open={successMessage} onClose={() => showSuccessMessage(false)} />
+
     </form>
   );
 }

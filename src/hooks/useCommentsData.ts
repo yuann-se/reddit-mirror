@@ -1,31 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-export interface ICommentsData {
-  data: {
-    children: ICommentsData[]
-    id: string;
-    body: string;
-    author: string;
-    created: string;
-    replies: ICommentsData;
-  }
-}
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app";
+import { saveComments } from "../store/comments";
 
 export function useCommentsData(subreddit: string, postID: string) {
 
-  const [commentsData, setCommentsData] = useState<ICommentsData[]>([]);
+  const dispatch = useDispatch<any>();
+  const commentsData = useSelector((state: RootState) => state.comments.commentsData[postID]);
 
   useEffect(() => {
-    axios.get(
-      `https://api.reddit.com/r/${subreddit}/comments/${postID}?sort=top`,
-    )
-      .then((res) => {
-        setCommentsData(res.data[1].data.children)
-        // console.log(res.data[1].data.children)
-      })
+    if (!commentsData)
+      dispatch(saveComments(subreddit, postID))
   }, []);
+
   return commentsData
 }
-
-

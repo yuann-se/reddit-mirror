@@ -3,9 +3,10 @@
 $black: #333333;
 $orange: #CC6633;
 $green: #A4CC33;
+$red: #CC3361;
 $whiteLightness: 100%;
 $white: hsl(0, 0%, $whiteLightness);
-$grayF4: hsl(0, 0%, calc($whiteLightness - 4%));
+$greyF4: hsl(0, 0%, calc($whiteLightness - 4%));
 $greyF3: hsl(0, 0%, calc($whiteLightness - 5%));
 $greyEC: hsl(0, 0%, calc($whiteLightness - 7%));
 $greyE5: hsl(0, 0%, calc($whiteLightness - 10%));

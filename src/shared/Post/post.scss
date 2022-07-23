@@ -1,5 +1,53 @@
 @import '../../variables';
 
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  padding: 40px;
+  z-index: 900;
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.modal {
+  position: relative;
+  z-index: 1000;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
+  border-radius: 7px;
+  width: 80%;
+  max-width: 960px;
+  padding: 24px;
+  margin-bottom: 25px;
+}
+
+
+.modal-enter {
+  opacity: 0;
+  transform: translateX(-150px);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.modal-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+
 .header {
   display: flex;
   align-items: center;

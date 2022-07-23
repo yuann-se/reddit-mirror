@@ -1,29 +1,5 @@
 @import '../../../../../variables';
 
-.modal-enter {
-  opacity: 0;
-  transform: translateX(-150px);
-}
-
-.modal-enter-active {
-  opacity: 1;
-  transform: none;
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-.modal-exit {
-  opacity: 1;
-  transform: none;
-}
-
-.modal-exit-active {
-  opacity: 0;
-  transform: translateX(-150px);
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-
-
 .title {
   font-size: 16px;
   line-height: 19px;
