@@ -6,12 +6,12 @@ import { saveComments } from "../store/comments";
 export function useCommentsData(postID: string) {
 
   const dispatch = useDispatch<any>();
-  const commentsData = useSelector((state: RootState) => state.comments.commentsData[postID]);
+  const data = useSelector((state: RootState) => state.comments);
 
   useEffect(() => {
-    if (!commentsData)
+    if (!data.commentsData || !data.commentsData[postID])
       dispatch(saveComments(postID))
   }, []);
 
-  return commentsData
+  return data
 }

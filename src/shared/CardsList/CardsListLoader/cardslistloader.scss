@@ -1,0 +1,94 @@
+@import '../../../variables';
+@import '../../../mixins';
+
+.mainWrapper {
+  * {
+    border-radius: 3px;
+  }
+
+  width: 100%;
+
+  @include loader;
+}
+
+.cardContainer {
+  position: relative;
+  display: flex;
+  padding: 20px 20px 10px;
+}
+
+.preview {
+  width: 190px;
+  height: 110px;
+  margin-right: 40px;
+  background-color: $greyF3;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+
+  h2 {
+    height: 20px;
+    width: 60%;
+    margin-bottom: 10px;
+    background-color: $greyF3;
+  }
+
+  p {
+    display: block;
+    height: 11px;
+    width: 50%;
+    margin-bottom: 10px;
+    background-color: $greyF3;
+  }
+
+  span {
+    height: 15px;
+    width: 100px;
+    background-color: $greyF3;
+  }
+}
+
+.karmaCounter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  div {
+    width: 30px;
+    height: 14px;
+    margin: 5px 0;
+    background-color: $greyF3;
+  }
+
+  path {
+    fill: $greyF3;
+  }
+}
+
+@media all and (min-width: $tabletWidth) {
+  .cardContainer {
+    max-height: 110px;
+    padding: 0 40px;
+    margin-bottom: 40px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media all and (min-width: $desktopWidth) {
+  .cardContainer {
+    padding: 20px 60px;
+    max-height: 150px;
+    margin-bottom: 0;
+  }
+}

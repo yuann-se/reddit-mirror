@@ -1,0 +1,93 @@
+@import '../../../../variables';
+@import '../../../../mixins';
+
+.container {
+  @include loader;
+  display: flex;
+  overflow: hidden;
+
+  span {
+    background-color: $greyF3;
+    display: inline-block;
+  }
+}
+
+.upvotes {
+  width: 40px;
+  margin-right: 20px;
+}
+
+.arrowsIcons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: $white;
+
+  svg:nth-child(1) {
+    margin-bottom: 10px;
+  }
+
+  svg:nth-child(2) {
+    transform: rotate(180deg);
+  }
+
+  path {
+    fill: $greyF3
+  }
+}
+
+.bar {
+  width: 3px;
+  height: calc(100% - 90px);
+  background-color: $greyF3;
+  margin: 0 auto;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.metaData {
+  padding-top: 5px;
+  margin-bottom: 15px;
+
+  span:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 7px;
+  }
+
+  span:nth-child(2),
+  span:nth-child(3) {
+    width: 80px;
+    height: 15px;
+    margin-right: 7px;
+  }
+}
+
+
+.commentBody {
+  span:nth-child(1) {
+    width: 80%;
+    height: 15px;
+    margin-bottom: 10px;
+  }
+
+  span:nth-child(2) {
+    width: 75%;
+    height: 15px;
+    margin-bottom: 10px;
+  }
+}
+
+.controls {
+  margin-bottom: 40px;
+
+  span {
+    width: 100px;
+    height: 15px;
+    margin-right: 25px;
+  }
+}

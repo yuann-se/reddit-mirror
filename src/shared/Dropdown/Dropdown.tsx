@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './dropdown.scss';
 import { CSSTransition } from 'react-transition-group';
 import ReactDOM from 'react-dom';
@@ -26,9 +26,6 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
     }
   }
 
-  const node = document.getElementById('dropdown_root');
-  if (!node) return null;
-
   return (
     <div className={styles.container}>
       <div onClick={handleOpen}>
@@ -36,18 +33,18 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
       </div>
       {ReactDOM.createPortal(
         (<CSSTransition
-        in={isDropdownOpen}
-        timeout={transitionTimeout}
-        classNames={transitionClasses}
-        mountOnEnter
-        unmountOnExit
-      >
-        <div className={styles.listContainer}>
-          <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
-            {children}
+          in={isDropdownOpen}
+          timeout={transitionTimeout}
+          classNames={transitionClasses}
+          mountOnEnter
+          unmountOnExit
+        >
+          <div className={styles.listContainer}>
+            <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
+              {children}
+            </div>
           </div>
-        </div>
-      </CSSTransition>), node
+        </CSSTransition>), document.getElementById('dropdown_root')!
       )}
 
     </div>

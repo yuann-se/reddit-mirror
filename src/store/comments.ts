@@ -1,4 +1,4 @@
-import { Action, createAction, createSlice, ThunkAction } from "@reduxjs/toolkit";
+import { Action, createAction, createAsyncThunk, createSlice, ThunkAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../app";
 
@@ -18,12 +18,16 @@ export interface IResponse {
 
 interface IInitState {
   commentsData: {
-    [postID: string]: IResponse[]
+    [id: string]: IResponse[]
   }
+  loading: boolean;
+  fetchError: string;
 }
 
 const initialState: IInitState = {
   commentsData: {},
+  loading: false,
+  fetchError: ''
 }
 
 function getRequiredData(initData: IResponse[]) {
@@ -44,20 +48,16 @@ function getRequiredData(initData: IResponse[]) {
   return reqData;
 }
 
-export const setCommentsData = createAction('SET_COMMENTS_DATA',
-  function prepare(id: string, data: IResponse[]) {
-    return { payload: { id, data } }
-  });
+export const saveComments = createAsyncThunk('SAVE_POST_COMMENTS',
+  async (postID: string) => {
+    const res = await axios.get(
+      `https://api.reddit.com/comments/${postID}?sort=top`,
+    );
+    const initRes = res.data[1].data.children;
+    const comments = getRequiredData(initRes);
+    return { postID, comments }
+  })
 
-export const saveComments = (postID: string): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
-  axios.get(
-    `https://api.reddit.com/comments/${postID}?sort=top`,
-  )
-    .then((res) => {
-      const initRes = res.data[1].data.children;
-      dispatch(setCommentsData(postID, getRequiredData(initRes)))
-    })
-}
 
 export const comments = createSlice({
   name: 'comments',
@@ -65,9 +65,18 @@ export const comments = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(setCommentsData, (state, action) => {
-        state.commentsData[action.payload.id] = action.payload.data;
+      .addCase(saveComments.pending, (state) => {
+        state.loading = true;
+        state.fetchError = '';
       })
-      .addDefaultCase((state, action) => { state })
+      .addCase(saveComments.fulfilled, (state, action) => {
+        state.commentsData[action.payload.postID] = action.payload.comments;
+        state.loading = false;
+        state.fetchError = '';
+      })
+      .addCase(saveComments.rejected, (state, action) => {
+        state.fetchError = action.error.message!;
+        state.loading = false;
+      })
   }
 })

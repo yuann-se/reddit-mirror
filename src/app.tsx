@@ -17,18 +17,18 @@ export type RootState = ReturnType<typeof store.getState>
 
 function AppComponent() {
 
-  const [postsData] = useBestPostsData();
+  // const [postsData] = useBestPostsData();
   useToken();
 
   return (
-    <bestPostsContext.Provider value={postsData}>
-      <Layout>
-        <Header />
-        <Content>
-          <CardsList />
-        </Content>
-      </Layout>
-    </bestPostsContext.Provider>
+    // <bestPostsContext.Provider value={postsData}>
+    <Layout>
+      <Header />
+      <Content>
+        <CardsList />
+      </Content>
+    </Layout>
+    // </bestPostsContext.Provider>
   )
 }
 

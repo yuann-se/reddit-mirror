@@ -47,7 +47,8 @@ export function SuccessMsg({ open, onClose }: ISuccessMsgProps) {
     >
       <div className={styles.modalWrapper} onClick={handleOverlayClick}>
         <div className={styles.modal} ref={modalRef}>
-          <img src="https://sun9-76.userapi.com/impf/rAvFsnKrnrRlVYFZ2tEfr-TsEGDNi_qmcUjJvA/Y-5H7GY-ngA.jpg?size=127x213&quality=95&sign=54dddd48135cece1432987b2e7d7bb3d&type=album" alt="#" />
+          <img src="https://sun9-76.userapi.com/impf/rAvFsnKrnrRlVYFZ2tEfr-TsEGDNi_qmcUjJvA/Y-5H7GY-ngA.jpg?size=127x213&quality=95&sign=54dddd48135cece1432987b2e7d7bb3d&type=album"
+            alt="Комментарий опубликован" />
           <Text As='p' size={28} color={EColors.orange}>Комментарий опубликован &#129321;</Text>
           <button className={styles.closeBtn} onClick={handleClick}>
             <Text As='span' size={20} color={EColors.white}>Ура!</Text>

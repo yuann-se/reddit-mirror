@@ -35,7 +35,7 @@
   .card {
     background-color: transparent;
     flex-flow: row nowrap;
-    max-height: 107px;
+    max-height: 110px;
     padding: 0 40px;
   }
 
@@ -51,7 +51,7 @@
 @media all and (min-width: $desktopWidth) {
   .card {
     padding: 20px 60px;
-    max-height: 147px;
+    max-height: 150px;
     cursor: pointer;
     border-radius: 0;
 

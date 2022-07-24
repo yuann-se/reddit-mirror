@@ -11,7 +11,7 @@ interface IMenuProps {
 
 export function Menu({ postID }: IMenuProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [dropdownWidth, setDropdownWidth] = React.useState(window.innerWidth > 320 ? 157 : 145);
+  const [dropdownWidth, setDropdownWidth] = React.useState(typeof window !== "undefined" ? window.innerWidth > 320 ? 157 : 145 : 145);
   const handleClick = () => { setIsOpen(!isOpen) }
 
   const btnClasses = classNames(
