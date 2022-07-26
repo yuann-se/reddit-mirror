@@ -30,6 +30,7 @@ export function Post({ open, onClose, postID }: IPostProps) {
 
   useEffect(() => {
     if (open) document.body.style.overflow = 'hidden';
+
     return () => {
       document.body.style.overflow = 'auto';
     }
@@ -45,7 +46,7 @@ export function Post({ open, onClose, postID }: IPostProps) {
         unmountOnExit
         nodeRef={modalRef}
       >
-        <div className={styles.modalWrapper} onClick={handleOverlayClick}>
+        <div className={styles.modalWrapper} id='postModalWrapper' onClick={handleOverlayClick}>
           <div className={styles.modal} ref={modalRef}>
             <PostContent postID={postID} isOpen={open} onClose={() => onClose()} />
           </div>

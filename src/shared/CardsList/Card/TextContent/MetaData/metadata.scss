@@ -12,10 +12,19 @@
   display: none;
 }
 
-.createdAt,
-.createdAt span {
-  color: $grey99;
+.createdAt {
+  width: min-content;
+
+  span {
+    color: $grey99;
+  }
+
+  span:nth-child(2) {
+    white-space: nowrap;
+  }
+
 }
+
 
 .userLink {
   display: flex;

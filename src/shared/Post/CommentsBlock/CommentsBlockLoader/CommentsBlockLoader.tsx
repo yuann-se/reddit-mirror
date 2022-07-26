@@ -37,7 +37,6 @@ export function CommentsBlockLoader({ depth }: IProps) {
           </>
         }
       </div>
-      <CommentsBlockLoader depth={2} />
     </>
   );
 }

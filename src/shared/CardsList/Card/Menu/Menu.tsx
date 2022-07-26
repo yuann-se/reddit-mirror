@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Dropdown } from '../../../Dropdown';
 import styles from './menu.scss';
 import { ItemsList } from './ItemsList';
@@ -6,12 +6,13 @@ import { EIcons, Icon } from '../../../Icon';
 import classNames from 'classnames';
 
 interface IMenuProps {
-  postID: string
+  postID?: string;
+  zIndex?: number;
 }
 
-export function Menu({ postID }: IMenuProps): JSX.Element {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [dropdownWidth, setDropdownWidth] = React.useState(typeof window !== "undefined" ? window.innerWidth > 320 ? 157 : 145 : 145);
+export function Menu({ postID, zIndex }: IMenuProps): JSX.Element {
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownWidth, setDropdownWidth] = useState(typeof window !== "undefined" ? window.innerWidth > 320 ? 157 : 145 : 145);
   const handleClick = () => { setIsOpen(!isOpen) }
 
   const btnClasses = classNames(
@@ -27,10 +28,13 @@ export function Menu({ postID }: IMenuProps): JSX.Element {
   return (
     <div className={styles.menu}>
       <Dropdown
+        onClose={() => setIsOpen(false)}
+        isOpen={isOpen}
         button={<button
           className={btnClasses}
           onClick={handleClick}
-          ref={btnRef}>
+          ref={btnRef}
+        >
           <Icon
             Name={EIcons.menuBtn}
             width={5} />
@@ -42,6 +46,7 @@ export function Menu({ postID }: IMenuProps): JSX.Element {
           exitActive: styles['open-exit-active']
         }}
         transitionTimeout={200}
+        zIndex={zIndex}
       >
         <div
           className={styles.dropdown}
@@ -50,9 +55,9 @@ export function Menu({ postID }: IMenuProps): JSX.Element {
               left: btnCoord().right - dropdownWidth,
               top: btnCoord().bottom + window.scrollY + 10
             } : {}}
-          onClick={handleClick}>
+        >
           <ItemsList postID={postID} />
-          <button className={styles.closeBtn}>
+          <button className={styles.closeBtn} onClick={handleClick}>
             Закрыть
           </button>
         </div>

@@ -45,7 +45,7 @@ export function PostContent({ postID, isOpen, onClose }: IPostContentProps) {
         <div className={styles.karmaCounter}>
           <KarmaCounter upvotes={postData.upvotes} />
         </div>
-        <div>
+        <div className={styles.textcontent}>
           <div className={styles.title}>
             <Text As={'h2'} size={20} color={EColors.black}>{postData.postTitle}</Text>
           </div>

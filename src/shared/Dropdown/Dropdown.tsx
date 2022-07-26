@@ -10,15 +10,16 @@ interface IDropdownProps {
   onOpen?: () => void;
   onClose?: () => void;
   transitionClasses?: object;
-  transitionTimeout?: number
+  transitionTimeout?: number;
+  zIndex?: number;
 }
 
 const NOOP = () => { };
 
-export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NOOP, transitionClasses = {}, transitionTimeout = 0 }: IDropdownProps) {
+export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NOOP, transitionClasses = {}, transitionTimeout = 0, zIndex = 100 }: IDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(isOpen);
   React.useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
-  React.useEffect(() => isDropdownOpen ? onOpen : onClose, [isDropdownOpen]);
+  // React.useEffect(() => isDropdownOpen ? onOpen : onClose, [isDropdownOpen]);
 
   const handleOpen = () => {
     if (isOpen === undefined) {
@@ -28,7 +29,7 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
 
   return (
     <div className={styles.container}>
-      <div onClick={handleOpen}>
+      <div>
         {button}
       </div>
       {ReactDOM.createPortal(
@@ -39,8 +40,8 @@ export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NO
           mountOnEnter
           unmountOnExit
         >
-          <div className={styles.listContainer}>
-            <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
+          <div className={styles.listContainer} style={{ zIndex: zIndex }}>
+            <div className={styles.list}>
               {children}
             </div>
           </div>

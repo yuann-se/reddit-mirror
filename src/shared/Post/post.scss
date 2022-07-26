@@ -3,7 +3,7 @@
 .modalWrapper {
   position: fixed;
   inset: 0;
-  padding: 40px;
+  padding: 0;
   z-index: 900;
   width: 100vw;
   display: flex;
@@ -17,10 +17,10 @@
   z-index: 1000;
   background: #FFFFFF;
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
-  border-radius: 7px;
-  width: 80%;
+  border-radius: 0;
+  width: 100%;
   max-width: 960px;
-  padding: 24px;
+  padding: 24px 15px;
   margin-bottom: 25px;
 }
 
@@ -45,4 +45,23 @@
   opacity: 0;
   transform: translateX(-150px);
   transition: opacity .2s ease, transform .2s ease;
+}
+
+@media all and (min-width: $tabletWidth) {
+
+  .modalWrapper {
+    padding: 40px;
+  }
+
+  .modal {
+    padding: 24px;
+    width: 90%;
+    border-radius: 7px;
+  }
+}
+
+@media all and (min-width: $desktopWidth) {
+  .modal {
+    width: 80%;
+  }
 }

@@ -5,7 +5,7 @@ import { generateRandomString } from '../../../../utils/generateRandomString';
 import styles from './itemslist.scss';
 
 interface IItemList {
-  postID: string
+  postID?: string
 }
 
 export function ItemsList({ postID }: IItemList) {
@@ -40,7 +40,7 @@ export function ItemsList({ postID }: IItemList) {
     <li key={generateRandomString()}>
       <button
         className={`${classes} ${styles.menuItem}`}
-        onClick={() => console.log(postID)}
+        onClick={() => { }}
       >{icon}{text}</button></li>
   )
 

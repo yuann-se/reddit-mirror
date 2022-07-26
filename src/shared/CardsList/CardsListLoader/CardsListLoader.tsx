@@ -7,7 +7,6 @@ const card = <div className={styles.cardContainer}>
   <div className={styles.textContent}>
     <h2></h2>
     <p></p>
-    <span></span>
   </div>
   <div className={styles.karmaCounter}>
     <Icon Name={EIcons.arrowUp} width={30} />
@@ -18,10 +17,10 @@ const card = <div className={styles.cardContainer}>
 
 const cardsAmount = typeof window !== 'undefined'
   ? window.innerWidth >= 1240
-    ? Math.floor((window.innerHeight - 220) / 150)
+    ? Math.floor((window.innerHeight - 220) / 150) + 1
     : window.innerWidth >= 768
-      ? Math.floor((window.innerHeight - 170) / 150)
-      : 2
+      ? Math.floor((window.innerHeight - 170) / 150) + 1
+      : 3
   : 5
 
 export function CardsListLoader() {

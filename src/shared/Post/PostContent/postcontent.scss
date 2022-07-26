@@ -9,10 +9,23 @@
 
 .karmaCounter {
   margin-right: 20px;
+
+  &>div {
+    display: flex;
+    flex-direction: column;
+
+    &>span {
+      padding: 7px 0;
+    }
+  }
+}
+
+.textcontent {
+  max-width: 80%;
 }
 
 .title {
-  max-width: 80%;
+  // max-width: 80%;
 
   h2 {
     font-weight: 400;
@@ -23,7 +36,7 @@
 .content {
   position: relative;
   overflow-y: auto;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   margin-bottom: 15px;
   border-bottom: 1px solid $greyD9;
 }

@@ -34,7 +34,7 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
 
   return (
     <div className={styles.componentContainer}>
-      {/* {loading && <CommentsBlockLoader />}
+      {loading && <CommentsBlockLoader />}
       {fetchError && <ErrorScreen message={`${fetchError} :(`} />}
       {Array.isArray(comments) && comments.length > 0
         ? comments.map((item) => {
@@ -70,12 +70,12 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                   <div className={styles.commentBody}>
                     <Text As='p' size={14}>{item.data.body}</Text>
                   </div>
-                  <ul className={typeof depth == 'number' && depth >= 8 ? styles.controlsNarrow : styles.controls}>
+                  <ul className={typeof depth == 'number' && depth >= 4 ? styles.controlsNarrow : styles.controls}>
                     <li><button className={styles.menuItem} onClick={() => handleReply()}>
                       <span className={styles.iconWrapper}>
                         <Icon Name={EIcons.comments} width={15} />
                       </span>
-                      {typeof depth != 'number' || depth < 8 && (
+                      {typeof depth != 'number' || depth < 4 && (
                         <Text size={14} color={EColors.grey99}>Ответить</Text>
                       )}
                     </button></li>
@@ -84,7 +84,7 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                       <span className={styles.iconWrapper}>
                         <Icon Name={EIcons.share} width={12} />
                       </span>
-                      {typeof depth != 'number' || depth < 8 && (
+                      {typeof depth != 'number' || depth < 4 && (
                         <Text size={14} color={EColors.grey99}>Поделиться</Text>
                       )}
                     </button></li>
@@ -93,7 +93,7 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                       <span className={styles.iconWrapper}>
                         <Icon Name={EIcons.report} width={16} />
                       </span>
-                      {typeof depth != 'number' || depth < 8 && (
+                      {typeof depth != 'number' || depth < 4 && (
                         <Text size={14} color={EColors.grey99}>Пожаловаться</Text>
                       )}
                     </button></li>
@@ -120,8 +120,8 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
             )
           )
         })
-        : null} */}
-      <CommentsBlockLoader />
+        : null}
+      {/* <CommentsBlockLoader /> */}
     </div>
   );
 }

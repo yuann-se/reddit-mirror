@@ -5,8 +5,6 @@ import { CardsList } from "./shared/CardsList";
 import { Content } from "./shared/Content";
 import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
-import { useBestPostsData } from "./hooks/useBestPostsData";
-import { bestPostsContext } from "./shared/context/bestPostsContext";
 import { Provider } from "react-redux";
 import { reducer } from "./store/store";
 import { configureStore } from "@reduxjs/toolkit";
@@ -17,18 +15,15 @@ export type RootState = ReturnType<typeof store.getState>
 
 function AppComponent() {
 
-  // const [postsData] = useBestPostsData();
   useToken();
 
   return (
-    // <bestPostsContext.Provider value={postsData}>
     <Layout>
       <Header />
       <Content>
         <CardsList />
       </Content>
     </Layout>
-    // </bestPostsContext.Provider>
   )
 }
 
