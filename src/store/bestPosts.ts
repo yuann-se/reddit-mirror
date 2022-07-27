@@ -1,7 +1,8 @@
-import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface IInitPost {
+  after: string;
   data: {
     author: string;
     avatarSrc: string;
@@ -48,16 +49,19 @@ interface IPost {
 }
 
 export const saveBestPosts = createAsyncThunk('SAVE_BEST_POSTS',
-  async () => {
+  async (cursor: string) => {
     let postsData: IPost[] = [];
 
     const res = await axios.get(
       'https://oauth.reddit.com/best.json?sr_detail=true',
-      { headers: { Authorization: `bearer ` } }
+      {
+        headers: { Authorization: `bearer ` },
+        params: { after: cursor }
+      }
     );
 
     const initData = res.data.data.children;
-    // console.log(initData)
+    // console.log(res.data.data)
     initData.map(({ data }: IInitPost) => {
       const prevSrc = data.preview
         ? data.preview.images[0].source.url.split('&amp;').join('&')
@@ -84,16 +88,19 @@ export const saveBestPosts = createAsyncThunk('SAVE_BEST_POSTS',
 
       postsData.push(post);
     })
-    return postsData;
+    const after = res.data.data.after;
+    return { postsData, after };
   })
 
-interface IInitState {
+export interface IInitState {
+  after: string;
   data: IPost[];
   loading: boolean;
   fetchError: string;
 }
 
-const initialState: IInitState = {
+export const initialState: IInitState = {
+  after: '',
   data: [],
   loading: false,
   fetchError: ''
@@ -107,16 +114,17 @@ export const bestPosts = createSlice({
     builder
       .addCase(saveBestPosts.pending, (state) => {
         state.loading = true;
-        state.fetchError = '';
+        // state.fetchError = '';
       })
       .addCase(saveBestPosts.rejected, (state, action) => {
         state.loading = false;
         state.fetchError = action.error.message!;
       })
       .addCase(saveBestPosts.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.data = state.data.concat(action.payload.postsData);
         state.loading = false;
-        state.fetchError = '';
+        // state.fetchError = '';
+        state.after = action.payload.after;
       })
   }
 })

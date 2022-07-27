@@ -132,15 +132,7 @@ export function CommentForm(props: ICommentFormProps) {
       </CSSTransition>
 
       <CSSTransition
-        in={errors.comment?.type === 'max'} timeout={200}
-        classNames={errorTransitionClasses}
-        mountOnEnter unmountOnExit
-      >
-        <div className={styles.errorMessage}>{errors.comment?.message}</div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={errors.comment?.type === 'required'} timeout={200}
+        in={!!errors.comment} timeout={200}
         classNames={errorTransitionClasses}
         mountOnEnter unmountOnExit
       >

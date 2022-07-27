@@ -1,13 +1,5 @@
-import { Action, createAction, createSlice, ThunkAction } from "@reduxjs/toolkit";
-import { RootState } from "../app";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-export const meRequest = createAction('ME_REQUEST');
-
-export const meRequestSuccess = createAction('ME_REQUEST_SUCCESS',
-  function prepare(username: string, iconImg: string) { return { payload: { username, iconImg } } });
-
-export const meRequestError = createAction<string>('ME_REQUEST_ERROR');
 
 export interface IUserData {
   username: string;
@@ -17,7 +9,7 @@ export interface IUserData {
 export interface IMeState {
   data: IUserData;
   loading: boolean;
-  error: string;
+  fetchError: string;
 }
 
 const initialState: IMeState = {
@@ -26,8 +18,19 @@ const initialState: IMeState = {
     iconImg: ''
   },
   loading: false,
-  error: '',
+  fetchError: '',
 }
+
+export const meRequest = createAsyncThunk('ME_REQUEST',
+  async (token: string) => {
+    const res = await axios.get(
+      'https://oauth.reddit.com/api/v1/me',
+      { headers: { Authorization: `bearer ${token}` } }
+    );
+    const username: string = res.data.name;
+    const iconImg: string = res.data.icon_img.split('&amp;').join('&');
+    return { username, iconImg }
+  })
 
 export const me = createSlice({
   name: 'me',
@@ -35,35 +38,20 @@ export const me = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(meRequest, (state, action) => {
+      .addCase(meRequest.pending, (state) => {
         state.loading = true
       })
-      .addCase(meRequestSuccess, (state, action) => {
+      .addCase(meRequest.fulfilled, (state, action) => {
         state.data = {
           username: action.payload.username,
           iconImg: action.payload.iconImg
-        };
+        }
+        state.loading = false;
+        state.fetchError = '';
+      })
+      .addCase(meRequest.rejected, (state, action) => {
+        state.fetchError = action.error.message!;
         state.loading = false;
       })
-      .addCase(meRequestError, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      })
-      .addDefaultCase((state, action) => { state })
   }
 })
-
-export const meRequestAsync = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
-  dispatch(meRequest());
-  axios.get(
-    'https://oauth.reddit.com/api/v1/me',
-    { headers: { Authorization: `bearer ${getState().token.token}` } }
-  )
-    .then((res) => {
-      const userData = res.data;
-      dispatch(meRequestSuccess(userData.name, userData.icon_img.substring(0, userData.icon_img.indexOf('?'))));
-    })
-    .catch((error) => {
-      dispatch(meRequestError(String(error)));
-    })
-}

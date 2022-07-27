@@ -58,7 +58,8 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                 </div>
                 <div className={styles.contentContainer}>
                   <div className={styles.metaDataContainer}>
-                    <div className={styles.metaData}>
+                    <div className={styles.metaData}
+                    >
                       <MetaData
                         avatarSrc={''}
                         author={item.data.author}

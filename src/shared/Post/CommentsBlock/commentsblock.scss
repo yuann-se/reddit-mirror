@@ -47,6 +47,10 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+
+    &>div>span>span:first-child {
+      display: none;
+    }
   }
 }
 

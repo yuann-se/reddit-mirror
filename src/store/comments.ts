@@ -1,6 +1,5 @@
-import { Action, createAction, createAsyncThunk, createSlice, ThunkAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { RootState } from "../app";
 
 export interface IResponse {
   data: {

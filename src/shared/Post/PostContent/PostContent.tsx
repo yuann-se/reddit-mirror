@@ -22,7 +22,7 @@ export function PostContent({ postID, isOpen, onClose }: IPostContentProps) {
 
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
 
-  const { data } = useBestPostsData();
+  const { data } = useBestPostsData('');
   const [postData] = data.filter((item) => item.id === postID);
   const chooseSrc = imageReg.test(postData.postUrl)
     ? postData.postUrl
