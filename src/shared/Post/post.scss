@@ -3,7 +3,7 @@
 .modalWrapper {
   position: fixed;
   inset: 0;
-  padding: 40px;
+  padding: 0;
   z-index: 900;
   width: 100vw;
   display: flex;
@@ -17,10 +17,10 @@
   z-index: 1000;
   background: #FFFFFF;
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
-  border-radius: 7px;
-  width: 80%;
+  border-radius: 0;
+  width: 100%;
   max-width: 960px;
-  padding: 24px;
+  padding: 24px 15px;
   margin-bottom: 25px;
 }
 
@@ -47,44 +47,21 @@
   transition: opacity .2s ease, transform .2s ease;
 }
 
+@media all and (min-width: $tabletWidth) {
 
-.header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
+  .modalWrapper {
+    padding: 40px;
+  }
 
-.karmaCounter {
-  margin-right: 20px;
-}
-
-.title {
-  max-width: 80%;
-
-  h2 {
-    font-weight: 400;
-    margin-bottom: 10px;
+  .modal {
+    padding: 24px;
+    width: 90%;
+    border-radius: 7px;
   }
 }
 
-.content {
-  overflow-y: auto;
-  padding-bottom: 30px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid $greyD9;
-}
-
-.preview {
-  width: 100%;
-}
-
-.closeBtn {
-  position: absolute;
-  top: 30px;
-  right: 20px;
-}
-
-.sortComments {
-  margin-bottom: 50px;
-  border-bottom: 1px solid $greyD9;
+@media all and (min-width: $desktopWidth) {
+  .modal {
+    width: 80%;
+  }
 }

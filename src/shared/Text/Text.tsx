@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './text.scss';
 import classNames from 'classnames';
 
-type TSizes = 28 | 20 | 16 | 14 | 12 | 10;
+type TSizes = 28 | 24 | 20 | 16 | 14 | 12 | 10;
 
 export enum EColors {
   black = 'black',

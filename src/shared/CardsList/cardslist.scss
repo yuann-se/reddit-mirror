@@ -1,5 +1,18 @@
 @import '../../variables';
 
+.loadMoreBtn {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 25px 50px;
+  border-radius: 15px;
+  background-color: $orange;
+}
+
+.bottomOfList {
+  margin-bottom: 0 !important;
+}
+
 @media all and (min-width: $tabletWidth) {
   .cardsList {
     padding: 40px 0;

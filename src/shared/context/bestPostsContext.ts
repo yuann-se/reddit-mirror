@@ -11,7 +11,6 @@ interface IPost {
   previewSrc: string;
   upvotes: number;
   upvoteRatio: number;
-  subreddit: string;
   comments: number
 }
 

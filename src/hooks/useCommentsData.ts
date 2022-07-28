@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app";
 import { saveComments } from "../store/comments";
 
-export function useCommentsData(subreddit: string, postID: string) {
+export function useCommentsData(postID: string) {
 
   const dispatch = useDispatch<any>();
-  const commentsData = useSelector((state: RootState) => state.comments.commentsData[postID]);
+  const data = useSelector((state: RootState) => state.comments);
 
   useEffect(() => {
-    if (!commentsData)
-      dispatch(saveComments(subreddit, postID))
+    if (!data.commentsData || !data.commentsData[postID])
+      dispatch(saveComments(postID))
   }, []);
 
-  return commentsData
+  return data
 }

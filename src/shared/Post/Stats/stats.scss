@@ -2,13 +2,15 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 35px;
 }
 
-.controlsContainer {
-  display: flex;
+.menu {
+  margin-left: auto;
+}
 
+.controlsContainer {
   .menuItem {
     display: flex;
     flex-flow: row nowrap;
@@ -19,5 +21,24 @@
     svg {
       margin-right: 5px;
     }
+  }
+
+  li:nth-child(n+2):nth-child(-n+5) {
+    display: none;
+  }
+}
+
+@media all and (min-width: $desktopWidth) {
+
+  .controlsContainer {
+    display: flex;
+
+    li:nth-child(n+2):nth-child(-n+5) {
+      display: flex;
+    }
+  }
+
+  .menu {
+    display: none;
   }
 }

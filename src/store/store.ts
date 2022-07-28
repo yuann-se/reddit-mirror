@@ -1,5 +1,5 @@
-import { Action, combineReducers, createAction, createSlice, ThunkAction } from "@reduxjs/toolkit";
-import { RootState } from "../app";
+import { combineReducers, createAction, createSlice } from "@reduxjs/toolkit";
+import { bestPosts } from "./bestPosts";
 import { comments } from "./comments";
 import { me } from "./me";
 import { token } from "./token";
@@ -49,6 +49,7 @@ export const reducer = combineReducers({
   me: me.reducer,
   token: token.reducer,
   comments: comments.reducer,
+  bestPosts: bestPosts.reducer,
   main: main.reducer
 })
 

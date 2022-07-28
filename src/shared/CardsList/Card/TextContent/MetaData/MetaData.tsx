@@ -58,7 +58,7 @@ export function MetaData(props: IMetaDataProps) {
       </div>
       <span className={styles.createdAt}>
         <span className={styles.publishedLabel}>опубликовано </span>
-        {timeSince(props.createdAt)}
+        <span>{timeSince(props.createdAt)}</span>
       </span>
     </div>
   );

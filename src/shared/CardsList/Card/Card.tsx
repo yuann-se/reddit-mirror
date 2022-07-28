@@ -14,6 +14,7 @@ interface ICardProps {
   postTitle: string;
   postUrl: string
   previewSrc: string;
+  lqPreviewSrc: string;
   upvotes: number;
   comments: number;
 }
@@ -34,7 +35,7 @@ export function Card(props: ICardProps) {
         postTitle={props.postTitle}
       />
       {props.previewSrc && (
-        <Preview src={props.previewSrc} />
+        <Preview src={props.previewSrc} lqSrc={props.lqPreviewSrc} />
       )}
       <Menu postID={props.id} />
       <Controls

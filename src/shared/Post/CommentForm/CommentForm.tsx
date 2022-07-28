@@ -11,12 +11,15 @@ import { CSSTransition } from 'react-transition-group';
 import { SuccessMsg } from './SuccessMsg';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { CommentFormDropdown } from './CommentFormDropdown';
+
+const isTablet = typeof window !== 'undefined' ? window.innerWidth >= 768 : true;
 
 const markdownBtns = [
-  <Icon Name={EIcons.inlineCode} width={20} />,
-  <Icon Name={EIcons.attachImg} width={18} />,
-  <Icon Name={EIcons.attachDoc} width={16} />,
-  <Icon Name={EIcons.download} width={14} />,
+  <Icon Name={EIcons.inlineCode} width={isTablet ? 20 : 18} />,
+  <Icon Name={EIcons.attachImg} width={isTablet ? 18 : 16} />,
+  <Icon Name={EIcons.attachDoc} width={isTablet ? 16 : 14} />,
+  <Icon Name={EIcons.download} width={isTablet ? 14 : 12} />,
   <Icon Name={EIcons.attachPhoto} width={18} />,
   <Icon Name={EIcons.reverse} width={22} />,
   <Icon Name={EIcons.attachLink} width={20} />,
@@ -103,11 +106,12 @@ export function CommentForm(props: ICommentFormProps) {
 
       <div className={styles.controlsWrapper}>
         <div className={styles.markdownBtnsWrapper}>
-          {markdownBtns}
+          <div>{markdownBtns}</div>
+          <CommentFormDropdown zIndex={1000} />
         </div>
         <button type='submit' className={styles.button}
         >
-          <Text size={14} color={EColors.white}>Комментировать</Text>
+          <Text size={14} color={EColors.white} mobileSize={12}>Комментировать</Text>
         </button>
       </div>
 
@@ -128,15 +132,7 @@ export function CommentForm(props: ICommentFormProps) {
       </CSSTransition>
 
       <CSSTransition
-        in={errors.comment?.type === 'max'} timeout={200}
-        classNames={errorTransitionClasses}
-        mountOnEnter unmountOnExit
-      >
-        <div className={styles.errorMessage}>{errors.comment?.message}</div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={errors.comment?.type === 'required'} timeout={200}
+        in={!!errors.comment} timeout={200}
         classNames={errorTransitionClasses}
         mountOnEnter unmountOnExit
       >

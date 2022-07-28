@@ -1,11 +1,13 @@
 import React from 'react';
 import { EIcons, Icon } from '../../Icon';
 import { EColors, Text } from '../../Text';
+import { generateRandomString } from '../../utils/generateRandomString';
 import styles from './stats.scss';
+import { StatsDropdown } from './StatsDropdown';
 
 interface IStatsProps {
   commentsNumber: number;
-  ratio: number
+  ratio: number;
 }
 
 export function Stats(props: IStatsProps) {
@@ -14,30 +16,25 @@ export function Stats(props: IStatsProps) {
     {
       icon: <Icon Name={EIcons.comments} width={15} />,
       text: <Text size={14} color={EColors.grey99}>Комментарии: {props.commentsNumber}</Text>,
-      name: 'Комментарии'
     },
     {
       icon: <Icon Name={EIcons.share} width={12} />,
       text: <Text size={14} color={EColors.grey99}>Поделиться</Text>,
-      name: 'Поделиться'
     },
     {
       icon: <Icon Name={EIcons.block} width={14} />,
       text: <Text size={14} color={EColors.grey99}>Скрыть</Text>,
-      name: 'Скрыть'
     },
     {
       icon: <Icon Name={EIcons.save} width={14} />,
       text: <Text size={14} color={EColors.grey99}>Сохранить</Text>,
-      name: 'Сохранить'
     },
     {
       icon: <Icon Name={EIcons.report} width={16} />,
       text: <Text size={14} color={EColors.grey99}>Пожаловаться</Text>,
-      name: 'Пожаловаться'
     },
-  ].map(({ icon, text, name }) =>
-    <li key={name}>
+  ].map(({ icon, text }) =>
+    <li key={generateRandomString()}>
       <button
         className={styles.menuItem}
         onClick={() => { }}
@@ -54,6 +51,9 @@ export function Stats(props: IStatsProps) {
       <span className={styles.voted}>
         <Text size={14} color={EColors.grey99}>{props.ratio * 100}% Проголосовали</Text>
       </span>
+      <div className={styles.menu}>
+        <StatsDropdown zIndex={1000} />
+      </div>
     </div>
   );
 }

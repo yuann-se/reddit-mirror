@@ -23,10 +23,14 @@
 }
 
 .menu {
-  position: absolute;
-  top: 17px;
-  right: 15px;
-  padding: 0;
+  position: relative;
+  order: 2;
+  display: flex;
+  align-items: center;
+  flex: 0 0;
+  top: unset;
+  right: unset;
+  margin: 0 0 0 auto;
 }
 
 .dropdown {
@@ -52,8 +56,12 @@
   height: 31px;
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: center;
-  transform: rotate(90deg);
+
+  circle {
+    fill: $grey99;
+  }
 }
 
 .menuBtn::before {
@@ -71,25 +79,21 @@
   background-color: rgba(51, 51, 51, 0.1);
 }
 
-@media all and (min-width: $tabletWidth) {
-  .menu {
-    position: relative;
-    order: 2;
-    display: flex;
-    align-items: center;
-    flex: 0 0;
-    top: unset;
-    right: unset;
-    margin: 0 0 0 auto;
-  }
+.menuItemsList {
+  padding: 20px;
+  display: flex;
+}
 
-  .menuBtn {
-    align-self: center;
-    transform: unset;
+.menuItem {
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 20px;
   }
 }
 
 @media all and (min-width: $desktopWidth) {
+
   .menuBtn:hover::before {
     transform: scale(1);
     background-color: rgba(51, 51, 51, 0.1);
@@ -97,5 +101,13 @@
 
   .closeBtn {
     display: none;
+  }
+
+  .menuItemsList {
+    padding: 10px 20px;
+  }
+
+  .menuItem {
+    padding: 6px 0;
   }
 }

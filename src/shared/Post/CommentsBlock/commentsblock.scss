@@ -28,7 +28,7 @@
 .arrowDown {
   width: fit-content;
   transform: rotate(180deg);
-  margin-top: 4px;
+  margin-top: 7px;
 }
 
 .bar {
@@ -47,6 +47,10 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+
+    &>div>span>span:first-child {
+      display: none;
+    }
   }
 }
 
