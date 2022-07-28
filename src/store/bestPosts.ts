@@ -8,6 +8,7 @@ interface IInitPost {
     avatarSrc: string;
     created: string;
     id: string;
+    permalink: string;
     title: string;
     preview?: {
       images: [
@@ -39,6 +40,7 @@ interface IPost {
   avatarSrc: string;
   createdAt: string;
   id: string;
+  permalink: string;
   postTitle: string;
   postUrl: string
   previewSrc: string;
@@ -77,6 +79,7 @@ export const saveBestPosts = createAsyncThunk('SAVE_BEST_POSTS',
         avatarSrc: data.sr_detail.icon_img,
         createdAt: data.created,
         id: data.id,
+        permalink: data.permalink.split('/').slice(0, -1).slice(-1)[0],
         postTitle: data.title,
         postUrl: data.url,
         previewSrc: prevSrc,

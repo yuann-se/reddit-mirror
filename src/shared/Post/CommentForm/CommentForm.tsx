@@ -12,6 +12,7 @@ import { SuccessMsg } from './SuccessMsg';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { CommentFormDropdown } from './CommentFormDropdown';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const isTablet = typeof window !== 'undefined' ? window.innerWidth >= 768 : true;
 
@@ -33,7 +34,6 @@ const markdownBtns = [
 
 interface ICommentFormProps {
   postID: string;
-  isOpen: boolean;
 }
 
 interface ITextarea {
@@ -65,11 +65,12 @@ export function CommentForm(props: ICommentFormProps) {
       .max(500, 'Максимальная длина комментария - 500 символов'),
   });
 
+  const history = useHistory();
   useEffect(() => {
-    return () => {
+    return history.listen(() => {
       dispatch(updateComment(props.postID, inputValue));
-    }
-  }, [props.isOpen]);
+    })
+  })
 
   const { control, handleSubmit, formState: { errors, isSubmitSuccessful }, reset } =
     useForm<ITextarea>({ resolver: yupResolver(validationSchema), defaultValues: { comment: inputValue } });

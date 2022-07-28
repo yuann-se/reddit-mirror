@@ -7,9 +7,7 @@ import axios from 'axios'
 const app = express();
 app.use('/static', express.static('./dist/client'))
 
-app.get('/', (req, res) => {
-  res.send(indexTemplate(ReactDOM.renderToString(App())))
-});
+
 
 const tokensCache = {};
 
@@ -30,6 +28,10 @@ app.get('/auth', (req, res) => {
       })
       .catch(console.log)
 })
+
+app.get('*', (req, res) => {
+  res.send(indexTemplate(ReactDOM.renderToString(App())))
+});
 
 app.listen(3000, () => {
   console.log(`>>> Server started on port http://localhost:3000`)

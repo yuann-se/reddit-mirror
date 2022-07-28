@@ -1,4 +1,5 @@
 @import '../../variables';
+@import '../../mixins';
 
 .modalWrapper {
   position: fixed;
@@ -24,43 +25,87 @@
   margin-bottom: 25px;
 }
 
-
-.modal-enter {
-  opacity: 0;
-  transform: translateX(-150px);
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.modal-enter-active {
-  opacity: 1;
-  transform: none;
-  transition: opacity .2s ease, transform .2s ease;
+.karmaCounter {
+  margin-right: 20px;
+
+  &>div {
+    display: flex;
+    flex-direction: column;
+
+    &>span {
+      padding: 7px 0;
+    }
+  }
 }
 
-.modal-exit {
-  opacity: 1;
-  transform: none;
+.textcontent {
+  max-width: 80%;
 }
 
-.modal-exit-active {
-  opacity: 0;
-  transform: translateX(-150px);
-  transition: opacity .2s ease, transform .2s ease;
+.title {
+
+  h2 {
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+}
+
+.content {
+  position: relative;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid $greyD9;
+}
+
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.previewLoader {
+  width: 100%;
+  filter: blur(20px);
+}
+
+
+.closeBtn {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+
+.sortComments {
+  margin-bottom: 50px;
+  border-bottom: 1px solid $greyD9;
 }
 
 @media all and (min-width: $tabletWidth) {
 
   .modalWrapper {
-    padding: 40px;
+    padding: 30px;
   }
 
   .modal {
     padding: 24px;
-    width: 90%;
     border-radius: 7px;
   }
 }
 
 @media all and (min-width: $desktopWidth) {
+
+  .modalWrapper {
+    padding: 40px;
+  }
+
   .modal {
     width: 80%;
   }

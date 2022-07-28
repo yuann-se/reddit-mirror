@@ -1,32 +1,54 @@
 import React from 'react';
+import { Link, Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Post } from '../../../../Post';
 import styles from './posttitle.scss';
 
 interface IPostTitleProps {
   postID: string;
   postUrl: string;
+  permalink: string;
   postTitle: string;
 }
 
 export function PostTitle(props: IPostTitleProps) {
 
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const history = useHistory();
 
-  const handleClick = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    setIsModalOpen(true);
+  const handleClose = () => {
+    history.push('/');
   }
+
+  const transitionClasses = {
+    enter: styles['modal-enter'],
+    enterActive: styles['modal-enter-active'],
+    exit: styles['modal-exit'],
+    exitActive: styles['modal-exit-active']
+  }
+
+  const location = useLocation();
 
   return (
     <h2 className={styles.title}>
-      <a href={props.postUrl} className={styles.postLink} onClick={handleClick}>
+      <Link to={`/posts/${props.postID}/${props.permalink}`} className={styles.postLink}>
         {props.postTitle}
-      </a>
-      <Post
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        postID={props.postID}
-      />
+      </Link>
+      <TransitionGroup>
+        <CSSTransition
+          key={location.pathname}
+          timeout={200}
+          classNames={transitionClasses}
+        >
+          <Switch location={location}>
+            <Route path={`/posts/${props.postID}/${props.permalink}`}>
+              <Post
+                onClose={handleClose}
+                postID={props.postID}
+              />
+            </Route>
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
     </h2>
   );
 }

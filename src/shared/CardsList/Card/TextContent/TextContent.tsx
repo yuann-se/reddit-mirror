@@ -10,6 +10,7 @@ interface ITextContentProps {
   author: string;
   createdAt: string;
   postUrl: string;
+  permalink: string;
   postTitle: string;
 }
 
@@ -25,6 +26,7 @@ export function TextContent(props: ITextContentProps) {
       <PostTitle
         postID={props.postID}
         postUrl={props.postUrl}
+        permalink={props.permalink}
         postTitle={props.postTitle}
       />
     </div>

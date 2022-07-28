@@ -40,7 +40,7 @@ export const main = createSlice({
           isOpen: action.payload.isOpen
         }
       })
-      .addDefaultCase((state, action) => { state })
+      .addDefaultCase((state) => { state })
   }
 })
 

@@ -22,8 +22,13 @@ export function CardsList() {
   }
 
   useEffect(() => {
+    if (data.length === 0) dispatch(saveBestPosts(''));
+    setCount(1);
+  }, [])
+
+  useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && count < 2) {
+      if (entries[0].isIntersecting && count < 2 && after) {
         dispatch(saveBestPosts(after));
         setCount(count + 1);
       }
@@ -35,7 +40,7 @@ export function CardsList() {
       if (bottomOfList.current) observer.unobserve(bottomOfList.current);
     }
 
-  }, [bottomOfList.current, after])
+  }, [after, bottomOfList.current])
 
   const list = data.map((post) => <Card
     key={post.id}
@@ -44,6 +49,7 @@ export function CardsList() {
     authorUrl={post.authorUrl}
     avatarSrc={post.avatarSrc}
     createdAt={post.createdAt}
+    permalink={post.permalink}
     postTitle={post.postTitle}
     postUrl={post.postUrl}
     previewSrc={post.previewSrc}
