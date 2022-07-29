@@ -31,6 +31,7 @@
 }
 
 .postLink {
+  margin-bottom: 10px;
   overflow: hidden;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -52,5 +53,6 @@
 
   .postLink {
     -webkit-line-clamp: 1;
+    margin-bottom: 0;
   }
 }

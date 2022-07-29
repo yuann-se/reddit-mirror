@@ -30,6 +30,7 @@ export function CommentsBlock({ comments, depth, loading, fetchError }: IComment
 
   const dispatch = useDispatch();
   typeof depth == 'number' ? depth++ : depth = 0;
+  const data = useSelector((state: RootState) => state.main.commentsReplies);
 
   return (
     <div className={styles.componentContainer}>
@@ -38,7 +39,7 @@ export function CommentsBlock({ comments, depth, loading, fetchError }: IComment
       {Array.isArray(comments) && comments.length > 0
         ? comments.map((item) => {
 
-          const storeData = useSelector((state: RootState) => state.main.commentsReplies[item.data.id]);
+          const storeData = data[item.data.id];
           function handleReply() {
             storeData
               ? dispatch(updateReply(item.data.id, !storeData.isOpen, storeData.text))

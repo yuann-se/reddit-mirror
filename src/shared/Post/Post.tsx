@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useBestPostsData } from '../../hooks/useBestPostsData';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { KarmaCounter } from '../CardsList/Card/Controls/KarmaCounter';
@@ -11,16 +12,15 @@ import { CommentsBlock } from './CommentsBlock';
 import styles from './post.scss';
 import { Stats } from './Stats';
 
-interface IPostProps {
-  onClose: () => void;
-  postID: string;
-}
-
 const imageReg = /[\/.](gif|jpg|jpeg|tiff|png)$/i;
 
-export function Post({ onClose, postID }: IPostProps) {
+export function Post() {
 
   const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
+
+  const history = useHistory();
+
+  const { postID } = useParams<{ postID: string }>();
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -37,12 +37,12 @@ export function Post({ onClose, postID }: IPostProps) {
   const handleOverlayClick = (e: React.SyntheticEvent) => {
     if (e.target instanceof Node && !modalRef.current?.contains(e.target)) {
       e.stopPropagation();
-      onClose();
+      history.push('/best/');
     }
   }
 
   const handleClick = () => {
-    onClose?.()
+    history.push('/best/');
   }
 
   useEffect(() => {
