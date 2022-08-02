@@ -17,7 +17,6 @@ interface ICommentsBlockProps {
   loading?: boolean;
   fetchError?: string;
   depth: number | undefined;
-  isModalOpen: boolean;
 }
 
 const replyFormTransitionClasses = {
@@ -27,10 +26,11 @@ const replyFormTransitionClasses = {
   exitActive: styles['reply-exit-active']
 }
 
-export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchError }: ICommentsBlockProps) {
+export function CommentsBlock({ comments, depth, loading, fetchError }: ICommentsBlockProps) {
 
   const dispatch = useDispatch();
   typeof depth == 'number' ? depth++ : depth = 0;
+  const data = useSelector((state: RootState) => state.main.commentsReplies);
 
   return (
     <div className={styles.componentContainer}>
@@ -39,7 +39,7 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
       {Array.isArray(comments) && comments.length > 0
         ? comments.map((item) => {
 
-          const storeData = useSelector((state: RootState) => state.main.commentsReplies[item.data.id]);
+          const storeData = data[item.data.id];
           function handleReply() {
             storeData
               ? dispatch(updateReply(item.data.id, !storeData.isOpen, storeData.text))
@@ -71,12 +71,12 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                   <div className={styles.commentBody}>
                     <Text As='p' size={14}>{item.data.body}</Text>
                   </div>
-                  <ul className={typeof depth == 'number' && depth >= 4 ? styles.controlsNarrow : styles.controls}>
+                  <ul className={typeof depth == 'number' && depth >= 9 ? styles.controlsNarrow : styles.controls}>
                     <li><button className={styles.menuItem} onClick={() => handleReply()}>
                       <span className={styles.iconWrapper}>
                         <Icon Name={EIcons.comments} width={15} />
                       </span>
-                      {typeof depth != 'number' || depth < 4 && (
+                      {typeof depth != 'number' || depth < 9 && (
                         <Text size={14} color={EColors.grey99}>Ответить</Text>
                       )}
                     </button></li>
@@ -85,7 +85,7 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                       <span className={styles.iconWrapper}>
                         <Icon Name={EIcons.share} width={12} />
                       </span>
-                      {typeof depth != 'number' || depth < 4 && (
+                      {typeof depth != 'number' || depth < 9 && (
                         <Text size={14} color={EColors.grey99}>Поделиться</Text>
                       )}
                     </button></li>
@@ -94,7 +94,7 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                       <span className={styles.iconWrapper}>
                         <Icon Name={EIcons.report} width={16} />
                       </span>
-                      {typeof depth != 'number' || depth < 4 && (
+                      {typeof depth != 'number' || depth < 9 && (
                         <Text size={14} color={EColors.grey99}>Пожаловаться</Text>
                       )}
                     </button></li>
@@ -109,12 +109,12 @@ export function CommentsBlock({ comments, depth, isModalOpen, loading, fetchErro
                     <ReplyForm
                       commentID={item.data.id}
                       isOpen={storeData && storeData.isOpen}
-                      isModalOpen={isModalOpen}
+                      depth={depth}
                     />
                   </CSSTransition>
 
                   {item.data.replies && (
-                    <CommentsBlock comments={item.data.replies.data.children} depth={depth} isModalOpen={isModalOpen} />
+                    <CommentsBlock comments={item.data.replies.data.children} depth={depth} />
                   )}
                 </div>
               </div>

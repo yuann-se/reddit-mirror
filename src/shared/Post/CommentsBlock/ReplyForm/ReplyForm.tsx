@@ -1,5 +1,7 @@
+import classNames from 'classnames';
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { RootState } from '../../../../app';
 import { IMainState, updateReply } from '../../../../store/store';
 import { EIcons, Icon } from '../../../Icon';
@@ -19,15 +21,20 @@ const markdownBtns = [
 interface IReplyFormProps {
   commentID: string;
   isOpen?: boolean;
-  isModalOpen?: boolean;
+  depth?: number | undefined
 }
 
-export function ReplyForm({ commentID, isOpen, isModalOpen }: IReplyFormProps) {
+export function ReplyForm({ commentID, isOpen, depth }: IReplyFormProps) {
 
   const dispatch = useDispatch();
   const storeValue = useSelector((state: RootState) => state.main.commentsReplies[`${commentID}`])
 
   const [inputValue, setInputValue] = useState(storeValue.text);
+
+  const controlsWrapperClasses = classNames(
+    styles.controlsWrapper,
+    { [styles.controlsWrapperNarrow]: typeof depth == 'number' && depth >= 4 }
+  )
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -48,13 +55,12 @@ export function ReplyForm({ commentID, isOpen, isModalOpen }: IReplyFormProps) {
     }
   }, [isOpen])
 
+  const history = useHistory();
   useEffect(() => {
-    return () => {
-      if (!isModalOpen) {
-        dispatch(updateReply(commentID, true, inputValue))
-      }
-    }
-  }, [isModalOpen])
+    return history.listen(() => {
+      dispatch(updateReply(commentID, true, inputValue));
+    })
+  })
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -65,7 +71,7 @@ export function ReplyForm({ commentID, isOpen, isModalOpen }: IReplyFormProps) {
         onChange={(e) => setInputValue(e.target.value)}
         onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length + 1, e.currentTarget.value.length + 1)}>
       </textarea>
-      <div className={styles.controlsWrapper}>
+      <div className={controlsWrapperClasses}>
         <div className={styles.markdownBtnsWrapper}>
           {markdownBtns}
         </div>

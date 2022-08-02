@@ -11,6 +11,7 @@ interface ICardProps {
   authorUrl: string;
   avatarSrc: string;
   createdAt: string;
+  permalink: string;
   postTitle: string;
   postUrl: string
   previewSrc: string;
@@ -32,6 +33,7 @@ export function Card(props: ICardProps) {
         authorUrl={props.authorUrl}
         createdAt={props.createdAt}
         postUrl={props.postUrl}
+        permalink={props.permalink}
         postTitle={props.postTitle}
       />
       {props.previewSrc && (

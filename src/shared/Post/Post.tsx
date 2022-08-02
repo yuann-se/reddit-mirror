@@ -1,35 +1,52 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
+import { useHistory, useParams } from 'react-router-dom';
+import { useBestPostsData } from '../../hooks/useBestPostsData';
+import { useCommentsData } from '../../hooks/useCommentsData';
+import { KarmaCounter } from '../CardsList/Card/Controls/KarmaCounter';
+import { MetaData } from '../CardsList/Card/TextContent/MetaData';
+import { EIcons, Icon } from '../Icon';
+import { EColors, Text } from '../Text';
+import { CommentForm } from './CommentForm';
+import { CommentsBlock } from './CommentsBlock';
 import styles from './post.scss';
-import { PostContent } from './PostContent';
+import { Stats } from './Stats';
 
-interface IPostProps {
-  open: boolean;
-  onClose: () => void;
-  postID: string;
-}
+const imageReg = /[\/.](gif|jpg|jpeg|tiff|png)$/i;
 
-const transitionClasses = {
-  enter: styles['modal-enter'],
-  enterActive: styles['modal-enter-active'],
-  exit: styles['modal-exit'],
-  exitActive: styles['modal-exit-active']
-}
+export function Post() {
 
-export function Post({ open, onClose, postID }: IPostProps) {
+  const [isImgLoaded, setIsImgLoaded] = useState<boolean>(false);
+
+  const history = useHistory();
+
+  const { postID } = useParams<{ postID: string }>();
 
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const { data } = useBestPostsData('');
+  const [postData] = data.filter((item) => item.id === postID);
+  const chooseSrc = imageReg.test(postData.postUrl)
+    ? postData.postUrl
+    : postData.previewSrc
+
+
+  const { commentsData, fetchError, loading } = useCommentsData(postID);
+  const commentsList = commentsData[postID];
 
   const handleOverlayClick = (e: React.SyntheticEvent) => {
     if (e.target instanceof Node && !modalRef.current?.contains(e.target)) {
       e.stopPropagation();
-      onClose();
+      history.push('/best/');
     }
   }
 
+  const handleClick = () => {
+    history.push('/best/');
+  }
+
   useEffect(() => {
-    if (open) document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.body.style.overflow = 'auto';
@@ -38,19 +55,55 @@ export function Post({ open, onClose, postID }: IPostProps) {
 
   return ReactDOM.createPortal(
     (
-      <CSSTransition
-        in={open}
-        timeout={200}
-        classNames={transitionClasses}
-        mountOnEnter
-        unmountOnExit
-        nodeRef={modalRef}
-      >
-        <div className={styles.modalWrapper} id='postModalWrapper' onClick={handleOverlayClick}>
-          <div className={styles.modal} ref={modalRef}>
-            <PostContent postID={postID} isOpen={open} onClose={() => onClose()} />
+      <div className={styles.modalWrapper} id='postModalWrapper' onClick={handleOverlayClick}>
+        <div className={styles.modal} ref={modalRef}>
+          <button className={styles.closeBtn} onClick={handleClick}>
+            <Icon Name={EIcons.closeModal} width={21} />
+          </button>
+          <div className={styles.header}>
+            <div className={styles.karmaCounter}>
+              <KarmaCounter upvotes={postData.upvotes} />
+            </div>
+            <div className={styles.textcontent}>
+              <div className={styles.title}>
+                <Text As={'h2'} size={20} color={EColors.black}>{postData.postTitle}</Text>
+              </div>
+              <MetaData
+                avatarSrc={postData.avatarSrc}
+                authorUrl={postData.authorUrl}
+                author={postData.author}
+                createdAt={postData.createdAt}
+              />
+            </div>
           </div>
+          <div className={styles.content}>
+            {postData.previewSrc.length > 10 && (
+              <Fragment>
+                <img
+                  src={postData.lqPreviewSrc}
+                  className={styles.previewLoader}
+                  alt={postData.postTitle}
+                  style={{ visibility: isImgLoaded ? "hidden" : "visible" }}
+                />
+                <img
+                  onLoad={() => setIsImgLoaded(true)}
+                  src={chooseSrc}
+                  className={styles.preview}
+                  alt={postData.postTitle}
+                  style={{ filter: isImgLoaded ? "none" : "blur(20px)", transition: "filter .2s ease-out" }}
+                />
+              </Fragment>
+            )}
+          </div>
+          <Stats commentsNumber={postData.comments} ratio={postData.upvoteRatio} />
+          <CommentForm postID={postID} />
+          <CommentsBlock
+            comments={commentsList}
+            depth={undefined}
+            loading={loading}
+            fetchError={fetchError}
+          />
         </div>
-      </CSSTransition>
+      </div>
     ), document.getElementById('modal_root')!);
 }
