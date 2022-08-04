@@ -41,6 +41,7 @@
 .postLink::after {
   content: '';
   position: absolute;
+  z-index: 100;
   inset: 0;
 }
 

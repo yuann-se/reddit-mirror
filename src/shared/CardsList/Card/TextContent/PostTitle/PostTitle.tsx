@@ -1,8 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link, Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { RootState } from '../../../../../app';
 import { Post } from '../../../../Post';
 import { Text } from '../../../../Text';
 import styles from './posttitle.scss';

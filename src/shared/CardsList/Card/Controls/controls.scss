@@ -2,6 +2,7 @@
 
 .controls {
   position: relative;
+  z-index: 200;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;

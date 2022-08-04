@@ -8,7 +8,7 @@ const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
 
 module.exports = {
   target: 'node',
-  mode: NODE_ENV ? NODE_ENV : 'development',
+  mode: NODE_ENV,
   entry: path.resolve(__dirname, '../src/server/server.js'),
   output: {
     path: path.resolve(__dirname, '../dist/server'),
@@ -45,9 +45,11 @@ module.exports = {
         use: ['css-loader', 'sass-loader']
       }]
   },
-  optimization: {
-    minimize: false,
-  },
   devtool: IS_DEV ? 'eval' : false,
-  plugins: [new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` })],
+  plugins: [new DefinePlugin(
+    {
+      'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
+      'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`,
+      'process.env.REDIRECT_URI': `'${process.env.REDIRECT_URI}'`,
+    })],
 }

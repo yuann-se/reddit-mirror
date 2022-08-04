@@ -19,25 +19,6 @@
 }
 
 
-.modal-enter {
-  opacity: 0;
-  transform: scale(.5);
-}
-
-.modal-enter-active,
-.modal-exit {
-  opacity: 1;
-  transform: none;
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-.modal-exit-active {
-  opacity: 0;
-  transform: scale(1.5);
-  transition: opacity .2s ease, transform .2s ease;
-}
-
-
 .form {
   position: relative;
   display: flex;
@@ -58,7 +39,7 @@ label {
 
 .input {
   height: 89px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid $greyD9;
   padding: 16px;
   box-sizing: border-box;
   border-radius: 3px 3px 0px 0px;
@@ -68,7 +49,7 @@ label {
   resize: vertical;
 
   &:focus {
-    border: 2px solid $black;
+    border: 2px solid $grey66;
     outline: none;
   }
 
@@ -119,10 +100,10 @@ label {
 .button {
   width: 160px;
   height: 50px;
-  background: #CC6633;
+  background: $orange;
   border-radius: 0px 0px 3px 0px;
   text-align: center;
-  color: #FFFFFF;
+  color: $white;
 }
 
 

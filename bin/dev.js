@@ -5,25 +5,10 @@ const path = require('path');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const express = require('express');
-// const cors = require('cors');
 
 const hmrServer = express();
 const compiler = webpack(webpackServerConfig);
 const clientCompiler = webpack(webpackClientConfig);
-
-// const allowedOrigins = ["http://localhost:3000", "http://localhost:3001"];
-// hmrServer.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin) return callback(null, true);
-//       if (allowedOrigins.indexOf(origin) === -1) {
-//         let msg = "The CORS policy for this site does not" + " allow access from the specified Origin.";
-//         return callback(new Error(msg), false);
-//       }
-//       return callback(null, true);
-//     }
-//   })
-// )
 
 hmrServer.use(
   webpackDevMiddleware(clientCompiler, {

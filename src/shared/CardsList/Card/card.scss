@@ -23,11 +23,11 @@
   padding: 13px 0 0;
 }
 
-.card h2 a {
+.card h2 span {
   transition: color .2s ease;
 }
 
-.card:focus-within h2 a {
+.card:focus-within h2 span {
   color: $orange;
 }
 
@@ -62,7 +62,7 @@
 
   }
 
-  .card:hover h2 a {
+  .card:hover h2 span {
     color: $orange;
   }
 }

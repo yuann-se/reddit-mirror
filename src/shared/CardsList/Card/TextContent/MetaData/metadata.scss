@@ -26,6 +26,8 @@
 
 
 .userLink {
+  position: relative;
+  z-index: 200;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

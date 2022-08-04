@@ -6,12 +6,23 @@ import { indexTemplate } from './indexTemplate';
 import axios from 'axios';
 import { StaticRouter } from 'react-router-dom';
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import helmet from 'helmet';
 
 const PORT = process.env.PORT || 3000;
+const IS_PROD = process.env.NODE_ENV === 'production';
 
 const app = express();
+if (IS_PROD) {
+  app.use(compression());
+  app.use(helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false
+  }));
+}
 app.use('/static', express.static('./dist/client'));
 app.use(cookieParser());
+
 
 app.get('/auth', (req, res) => {
   axios.post(

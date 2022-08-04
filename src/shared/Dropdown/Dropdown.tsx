@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './dropdown.scss';
 import { CSSTransition } from 'react-transition-group';
 import ReactDOM from 'react-dom';
@@ -16,16 +16,9 @@ interface IDropdownProps {
 
 const NOOP = () => { };
 
-export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NOOP, transitionClasses = {}, transitionTimeout = 0, zIndex = 100 }: IDropdownProps) {
+export function Dropdown({ button, children, isOpen, onClose = NOOP, onOpen = NOOP, transitionClasses = {}, transitionTimeout = 0, zIndex = 200 }: IDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(isOpen);
   React.useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
-  // React.useEffect(() => isDropdownOpen ? onOpen : onClose, [isDropdownOpen]);
-
-  const handleOpen = () => {
-    if (isOpen === undefined) {
-      setIsDropdownOpen(!isDropdownOpen);
-    }
-  }
 
   return (
     <div className={styles.container}>

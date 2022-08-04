@@ -13,18 +13,19 @@
 
 .input {
   height: 89px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid $greyD9;
   padding: 16px;
   box-sizing: border-box;
   border-radius: 3px 3px 0px 0px;
   font-size: 16px;
   line-height: 19px;
-  color: #999999;
+  color: $grey99;
   resize: none;
-}
 
-.input[aria-invalid] {
-  border-color: red;
+  &:focus {
+    border: 2px solid $grey66;
+    outline: none;
+  }
 }
 
 .controlsWrapper {
@@ -46,10 +47,10 @@
   .button {
     width: 220px;
     height: 50px;
-    background: #CC6633;
+    background: $orange;
     border-radius: 0px 0px 3px 0px;
     text-align: center;
-    color: #FFFFFF;
+    color: $white;
   }
 }
 
