@@ -35,7 +35,7 @@ function AppComponent() {
             <CardsList />
           </Route>
           <Route exact path='/404'>
-            <div style={{ width: '100vw', height: 'calc(100vh - 185px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ height: 'calc(100vh - 185px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ErrorScreen message="404 — страница не найдена" />
             </div>
           </Route>

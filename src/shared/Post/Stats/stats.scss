@@ -30,6 +30,10 @@
 
 @media all and (min-width: $desktopWidth) {
 
+  .container {
+    justify-content: space-between;
+  }
+
   .controlsContainer {
     display: flex;
 

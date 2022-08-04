@@ -12,15 +12,13 @@ import { SuccessMsg } from './SuccessMsg';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { CommentFormDropdown } from './CommentFormDropdown';
-import { useHistory, useLocation } from 'react-router-dom';
-
-const isTablet = typeof window !== 'undefined' ? window.innerWidth >= 768 : true;
+import { useHistory } from 'react-router-dom';
 
 const markdownBtns = [
-  <Icon Name={EIcons.inlineCode} width={isTablet ? 20 : 18} />,
-  <Icon Name={EIcons.attachImg} width={isTablet ? 18 : 16} />,
-  <Icon Name={EIcons.attachDoc} width={isTablet ? 16 : 14} />,
-  <Icon Name={EIcons.download} width={isTablet ? 14 : 12} />,
+  <Icon Name={EIcons.inlineCode} width={20} />,
+  <Icon Name={EIcons.attachImg} width={18} />,
+  <Icon Name={EIcons.attachDoc} width={16} />,
+  <Icon Name={EIcons.download} width={14} />,
   <Icon Name={EIcons.attachPhoto} width={18} />,
   <Icon Name={EIcons.reverse} width={22} />,
   <Icon Name={EIcons.attachLink} width={20} />,

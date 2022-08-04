@@ -34,7 +34,7 @@ const cardsAmount = typeof window !== 'undefined'
 const cards = () => {
   let cardslist = [];
   for (let i = 1; i <= cardsAmount; i++) {
-    cardslist.push(<Card />);
+    cardslist.push(<Card key={i} />);
   }
   return cardslist
 }
