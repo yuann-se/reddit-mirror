@@ -16,9 +16,9 @@ app.use(cookieParser());
 app.get('/auth', (req, res) => {
   axios.post(
     'https://www.reddit.com/api/v1/access_token',
-    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://localhost:3000/auth`,
+    `grant_type=authorization_code&code=${req.query.code}&redirect_uri=${process.env.REDIRECT_URI}`,
     {
-      auth: { username: process.env.CLIENT_ID, password: 'llspliIY0sBA-voydz89yDt2r-N9EA' },
+      auth: { username: process.env.CLIENT_ID, password: process.env.SECRET },
       headers: { 'Content-type': 'application/x-www-form-urlencoded' }
     }
   )
