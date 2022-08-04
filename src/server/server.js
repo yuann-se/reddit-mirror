@@ -7,6 +7,8 @@ import axios from 'axios';
 import { StaticRouter } from 'react-router-dom';
 import cookieParser from 'cookie-parser';
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 app.use('/static', express.static('./dist/client'));
 app.use(cookieParser());
@@ -36,7 +38,7 @@ app.get('*', (req, res) => {
     : res.send(indexTemplate(ReactDOM.renderToString(<StaticRouter location={req.url}>{App()}</StaticRouter>)))
 });
 
-app.listen(3000, () => {
-  console.log(`>>> Server started on port http://localhost:3000`)
+app.listen(PORT, () => {
+  console.log(`>>> Server started on port http://localhost:${PORT}`)
 })
 

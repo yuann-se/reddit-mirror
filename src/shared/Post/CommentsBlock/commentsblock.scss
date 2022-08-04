@@ -32,7 +32,7 @@
 }
 
 .bar {
-  width: 3px;
+  width: 2px;
   height: calc(100% - 90px);
   background-color: $greyD9;
   margin: 0 auto;
@@ -112,5 +112,9 @@
 @media all and (min-width: $desktopWidth) {
   .upvotes {
     min-width: 40px;
+  }
+
+  .bar {
+    width: 3px;
   }
 }

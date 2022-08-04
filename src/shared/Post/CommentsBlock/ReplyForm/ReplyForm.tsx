@@ -38,7 +38,7 @@ export function ReplyForm({ commentID, isOpen, depth }: IReplyFormProps) {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(updateReply(commentID, false, inputValue))
+    dispatch(updateReply(commentID, false, ''))
   }
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);

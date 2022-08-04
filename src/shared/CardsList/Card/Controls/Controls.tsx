@@ -16,8 +16,12 @@ export function Controls({ upvotes, comments }: IControlsProps) {
       <KarmaCounter upvotes={upvotes} />
       <CommentsBtn comments={comments} />
       <ActionBtns>
-        <Icon Name={EIcons.shareRnd} width={20} />
-        <Icon Name={EIcons.saveRnd} width={20} />
+        <button>
+          <Icon Name={EIcons.shareRnd} width={20} />
+        </button>
+        <button>
+          <Icon Name={EIcons.saveRnd} width={20} />
+        </button>
       </ActionBtns>
     </div>
   );
