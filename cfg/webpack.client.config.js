@@ -1,6 +1,7 @@
 const path = require('path');
 const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const COMMON_PLUGINS = [new DefinePlugin(
   {
@@ -13,7 +14,7 @@ const COMMON_PLUGINS = [new DefinePlugin(
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
 const GLOBAL_CSS_REGEXP = /\.global\.scss$/;
-const DEV_PLUGINS = [new CleanWebpackPlugin(), new HotModuleReplacementPlugin()];
+const DEV_PLUGINS = [new CleanWebpackPlugin(), new HotModuleReplacementPlugin(), new ForkTsCheckerWebpackPlugin()];
 
 function setupDevtool() {
   if (IS_DEV) return 'eval'
@@ -48,7 +49,12 @@ module.exports = {
     rules: [
       {
         test: /\.[tj]sx?$/,
-        use: ['ts-loader'],
+        use: [{
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          },
+        }]
       },
       {
         test: /\.scss$/,
