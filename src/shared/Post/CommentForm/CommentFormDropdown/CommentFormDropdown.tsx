@@ -49,7 +49,7 @@ export function CommentFormDropdown({ postID, zIndex }: IMenuProps): JSX.Element
 
   const dropdownStyle = btnRef.current
     ? {
-      left: window.innerWidth >= 768 ? btnCoord().right - 315 : btnCoord().right,
+      left: window.innerWidth >= 768 ? btnCoord().right - 315 : btnCoord().right - 155,
       top: btnCoord().bottom + window.scrollY + 10
     } : {}
 

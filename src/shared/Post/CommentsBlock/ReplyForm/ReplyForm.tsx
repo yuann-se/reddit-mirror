@@ -26,6 +26,16 @@ interface IReplyFormProps {
 
 export function ReplyForm({ commentID, isOpen, depth }: IReplyFormProps) {
 
+  const shouldBeNarrow = window.innerWidth >= 900
+    ? typeof depth == 'number' && depth >= 9
+      ? true : false
+    : window.innerWidth >= 650
+      ? typeof depth == 'number' && depth >= 4
+        ? true : false
+      : window.innerWidth >= 450
+        ? true : true
+
+
   const dispatch = useDispatch();
   const storeValue = useSelector((state: RootState) => state.main.commentsReplies[`${commentID}`])
 
@@ -33,7 +43,7 @@ export function ReplyForm({ commentID, isOpen, depth }: IReplyFormProps) {
 
   const controlsWrapperClasses = classNames(
     styles.controlsWrapper,
-    { [styles.controlsWrapperNarrow]: typeof depth == 'number' && depth >= 4 }
+    { [styles.controlsWrapperNarrow]: shouldBeNarrow }
   )
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {

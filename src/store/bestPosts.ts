@@ -10,6 +10,7 @@ interface IInitPost {
     id: string;
     permalink: string;
     title: string;
+    selftext: string;
     preview?: {
       images: [
         {
@@ -42,6 +43,7 @@ interface IPost {
   id: string;
   permalink: string;
   postTitle: string;
+  postBody: string;
   postUrl: string
   previewSrc: string;
   lqPreviewSrc: string;
@@ -81,6 +83,7 @@ export const saveBestPosts = createAsyncThunk('SAVE_BEST_POSTS',
         id: data.id,
         permalink: data.permalink.split('/').slice(0, -1).slice(-1)[0],
         postTitle: data.title,
+        postBody: data.selftext,
         postUrl: data.url,
         previewSrc: prevSrc,
         lqPreviewSrc: lqPrevSrc,
@@ -117,7 +120,6 @@ export const bestPosts = createSlice({
     builder
       .addCase(saveBestPosts.pending, (state) => {
         state.loading = true;
-        // state.fetchError = '';
       })
       .addCase(saveBestPosts.rejected, (state, action) => {
         state.loading = false;
@@ -126,7 +128,6 @@ export const bestPosts = createSlice({
       .addCase(saveBestPosts.fulfilled, (state, action) => {
         state.data = state.data.concat(action.payload.postsData);
         state.loading = false;
-        // state.fetchError = '';
         state.after = action.payload.after;
       })
   }

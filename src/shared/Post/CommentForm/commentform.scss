@@ -93,7 +93,7 @@ label {
   }
 
   .markdownBtn:not(:last-child) {
-    margin-right: 26px;
+    margin-right: 20px;
   }
 }
 
@@ -110,6 +110,10 @@ label {
 @media all and (min-width: $tabletWidth) {
   .button {
     width: 220px;
+  }
+
+  .markdownBtn:not(:last-child) {
+    margin-right: 26px;
   }
 }
 

@@ -1,11 +1,41 @@
 @import '../../../variables';
 
+.reply-enter {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.reply-enter-active {
+  opacity: 1;
+  transform: none;
+  transform-origin: top;
+  transition: all .2s ease;
+}
+
+.reply-exit {
+  opacity: 1;
+  transform: none;
+}
+
+.reply-exit-active {
+  opacity: 0;
+  transform: scale(0);
+  transition: all .2s ease;
+}
+
+
 .componentContainer {
   width: 100%;
 }
 
 .mainWrapper {
   display: flex;
+  flex-wrap: wrap;
+
+  &>div:first-child {
+    display: flex;
+    flex-grow: 1;
+  }
 }
 
 .contentContainer {
@@ -48,6 +78,10 @@
     top: 50%;
     transform: translateY(-50%);
 
+    &>div {
+      flex-wrap: wrap;
+    }
+
     &>div>span>span:first-child {
       display: none;
     }
@@ -64,9 +98,8 @@
 
 .controls {
   display: flex;
-  max-width: 340px;
-  justify-content: space-between;
-  margin-bottom: 40px;
+  justify-content: flex-start;
+  margin-bottom: 30px;
 }
 
 .controlsNarrow {
@@ -74,6 +107,10 @@
   max-width: 100px;
   justify-content: space-between;
   margin-bottom: 40px;
+
+  &>li>button>span:nth-child(2) {
+    display: none;
+  }
 }
 
 .iconWrapper {
@@ -83,30 +120,31 @@
 .menuItem {
   display: flex;
   align-items: center;
+  margin-right: 25px;
 }
 
 
-.reply-enter {
-  opacity: 0;
-  transform: scale(0);
-}
+@media all and (min-width: $tabletWidth) {
+  .controls {
+    max-width: 340px;
+    justify-content: space-between;
+  }
 
-.reply-enter-active {
-  opacity: 1;
-  transform: none;
-  transform-origin: top;
-  transition: all .2s ease;
-}
+  .metaDataContainer {
+    .metaData {
+      &>div {
+        flex-wrap: nowrap;
+      }
+    }
+  }
 
-.reply-exit {
-  opacity: 1;
-  transform: none;
-}
+  .menuItem {
+    margin-right: 0;
 
-.reply-exit-active {
-  opacity: 0;
-  transform: scale(0);
-  transition: all .2s ease;
+    &>span:nth-child(2) {
+      display: inline;
+    }
+  }
 }
 
 @media all and (min-width: $desktopWidth) {

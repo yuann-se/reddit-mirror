@@ -11,6 +11,11 @@ body {
   font-family: 'Roboto', serif;
 }
 
+#postModalWrapper,
+#react_root {
+  min-width: 450px;
+}
+
 * {
   color: $black;
   box-sizing: border-box;

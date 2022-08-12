@@ -28,6 +28,21 @@ const replyFormTransitionClasses = {
 
 export function CommentsBlock({ comments, depth, loading, fetchError }: ICommentsBlockProps) {
 
+  const commentsDepthLimit = window.innerWidth >= 900
+    ? 10
+    : window.innerWidth >= 768
+      ? 7
+      : window.innerWidth >= 600
+        ? 5
+        : window.innerWidth >= 450
+          ? 3
+          : 3
+
+  const shouldBeNarrow = window.innerWidth >= 550
+    ? typeof depth == 'number' && depth >= 9
+      ? true : false
+    : true
+
   const dispatch = useDispatch();
   typeof depth == 'number' ? depth++ : depth = 0;
   const data = useSelector((state: RootState) => state.main.commentsReplies);
@@ -36,8 +51,8 @@ export function CommentsBlock({ comments, depth, loading, fetchError }: IComment
     <div className={styles.componentContainer}>
       {loading && <CommentsBlockLoader />}
       {fetchError && <ErrorScreen message={`${fetchError} :(`} />}
-      {Array.isArray(comments) && comments.length > 0
-        ? comments.map((item) => {
+      {Array.isArray(comments) && comments.length > 0 && (
+        comments.map((item) => {
 
           const storeData = data[item.data.id];
           function handleReply() {
@@ -49,79 +64,78 @@ export function CommentsBlock({ comments, depth, loading, fetchError }: IComment
           return (
             item.data.body && (
               <div className={styles.mainWrapper} key={item.data.id}>
-                <div className={styles.upvotes}>
-                  <div className={styles.arrowsIcons}>
-                    <button><Icon Name={EIcons.arrowUp} width={19} /></button>
-                    <button className={styles.arrowDown}><Icon Name={EIcons.arrowUp} width={19} /></button>
-                  </div>
-                  <div className={styles.bar}></div>
-                </div>
-                <div className={styles.contentContainer}>
-                  <div className={styles.metaDataContainer}>
-                    <div className={styles.metaData}
-                    >
-                      <MetaData
-                        avatarSrc={''}
-                        author={item.data.author}
-                        authorUrl={`https://www.reddit.com/user/${item.data.author}/`}
-                        createdAt={item.data.created}
-                      />
+                <div>
+                  <div className={styles.upvotes}>
+                    <div className={styles.arrowsIcons}>
+                      <button><Icon Name={EIcons.arrowUp} width={19} /></button>
+                      <button className={styles.arrowDown}><Icon Name={EIcons.arrowUp} width={19} /></button>
                     </div>
+                    <div className={styles.bar}></div>
                   </div>
-                  <div className={styles.commentBody}>
-                    <Text As='p' size={14}>{item.data.body}</Text>
-                  </div>
-                  <ul className={typeof depth == 'number' && depth >= 9 ? styles.controlsNarrow : styles.controls}>
-                    <li><button className={styles.menuItem} onClick={() => handleReply()}>
-                      <span className={styles.iconWrapper}>
-                        <Icon Name={EIcons.comments} width={15} />
-                      </span>
-                      {typeof depth != 'number' || depth < 9 && (
+                  <div className={styles.contentContainer}>
+                    <div className={styles.metaDataContainer}>
+                      <div className={styles.metaData}
+                      >
+                        <MetaData
+                          avatarSrc={''}
+                          author={item.data.author}
+                          authorUrl={`https://www.reddit.com/user/${item.data.author}/`}
+                          createdAt={item.data.created}
+                        />
+                      </div>
+                    </div>
+                    <div className={styles.commentBody}>
+                      <Text As='p' size={14}>{item.data.body}</Text>
+                    </div>
+                    <ul className={shouldBeNarrow ? styles.controlsNarrow : styles.controls}>
+                      <li><button className={styles.menuItem} onClick={() => handleReply()}>
+                        <span className={styles.iconWrapper}>
+                          <Icon Name={EIcons.comments} width={15} />
+                        </span>
                         <Text size={14} color={EColors.grey99}>Ответить</Text>
-                      )}
-                    </button></li>
+                      </button></li>
 
-                    <li><button className={styles.menuItem} onClick={() => { }}>
-                      <span className={styles.iconWrapper}>
-                        <Icon Name={EIcons.share} width={12} />
-                      </span>
-                      {typeof depth != 'number' || depth < 9 && (
+                      <li><button className={styles.menuItem} onClick={() => { }}>
+                        <span className={styles.iconWrapper}>
+                          <Icon Name={EIcons.share} width={12} />
+                        </span>
                         <Text size={14} color={EColors.grey99}>Поделиться</Text>
-                      )}
-                    </button></li>
+                      </button></li>
 
-                    <li><button className={styles.menuItem} onClick={() => { }}>
-                      <span className={styles.iconWrapper}>
-                        <Icon Name={EIcons.report} width={16} />
-                      </span>
-                      {typeof depth != 'number' || depth < 9 && (
+                      <li><button className={styles.menuItem} onClick={() => { }}>
+                        <span className={styles.iconWrapper}>
+                          <Icon Name={EIcons.report} width={16} />
+                        </span>
                         <Text size={14} color={EColors.grey99}>Пожаловаться</Text>
-                      )}
-                    </button></li>
-                  </ul>
+                      </button></li>
+                    </ul>
 
-                  <CSSTransition
-                    in={storeData && storeData.isOpen}
-                    timeout={200}
-                    classNames={replyFormTransitionClasses}
-                    mountOnEnter unmountOnExit
-                  >
-                    <ReplyForm
-                      commentID={item.data.id}
-                      isOpen={storeData && storeData.isOpen}
-                      depth={depth}
-                    />
-                  </CSSTransition>
+                    <CSSTransition
+                      in={storeData && storeData.isOpen}
+                      timeout={200}
+                      classNames={replyFormTransitionClasses}
+                      mountOnEnter unmountOnExit
+                    >
+                      <ReplyForm
+                        commentID={item.data.id}
+                        isOpen={storeData && storeData.isOpen}
+                        depth={depth}
+                      />
+                    </CSSTransition>
 
-                  {item.data.replies && (
-                    <CommentsBlock comments={item.data.replies.data.children} depth={depth} />
-                  )}
+                    {item.data.replies && typeof depth == 'number' && depth < commentsDepthLimit && (
+                      <CommentsBlock comments={item.data.replies.data.children} depth={depth} />
+                    )}
+                  </div>
                 </div>
+                {item.data.replies && typeof depth == 'number' && depth >= commentsDepthLimit && (
+                  <CommentsBlock comments={item.data.replies.data.children} depth={depth} />
+                )}
               </div>
             )
           )
         })
-        : null}
+      )}
       {/* <CommentsBlockLoader /> */}
     </div>
   );

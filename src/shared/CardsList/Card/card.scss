@@ -6,6 +6,7 @@
   display: flex;
   flex-flow: row wrap;
   margin-top: -1px;
+  margin-bottom: 20px;
 
   background-color: $white;
   border-radius: 7px;
@@ -37,6 +38,7 @@
     flex-flow: row nowrap;
     max-height: 110px;
     padding: 0 40px;
+    margin-bottom: 0;
   }
 
   .card>* {

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useHistory, useParams } from 'react-router-dom';
@@ -93,6 +94,9 @@ export function Post() {
                   style={{ filter: isImgLoaded ? "none" : "blur(20px)", transition: "filter .2s ease-out" }}
                 />
               </Fragment>
+            )}
+            {postData.postBody && (
+              <div className={styles.postText}>{postData.postBody}</div>
             )}
           </div>
           <Stats commentsNumber={postData.comments} ratio={postData.upvoteRatio} />
