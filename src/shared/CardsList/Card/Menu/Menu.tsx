@@ -12,7 +12,7 @@ interface IMenuProps {
 
 export function Menu({ postID, zIndex }: IMenuProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownWidth, setDropdownWidth] = useState(typeof window !== "undefined" ? window.innerWidth > 320 ? 157 : 145 : 145);
+  const [dropdownWidth,] = useState(typeof window !== "undefined" ? window.innerWidth > 320 ? 157 : 145 : 145);
   const handleClick = () => { setIsOpen(!isOpen) }
 
   const btnClasses = classNames(

@@ -37,7 +37,7 @@ export function ItemsList({ postID }: IItemList) {
       classes: ``
     },
   ].map(({ icon, text, classes }) =>
-    <li key={generateRandomString()}>
+    <li key={generateRandomString()} className={styles.itemWrapper}>
       <button
         className={`${classes} ${styles.menuItem}`}
         onClick={() => { }}
