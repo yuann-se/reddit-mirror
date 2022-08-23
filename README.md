@@ -2,9 +2,20 @@
 
 React SPA that shows Reddit's best posts as well as detailed post pages with list of comments.
 
-**Check out on Heroku --> [rdt-mirror](https://rdt-mirror.herokuapp.com)** :unicorn:
+<img src="https://media.giphy.com/media/QuNC1qKtsHbyMAGqmO/giphy.gif" width="200" />
+
+## Start
+
+Start the app in the dev environment:
+
+```
+npm run start:dev
+```
+
+**Check out production build on Heroku → [rdt-mirror](https://rdt-mirror.herokuapp.com)** :unicorn:
 
 ## Features
+
 - authorization with Reddit account
 - SSR
 - routing
@@ -12,23 +23,23 @@ React SPA that shows Reddit's best posts as well as detailed post pages with lis
 - progressive image loading
 
 ## Languages and tools
-<div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="typescript" alt="typescript" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/redux/redux-original.svg" title="Redux" alt="Redux" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/sass/sass-original.svg" title="sass" alt="sass" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/webpack/webpack-original.svg" title="webpack" alt="webpack" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/nodejs/nodejs-original-wordmark.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/express/express-original.svg" title="express" alt="express" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/heroku/heroku-original.svg" title="heroku" alt="heroku" width="40" height="40"/>&nbsp;
-</div>
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white)
+![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 
 ## Preview
 
 **Main page:**
 
-![Preview](https://drive.google.com/uc?export=view&id=14DqeNRgpnLUlfLfLDMn7KjCW6691rbCh)
+<img src="https://drive.google.com/uc?export=view&id=14DqeNRgpnLUlfLfLDMn7KjCW6691rbCh" width="600" />
 
 **Post page:**
 
-![Preview](https://drive.google.com/uc?export=view&id=11U6iac5kyaZ7SdJs5PWJEDQceSXIfzI4)
+<img src="https://drive.google.com/uc?export=view&id=11U6iac5kyaZ7SdJs5PWJEDQceSXIfzI4" width="600" />

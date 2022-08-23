@@ -8,8 +8,10 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "open": "start http://localhost:3000/",
     "dev": "cross-env NODE_ENV=development REDIRECT_URI=http://localhost:3000/auth CLIENT_ID=exFzdgSCpuf71EwpUibaFQ SECRET=llspliIY0sBA-voydz89yDt2r-N9EA node ./bin/dev.js",
+    "start:dev": "npm i --force && npm run build:dev && npm run open && npm run dev",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "start": "cross-env node ./dist/server/server.js"
   },
   "author": "",
